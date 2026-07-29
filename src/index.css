@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('https://static.figma.com/font/PlusJakartaSans_wght__2') format('woff2');
+}
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --color-green-primary: #2E7D32;
+  --color-green-dark: #1B5E20;
+  --color-green-light: #E8F5E9;
+  --color-gold: #F9A825;
+  --color-gray-bg: #F5F5F5;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
