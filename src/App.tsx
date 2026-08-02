@@ -1,2126 +1,631 @@
 import { useState, useEffect, useRef } from 'react'
-import imgKKN from './imports/Penerimaan_KKN_Aparat-1.jpeg'
-import imgKepDes from './imports/Pertemuan_bersama_Kepala_Desa-1.jpeg'
-import imgProker from './imports/Pembahasan_Proker_Bersama_Aparat-1.jpeg'
+import imgLogoKonaweUtara from './imports/Kabupaten Konawe Utara.png'
+import imgGambarHome from './imports/gambarhome.png'
 import imgAvatar from './imports/avatar_default.jpg'
-import imgGallery2 from './imports/Penerimaan_2.jpeg'
-import imgGallery3 from './imports/Penerimaan_3.jpeg'
-import imgGallery4 from './imports/Penerimaan_4.jpeg'
 import imgCengkeh from './imports/Cengkeh.jpeg'
-
-// ── Initial Mock Data ──────────────────────────────────────────────────────────
-
-const INITIAL_DISCOVER_ITEMS = [
-  {
-    id: 1,
-    title: 'Ekowisata Hutan Mangrove Padaleu',
-    category: 'Alam',
-    location: 'Pesisir Timur Desa',
-    image: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=800&auto=format&fit=crop',
-    description: 'Menyusuri jembatan kayu terapung sepanjang 500 meter di tengah rimbunnya pohon bakau pusaka. Destinasi yang menenangkan jiwa sekaligus menjaga ekosistem pesisir Lembo.',
-    facilities: ['Jembatan Kayu Swafoto', 'Menara Pandang', 'Gazebo Istirahat', 'Penyewaan Perahu Tradisional'],
-    hours: '07:30 - 17:30 WITA',
-    contact: '+62 812-4455-6677 (Pokdarwis Desa)',
-    lat: -2.8620,
-    lng: 122.2490
-  },
-  {
-    id: 2,
-    title: 'Pantai Pasir Putih Teluk Lembo',
-    category: 'Alam',
-    location: 'Kawasan Pesisir Selatan',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop',
-    description: 'Garis pantai pasir putih halus sepanjang 1 km dengan ombak tenang yang sangat aman untuk berenang, snorkeling, dan bersantai menikmati matahari terbenam.',
-    facilities: ['Penyewaan Ban Renang', 'Kios Kuliner Ikan Bakar', 'Kamar Bilas Umum', 'Area Camping Ground'],
-    hours: '24 Jam Terbuka',
-    contact: '+62 812-4455-6677',
-    lat: -2.8590,
-    lng: 122.2510
-  },
-  {
-    id: 3,
-    title: 'Air Terjun Bertingkat Puncak Lembo',
-    category: 'Alam',
-    location: 'Hutan Barat Desa',
-    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format&fit=crop',
-    description: 'Air terjun tersembunyi dengan tiga tingkatan alami yang menawarkan kolam pemandian menyegarkan dengan air pegunungan yang jernih dan asri.',
-    facilities: ['Jalur Trekking Berbatu', 'Spot Foto Alami', 'Warung Makan Khas', 'Toilet Umum'],
-    hours: '08:00 - 17:00 WITA',
-    contact: '+62 812-8899-0011 (Komunitas Pecinta Alam)',
-    lat: -2.8510,
-    lng: 122.2430
-  },
-  {
-    id: 4,
-    title: 'Homestay Nyaman Pesisir Indah',
-    category: 'Penginapan',
-    location: 'Dusun II Pantai',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop',
-    description: 'Penginapan berkonsep ramah lingkungan yang menghadap langsung ke pantai. Dikelola langsung oleh warga setempat untuk memberikan pengalaman menginap otentik.',
-    facilities: ['AC & Kamar Mandi Dalam', 'Sarapan Masakan Lokal', 'Sewa Sepeda Gratis', 'Wi-Fi Area'],
-    hours: 'Check-in: 14:00 WITA',
-    contact: '+62 821-3344-5566 (Pak Wayan)',
-    lat: -2.8560,
-    lng: 122.2535
-  },
-  {
-    id: 5,
-    title: 'Warung Kuliner Ikan Bakar Aroma Laut',
-    category: 'Kuliner',
-    location: 'Jalan Dermaga Pantai',
-    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop',
-    description: 'Menyajikan hidangan laut segar tangkapan nelayan lokal hari ini, dibakar dengan bumbu rempah kelapa tradisional khas Konawe Utara.',
-    facilities: ['Area Duduk Lesehan Pantai', 'Live Music Akhir Pekan', 'Parkiran Luas', 'Mushola'],
-    hours: '11:00 - 22:00 WITA',
-    contact: '+62 812-7788-9900 (Warung Aroma Laut)',
-    lat: -2.8580,
-    lng: 122.2520
-  },
-  {
-    id: 6,
-    title: 'Pesta Adat Panen Rempah Cengkeh',
-    category: 'Budaya',
-    location: 'Lapangan Utama Desa',
-    image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&auto=format&fit=crop',
-    description: 'Syukuran tahunan masyarakat Desa Padaleu atas keberhasilan panen cengkeh melimpah. Diisi tarian tradisional, pameran hasil kebun, dan makan bersama warga.',
-    facilities: ['Panggung Pertunjukan Adat', 'Pasar Malam UMKM', 'Pameran Kerajinan Tangan'],
-    hours: 'Setiap Bulan September',
-    contact: '+62 812-3456-7890 (Sekretariat Adat)',
-    lat: -2.8540,
-    lng: 122.2540
-  }
-]
-
-const INITIAL_BERITA = [
-  {
-    id: 1,
-    title: 'Penerimaan KKN Mahasiswa UHO di Kantor Desa Padaleu',
-    category: 'Kegiatan',
-    excerpt: 'Pemerintah Desa Padaleu menyambut kedatangan mahasiswa Kuliah Kerja Nyata (KKN) Universitas Halu Oleo Kendari untuk melaksanakan program pengabdian masyarakat.',
-    content: 'Pemerintah Desa Padaleu secara resmi menerima rombongan mahasiswa Kuliah Kerja Nyata (KKN) Reguler Universitas Halu Oleo (UHO) Kendari. Penerimaan ini berlangsung khidmat di aula Kantor Desa, dihadiri oleh Kepala Desa Padaleu, segenap aparat desa, tokoh adat, serta perwakilan masyarakat.\n\nDalam sambutannya, Kepala Desa menyampaikan harapan agar para mahasiswa dapat berkolaborasi aktif dengan pemerintah desa dan masyarakat setempat untuk merancang serta menyukseskan program kerja (proker) yang menyasar pengembangan potensi lokal, administrasi digital, dan kebersihan lingkungan. Mahasiswa diharapkan dapat beradaptasi dengan adat istiadat setempat dan memberikan dampak positif nyata selama 40 hari masa pengabdian.',
-    date: '2026-07-28',
-    image: imgKKN,
-    author: 'Operator Desa'
-  },
-  {
-    id: 2,
-    title: 'Musyawarah Perencanaan Pembangunan (Musrenbang) Desa 2026',
-    category: 'Pemerintahan',
-    excerpt: 'Pemerintah Desa bersama masyarakat merumuskan rencana pembangunan infrastruktur pertanian dan peningkatan kapasitas UMKM lokal.',
-    content: 'Musyawarah Perencanaan Pembangunan Desa (Musrenbangdes) dalam rangka penyusunan Rencana Kerja Pemerintah Desa (RKPDes) Tahun Anggaran 2027 sukses diselenggarakan. Pertemuan yang diadakan di Kantor Desa Padaleu ini memprioritaskan pemanfaatan anggaran untuk sektor ketahanan pangan, terutama irigasi persawahan, jalan usaha tani, serta stimulus modal bagi UMKM pengolah komoditas cengkeh dan madu hutan.\n\nKepala Desa menekankan pentingnya partisipasi aktif dari perwakilan RT/RW dan tokoh pemuda agar arah pembangunan tepat sasaran dan selaras dengan program prioritas kabupaten.',
-    date: '2026-07-20',
-    image: imgProker,
-    author: 'Sekretaris Desa'
-  },
-  {
-    id: 3,
-    title: 'Pertemuan Rutin Pembahasan Program Kerja Aparat Desa',
-    category: 'Pengumuman',
-    excerpt: 'Rapat koordinasi bulanan aparat Desa Padaleu guna mengevaluasi kinerja pelayanan publik dan persiapan sistem digitalisasi data.',
-    content: 'Aparat Desa Padaleu mengadakan pertemuan koordinasi bulanan guna membahas efisiensi pelayanan administrasi kependudukan. Dalam pertemuan ini, disepakati penerapan sistem pencatatan digital untuk mempermudah permohonan surat keterangan bagi warga.\n\nEvaluasi berkala menunjukkan peningkatan kecepatan pelayanan administrasi hingga 40% setelah beberapa modul pelayanan disederhanakan. Kepala Desa menghimbau seluruh jajarannya untuk tetap mengedepankan keramahan dan kedisiplinan.',
-    date: '2026-07-15',
-    image: imgKepDes,
-    author: 'Kepala Desa'
-  }
-]
-
-const INITIAL_UMKM = [
-  {
-    id: 1,
-    name: 'Cengkeh Kering Super Padaleu',
-    category: 'Pertanian',
-    price: 'Rp 115.000 / Kg',
-    seller: 'Koperasi Tani Makmur',
-    phone: '628123456789',
-    image: imgCengkeh,
-    description: 'Cengkeh asli hasil perkebunan Desa Padaleu. Dipetik langsung dari pohon pilihan, disortir dengan ketat, dan dikeringkan secara alami di bawah sinar matahari untuk menjaga aroma khas dan kualitas minyak atsiri yang tinggi.'
-  },
-  {
-    id: 2,
-    name: 'Madu Hutan Asli Lembo',
-    category: 'Kuliner',
-    price: 'Rp 140.000 / Botol',
-    seller: 'Pak Suprianto (Kelompok Tani Hutan)',
-    phone: '628123456789',
-    image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500&h=350&fit=crop',
-    description: 'Madu murni yang dipanen langsung dari sarang lebah Apis Dorsata di pedalaman hutan Lembo. Tanpa campuran bahan pengawet atau pemanis buatan. Sangat baik untuk menjaga daya tahan tubuh.'
-  },
-  {
-    id: 3,
-    name: 'Kerajinan Anyaman Rotan Khas',
-    category: 'Kerajinan',
-    price: 'Rp 75.000 - Rp 250.000',
-    seller: 'Ibu Aminah (UMKM Anyaman Kreatif)',
-    phone: '628123456789',
-    image: 'https://images.unsplash.com/photo-1531835551805-16d864c8d311?w=500&h=350&fit=crop',
-    description: 'Tas belanja, keranjang buah, dan perabot rumah tangga estetik yang dianyam secara manual menggunakan rotan hutan pilihan yang awet dan kokoh.'
-  }
-]
-
-const INITIAL_MAP_MARKERS = [
-  { id: 1, title: 'Kantor Desa Padaleu', lat: -2.8540, lng: 122.2530, category: 'Fasilitas', description: 'Pusat pelayanan administrasi dan pemerintahan Desa Padaleu.', image: imgKepDes },
-  { id: 2, title: 'Puskesmas Pembantu (Pustu) Lembo', lat: -2.8562, lng: 122.2515, category: 'Fasilitas', description: 'Fasilitas layanan kesehatan dasar masyarakat desa.', image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&h=300&fit=crop' },
-  { id: 3, title: 'SD Negeri 1 Lembo', lat: -2.8515, lng: 122.2545, category: 'Pendidikan', description: 'Fasilitas pendidikan sekolah dasar negeri terakreditasi.', image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&h=300&fit=crop' },
-  { id: 4, title: 'Masjid Al-Muhajirin', lat: -2.8550, lng: 122.2560, category: 'Ibadah', description: 'Rumah ibadah dan pusat kegiatan keagamaan umat Islam.', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&h=300&fit=crop' },
-  { id: 5, title: 'Ekowisata Hutan Mangrove', lat: -2.8620, lng: 122.2490, category: 'Wisata', description: 'Kawasan konservasi hutan mangrove pesisir pantai dengan jembatan kayu estetik.', image: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=500&h=300&fit=crop' },
-  { id: 6, title: 'Pantai Pasir Putih Teluk Lembo', lat: -2.8590, lng: 122.2510, category: 'Wisata', description: 'Garis pantai berpasir putih halus, sangat ideal untuk rekreasi dan snorkeling.', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&h=300&fit=crop' },
-  { id: 7, title: 'Air Terjun Bertingkat Lembo', lat: -2.8510, lng: 122.2430, category: 'Wisata', description: 'Keindahan air terjun tiga tingkat alami dengan air pegunungan segar.', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&h=300&fit=crop' }
-]
-
-const INITIAL_APB_DES = {
-  tahun: '2026',
-  pendapatan: {
-    total: 1250000000,
-    items: [
-      { nama: 'Dana Desa (APBN)', nilai: 780000000, color: '#1b4620' },
-      { nama: 'Alokasi Dana Desa (ADD)', nilai: 380000000, color: '#4a7c59' },
-      { nama: 'Pendapatan Asli Desa (PAD)', nilai: 55000000, color: '#aa8c2c' },
-      { nama: 'Bagi Hasil Pajak & Retribusi', nilai: 35000000, color: '#d4af37' }
-    ]
-  },
-  belanja: {
-    total: 1210000000,
-    items: [
-      { nama: 'Penyelenggaraan Pemerintahan', nilai: 390000000, color: '#1e293b' },
-      { nama: 'Pembangunan Infrastruktur Desa', nilai: 520000000, color: '#1b4620' },
-      { nama: 'Pembinaan Kemasyarakatan', nilai: 130000000, color: '#aa8c2c' },
-      { nama: 'Pemberdayaan Masyarakat & UMKM', nilai: 170000000, color: '#d4af37' }
-    ]
-  },
-  pembiayaan: {
-    total: 40000000,
-    items: [
-      { nama: 'SILPA (Sisa Lebih Anggaran)', nilai: 40000000, color: '#64748b' }
-    ]
-  }
-}
-
-const INITIAL_STATISTIK_PENDUDUK = {
-  total: 1420,
-  lakiLaki: 728,
-  perempuan: 692,
-  kepalaKeluarga: 412,
-  usia: [
-    { label: 'Balita (0-5 thn)', jumlah: 140, pct: 10 },
-    { label: 'Anak-Anak (6-12 thn)', jumlah: 180, pct: 13 },
-    { label: 'Remaja (13-18 thn)', jumlah: 210, pct: 15 },
-    { label: 'Dewasa Produktif (19-59 thn)', jumlah: 710, pct: 50 },
-    { label: 'Lansia (60+ thn)', jumlah: 180, pct: 12 }
-  ],
-  pendidikan: [
-    { label: 'Tidak/Belum Sekolah', jumlah: 240 },
-    { label: 'SD / Sederajat', jumlah: 410 },
-    { label: 'SMP / Sederajat', jumlah: 380 },
-    { label: 'SMA / Sederajat', jumlah: 310 },
-    { label: 'Diploma / Sarjana (S1+)', jumlah: 80 }
-  ],
-  pekerjaan: [
-    { label: 'Petani / Pekebun', jumlah: 480 },
-    { label: 'Nelayan', jumlah: 120 },
-    { label: 'Wiraswasta / UMKM', jumlah: 210 },
-    { label: 'Karyawan Swasta', jumlah: 160 },
-    { label: 'PNS / TNI / POLRI', jumlah: 45 },
-    { label: 'Pelajar / Mahasiswa', jumlah: 290 },
-    { label: 'Tidak Bekerja', jumlah: 115 }
-  ],
-  agama: [
-    { label: 'Islam', jumlah: 1310 },
-    { label: 'Kristen Protestan', jumlah: 85 },
-    { label: 'Katolik', jumlah: 15 },
-    { label: 'Hindu', jumlah: 10 }
-  ]
-}
-
-const INITIAL_PPID = [
-  { id: 1, title: 'Peraturan Desa Padaleu No. 3 Tahun 2025 tentang Ketertiban Umum', type: 'Peraturan Desa', size: '1.2 MB', date: '2025-11-12' },
-  { id: 2, title: 'Laporan Realisasi APBDes Padaleu Semester II TA 2025', type: 'Laporan Keuangan', size: '2.4 MB', date: '2026-01-15' },
-  { id: 3, title: 'SK Kepala Desa No. 14 tentang Pengangkatan Pengurus BUMDes 2026', type: 'Surat Keputusan', size: '840 KB', date: '2026-02-05' },
-  { id: 4, title: 'Rencana Pembangunan Jangka Menengah Desa (RPJMDes) 2022-2028', type: 'Perencanaan', size: '5.8 MB', date: '2022-08-20' },
-  { id: 5, title: 'Peraturan Desa No. 1 Tahun 2026 tentang Anggaran Pendapatan & Belanja Desa', type: 'Peraturan Desa', size: '1.8 MB', date: '2026-01-08' }
-]
-
-const INITIAL_AGENDA = [
-  { id: 1, title: 'Gotong Royong Kebersihan Saluran Irigasi Persawahan Dusun I', date: '2026-08-05', time: '07:30 - Selesai', loc: 'Irigasi Sawah Dusun I', desc: 'Dihimbau warga Dusun I membawa alat parang dan cangkul untuk normalisasi saluran air sawah.' },
-  { id: 2, title: 'Rapat Pleno BPD Desa Padaleu Evaluasi Program Triwulan II', date: '2026-08-12', time: '09:00 - 12:00', loc: 'Aula Kantor Desa', desc: 'Rapat koordinasi bersama Badan Permusyawaratan Desa untuk meninjau perkembangan fisik proyek semenisasi jalan.' },
-  { id: 3, title: 'Posyandu Balita & Imunisasi Rutin KIA', date: '2026-08-18', time: '08:00 - 11:30', loc: 'Gedung Posyandu Kasih Ibu', desc: 'Pelayanan timbang berat badan, imunisasi campak dan polio, serta pemberian makanan tambahan bernutrisi.' },
-  { id: 4, title: 'Pelatihan Pemasaran Digital & E-Commerce untuk UMKM Desa', date: '2026-08-24', time: '13:00 - 17:00', loc: 'Ruang Multimedia Kantor Desa', desc: 'Pendampingan langsung pembuatan toko online WhatsApp Business dan teknik foto produk bagi pelaku usaha mikro.' }
-]
-
-// ── Icons Helper (optimized SVG) ──────────────────────────────────────────────
-
-function IconFileText() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" />
-    </svg>
-  )
-}
-function IconSearch() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-    </svg>
-  )
-}
-function IconArrowRight() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-    </svg>
-  )
-}
-function IconDownload() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-    </svg>
-  )
-}
-function IconPlus() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
-  )
-}
-function IconTrash() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" />
-    </svg>
-  )
-}
-function IconLogOut() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
-    </svg>
-  )
-}
-
-// ── App Component ─────────────────────────────────────────────────────────────
+import imgProker from './imports/Pembahasan_Proker_Bersama_Aparat-1.jpeg'
+import imgKKN from './imports/Penerimaan_KKN_Aparat-1.jpeg'
+import imgPenerimaan2 from './imports/Penerimaan_2.jpeg'
+import imgPenerimaan3 from './imports/Penerimaan_3.jpeg'
+import imgPenerimaan4 from './imports/Penerimaan_4.jpeg'
+import imgKepDes from './imports/Pertemuan_bersama_Kepala_Desa-1.jpeg'
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'discover' | 'profil' | 'peta' | 'kependudukan' | 'berita' | 'agenda' | 'potensi' | 'wisata' | 'umkm' | 'galeri' | 'apbdes' | 'ppid' | 'kontak' | 'admin'>('home')
-  
-  // App States (manipulated by mock admin panel)
-  const [discoverItems, setDiscoverItems] = useState(INITIAL_DISCOVER_ITEMS)
-  const [berita, setBerita] = useState(INITIAL_BERITA)
-  const [umkmList, setUmkmList] = useState(INITIAL_UMKM)
-  const [mapMarkers, setMapMarkers] = useState(INITIAL_MAP_MARKERS)
-  const [apbdes, setApbdes] = useState(INITIAL_APB_DES)
-  const [statistik, setStatistik] = useState(INITIAL_STATISTIK_PENDUDUK)
-  const [agendas] = useState(INITIAL_AGENDA)
-  const [ppidDocs] = useState(INITIAL_PPID)
+  // ── 1. Typewriter State ──
+  const [typedText, setTypedText] = useState('Selamat Datang di')
 
-  // Interactive Overlays/Detail page states
-  const [selectedDiscoverId, setSelectedDiscoverId] = useState<number | null>(null)
-  const [selectedBeritaId, setSelectedBeritaId] = useState<number | null>(null)
-  const [discoverFilter, setDiscoverFilter] = useState<'Semua' | 'Alam' | 'Budaya' | 'Kuliner' | 'Penginapan'>('Semua')
-  const [lang, setLang] = useState<'id' | 'en'>('id')
-  const [toastMessage, setToastMessage] = useState<string | null>(null)
+  // ── 2. Navigation & Floating State ──
+  const [activeSection, setActiveSection] = useState('hero')
+  const [showBackToTop, setShowBackToTop] = useState(false)
 
-  const triggerToast = (msg: string) => {
-    setToastMessage(msg)
-    setTimeout(() => setToastMessage(null), 3000)
-  }
+  // ── 3. Leaflet Map Ref ──
+  const mapRef = useRef<HTMLDivElement>(null)
 
-  // Scroll to top on page change
+  // ── Typewriter Effect Engine ──
   useEffect(() => {
-    window.scrollTo(0, 0)
-    setSelectedBeritaId(null)
-    setSelectedDiscoverId(null)
-  }, [currentPage])
+    const words = [
+      "Selamat Datang di",
+      "Selamat Menjelajahi",
+      "Portal Informasi Resmi",
+      "Surga Perkebunan Cengkeh & Pesisir"
+    ]
+    let wordIdx = 0
+    let charIdx = 0
+    let isDeleting = false
+    let timer: any = null
+
+    function typeLoop() {
+      const currentWord = words[wordIdx]
+      if (isDeleting) {
+        setTypedText(currentWord.substring(0, charIdx - 1))
+        charIdx--
+      } else {
+        setTypedText(currentWord.substring(0, charIdx + 1))
+        charIdx++
+      }
+
+      let speed = isDeleting ? 40 : 90
+
+      if (!isDeleting && charIdx === currentWord.length) {
+        speed = 2200
+        isDeleting = true
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false
+        wordIdx = (wordIdx + 1) % words.length
+        speed = 450
+      }
+
+      timer = setTimeout(typeLoop, speed)
+    }
+
+    timer = setTimeout(typeLoop, 500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  // ── Scroll Reveal Observer ──
+  useEffect(() => {
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
+
+    revealEls.forEach(el => revealObserver.observe(el))
+    return () => revealObserver.disconnect()
+  }, [])
+
+  // ── Scroll Active Section & Back To Top ──
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 350)
+
+      const sections = ['hero', 'sejarah', 'struktur', 'sambutan', 'komoditas', 'berita', 'galeri', 'peta-sec', 'kontak-sec']
+      const scrollY = window.scrollY + 220
+      let current = 'hero'
+      sections.forEach(id => {
+        const el = document.getElementById(id)
+        if (el && el.offsetTop <= scrollY) {
+          current = id
+        }
+      })
+      setActiveSection(current)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // ── Leaflet GIS Map Engine ──
+  useEffect(() => {
+    if (mapRef.current && (window as any).L) {
+      const L = (window as any).L
+      if ((mapRef.current as any)._leaflet_id) return
+
+      const padaleuLat = -3.7521192
+      const padaleuLng = 122.3402454
+      const map = L.map(mapRef.current).setView([padaleuLat, padaleuLng], 15)
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors | Desa Padaleu GIS'
+      }).addTo(map)
+
+      const markers = [
+        {
+          lat: -3.7521192, lng: 122.3402454,
+          title: "Desa Padaleu (Pusat Desa)",
+          desc: "Lokasi Geografis Resmi Desa Padaleu, Kec. Lembo, Kab. Konawe Utara.",
+          category: "Pusat Desa"
+        },
+        {
+          lat: -3.750500, lng: 122.341500,
+          title: "Kantor Desa Padaleu",
+          desc: "Pusat Pelayanan Publik & Balai Desa Padaleu.",
+          category: "Pemerintahan"
+        },
+        {
+          lat: -3.754000, lng: 122.345000,
+          title: "Perkebunan Cengkeh Organik",
+          desc: "Kawasan utama perkebunan cengkeh Desa Padaleu.",
+          category: "Komoditas"
+        },
+        {
+          lat: -3.756500, lng: 122.349000,
+          title: "Pesisir Teluk Lembo",
+          desc: "Kawasan pesisir pantai & dermaga tambatan perahu nelayan.",
+          category: "Wisata"
+        }
+      ]
+
+      markers.forEach(m => {
+        const popupContent = `
+          <div style="padding:0.4rem;">
+            <span style="font-size:0.6rem;font-weight:700;color:#c0392b;text-transform:uppercase;">${m.category}</span>
+            <h4 style="margin:0.2rem 0;font-size:0.95rem;color:#1a4a4a;">${m.title}</h4>
+            <p style="margin:0;font-size:0.78rem;color:#57534e;line-height:1.4;">${m.desc}</p>
+          </div>
+        `
+        L.marker([m.lat, m.lng]).addTo(map).bindPopup(popupContent)
+      })
+    }
+  }, [])
 
   return (
-    <div className="min-h-screen flex flex-col font-sans antialiased text-slate-800 bg-[#f8f9fa] selection:bg-[#d4af37]/30">
-      
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#1e4620] border-l-4 border-[#d4af37] text-white px-5 py-4.5 rounded-xl shadow-2xl animate-bounce flex items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37] animate-ping" />
-          <p className="font-semibold text-sm">{toastMessage}</p>
+    <div className="min-h-screen bg-white text-gray-800">
+
+      {/* ═══════════ TOP BAR (Mürren / Konawe Utara Style) ═══════════ */}
+      <div className="topbar" id="topbar">
+        <div className="topbar-left">
+          <a href="#hero" className="topbar-logo-box">
+            <img src={imgLogoKonaweUtara} alt="Logo Kabupaten Konawe Utara" className="topbar-logo-img" />
+            <div className="topbar-logo-content">
+              <span className="topbar-logo-text">DESA PADALEU</span>
+              <span className="topbar-logo-sub">KECAMATAN LEMBO - KONAWE UTARA</span>
+            </div>
+          </a>
         </div>
-      )}
+        <div className="topbar-right-info">
+          Pemerintah Kabupaten Konawe Utara
+        </div>
+      </div>
 
-      {/* ── Floating Header & Navigation (Mürren Inspired) ─────────────────── */}
-      <header className="sticky top-0 left-0 right-0 z-50 transition-all duration-300">
-        {/* Top Info Bar */}
-        <div className="bg-[#0f2811] text-[#f1f6f1]/80 text-[11px] font-medium tracking-wide py-1.5 px-6 flex items-center justify-between border-b border-[#1e4620]/40">
-          <div className="flex items-center gap-3">
-            <span className="hidden sm:inline">📍 Lembo, Konawe Utara</span>
-            <span>📞 (+62) 812-3456-789</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="hidden md:inline">Website Resmi Sistem Informasi Desa Padaleu</span>
-            <div className="flex items-center gap-1.5 bg-[#1e4620] px-2 py-0.5 rounded border border-[#d4af37]/20">
-              <button onClick={() => setLang('id')} className={`font-bold transition-colors ${lang === 'id' ? 'text-[#d4af37]' : 'text-white/60'}`}>ID</button>
-              <span className="text-white/30 text-[9px]">|</span>
-              <button onClick={() => setLang('en')} className={`font-bold transition-colors ${lang === 'en' ? 'text-[#d4af37]' : 'text-white/60'}`}>EN</button>
+      {/* ═══════════ SECONDARY NAV (Exact 9 Requested Menu Items) ═══════════ */}
+      <nav className="subnav" id="subnav">
+        <a href="#hero" className={activeSection === 'hero' ? 'active' : ''}>Beranda</a>
+        <a href="#sejarah" className={activeSection === 'sejarah' ? 'active' : ''}>Sejarah Desa</a>
+        <a href="#struktur" className={activeSection === 'struktur' ? 'active' : ''}>Struktur Desa</a>
+        <a href="#sambutan" className={activeSection === 'sambutan' ? 'active' : ''}>Sambutan</a>
+        <a href="#komoditas" className={activeSection === 'komoditas' ? 'active' : ''}>Komoditas Unggulan</a>
+        <a href="#berita" className={activeSection === 'berita' ? 'active' : ''}>Berita</a>
+        <a href="#galeri" className={activeSection === 'galeri' ? 'active' : ''}>Galeri</a>
+        <a href="#peta-sec" className={activeSection === 'peta-sec' ? 'active' : ''}>Peta Digital</a>
+        <a href="#kontak-sec" className={activeSection === 'kontak-sec' ? 'active' : ''}>Kontak</a>
+      </nav>
+
+      {/* ═══════════ MAIN CONTENT ═══════════ */}
+      <main>
+        {/* 1. BERANDA (Hero Section) */}
+        <section className="hero" id="hero">
+          <img src={imgGambarHome} alt="Panorama Desa Padaleu" className="hero-img" />
+          <div className="hero-overlay"></div>
+          <div className="hero-content">
+            <div className="hero-overline">
+              <span>{typedText}</span>
+              <span className="typing-cursor"></span>
             </div>
+            <h1 className="hero-title">Desa Padaleu</h1>
+            <p className="hero-subtitle">Kecamatan Lembo &middot; Kabupaten Konawe Utara &middot; Sulawesi Tenggara</p>
+          </div>
+          <a href="#sejarah" className="hero-scroll-hint">
+            <span>Scroll</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+        </section>
+
+        {/* STATISTIK BAR */}
+        <div className="stats-bar" id="statistik">
+          <div className="stat-item reveal stagger-1">
+            <div className="stat-number">1,420</div>
+            <div className="stat-label">Penduduk</div>
+          </div>
+          <div className="stat-item reveal stagger-2">
+            <div className="stat-number">412</div>
+            <div className="stat-label">Kepala Keluarga</div>
+          </div>
+          <div className="stat-item reveal stagger-3">
+            <div className="stat-number">3</div>
+            <div className="stat-label">Destinasi Wisata</div>
+          </div>
+          <div className="stat-item reveal stagger-4">
+            <div className="stat-number">2,026</div>
+            <div className="stat-label">Tahun Anggaran</div>
           </div>
         </div>
 
-        {/* Main Glassmorphic Navbar */}
-        <nav className="bg-white/95 backdrop-blur-md border-b border-[#1e4620]/10 shadow-sm transition-all duration-300 px-6 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setCurrentPage('home')}>
-            {/* Swiss-inspired Badge/Shield Logo */}
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#1e4620] to-[#0f2811] border border-[#d4af37] flex items-center justify-center shadow-md">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#d4af37" />
-                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#f1f6f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <div>
-              <h1 className="font-extrabold text-base leading-tight tracking-tight text-[#0f2811]">DESA PADALEU</h1>
-              <p className="text-[10px] uppercase font-bold tracking-widest text-[#d4af37]">Lembo • Konawe Utara</p>
-            </div>
-          </div>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden xl:flex items-center gap-1">
-            {[
-              { id: 'home', label: 'Beranda' },
-              { id: 'discover', label: 'Discover' },
-              { id: 'profil', label: 'Profil Desa' },
-              { id: 'peta', label: 'Peta Digital' },
-              { id: 'kependudukan', label: 'Kependudukan' },
-              { id: 'berita', label: 'Berita' },
-              { id: 'agenda', label: 'Agenda' },
-              { id: 'potensi', label: 'Potensi & Wisata' },
-              { id: 'umkm', label: 'UMKM' },
-              { id: 'apbdes', label: 'Transparansi APBDes' },
-              { id: 'ppid', label: 'PPID' },
-              { id: 'kontak', label: 'Hubungi Kami' }
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setCurrentPage(item.id as any)}
-                className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                  currentPage === item.id 
-                    ? 'text-[#1e4620] bg-[#f1f6f1] border-b-2 border-[#d4af37]' 
-                    : 'text-[#0f2811]/70 hover:text-[#1e4620] hover:bg-[#f1f6f1]/50'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button 
-              onClick={() => setCurrentPage('admin')}
-              className={`px-4.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm transition-all duration-200 ${
-                currentPage === 'admin'
-                  ? 'bg-[#d4af37] text-[#0f2811] ring-2 ring-[#d4af37]/30'
-                  : 'bg-[#1e4620] hover:bg-[#0f2811] text-white hover:shadow-md'
-              }`}
-            >
-              🔒 Admin Panel
-            </button>
-          </div>
-        </nav>
-
-        {/* Mobile Submenu Helper - Horizontal Scrolling */}
-        <div className="xl:hidden bg-white border-b border-[#1e4620]/10 flex gap-2 overflow-x-auto px-4 py-2 scrollbar-none">
-          {[
-            { id: 'home', label: 'Beranda' },
-            { id: 'discover', label: 'Discover' },
-            { id: 'profil', label: 'Profil' },
-            { id: 'peta', label: 'Peta GIS' },
-            { id: 'kependudukan', label: 'Statistik' },
-            { id: 'berita', label: 'Berita' },
-            { id: 'agenda', label: 'Agenda' },
-            { id: 'potensi', label: 'Wisata' },
-            { id: 'umkm', label: 'UMKM' },
-            { id: 'apbdes', label: 'APBDes' },
-            { id: 'ppid', label: 'PPID' },
-            { id: 'kontak', label: 'Kontak' }
-          ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setCurrentPage(item.id as any)}
-              className={`flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-bold uppercase transition-all ${
-                currentPage === item.id
-                  ? 'bg-[#1e4620] text-white'
-                  : 'bg-[#f1f6f1] text-[#0f2811]/80 hover:bg-[#1e4620]/10'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </header>
-
-      {/* ── Main Content Container ──────────────────────────────────────────── */}
-      <main className="flex-grow">
-        
-        {/* Halaman: HOME (Beranda) */}
-        {currentPage === 'home' && (
-          <div className="animate-fade-in">
-            {/* Immersive Parallax-like Hero Section */}
-            <section className="relative h-[95vh] min-h-[600px] bg-[#0f2811] flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1800&auto=format&fit=crop&q=90" 
-                  alt="Desa Pesisir Padaleu Landscape" 
-                  className="w-full h-full object-cover opacity-50 scale-105" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0f2811] via-transparent to-[#0f2811]/55" />
-              </div>
-
-              {/* Centered Minimalist Typography */}
-              <div className="relative z-10 text-center px-6 max-w-5xl">
-                <div className="inline-flex items-center gap-2 bg-[#d4af37]/25 border border-[#d4af37]/50 text-[#d4af37] px-5 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest mb-8 backdrop-blur-md">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37] animate-ping" />
-                  Ekowisata Pesisir Konawe Utara
-                </div>
-                
-                <h1 className="text-white text-5xl md:text-8xl font-extrabold font-swiss-title tracking-tight leading-none mb-6">
-                  Jelajahi Surga<br />
-                  Tersembunyi <span className="text-[#d4af37] italic">Padaleu</span>
-                </h1>
-                
-                <p className="text-white/80 text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-12 font-light">
-                  Nikmati perpaduan asri ekowisata mangrove, deburan ombak pantai berpasir putih teluk Lembo, dan kehangatan tradisi lokal masyarakat desa.
-                </p>
-
-                <div className="flex flex-wrap items-center justify-center gap-4">
-                  <button 
-                    onClick={() => setCurrentPage('discover')}
-                    className="px-9 py-4 bg-[#d4af37] hover:bg-[#aa8c2c] text-[#0f2811] font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-transform hover:-translate-y-1"
-                  >
-                    Mulai Eksplorasi (Discover)
-                  </button>
-                  <button 
-                    onClick={() => setCurrentPage('peta')}
-                    className="px-9 py-4 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold text-xs uppercase tracking-wider rounded-xl backdrop-blur-sm transition-transform hover:-translate-y-1"
-                  >
-                    Peta Trekking & POI
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {/* Teaser Destinations Section (Discover Cards) */}
-            <section className="max-w-7xl mx-auto px-6 py-24">
-              <div className="text-center max-w-2xl mx-auto mb-16">
-                <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Daya Tarik Utama</p>
-                <h2 className="text-3xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Destinasi Pilihan Wisatawan</h2>
-                <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-8">
-                {discoverItems.slice(0, 3).map((item) => (
-                  <div 
-                    key={item.id} 
-                    onClick={() => { setSelectedDiscoverId(item.id); setCurrentPage('discover') }}
-                    className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg border border-[#1e4620]/5 cursor-pointer hover-lift group"
-                  >
-                    <div className="h-64 overflow-hidden relative">
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                      <span className="absolute bottom-4 left-4 bg-[#d4af37] text-[#0f2811] text-[9px] font-extrabold uppercase px-3 py-1 rounded-full">{item.category}</span>
-                    </div>
-                    <div className="p-6">
-                      <p className="text-slate-400 text-[10px] font-bold uppercase">{item.location}</p>
-                      <h3 className="font-extrabold text-lg text-[#0f2811] mt-1.5 line-clamp-1">{item.title}</h3>
-                      <p className="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
-        )}
-
-        {/* Halaman: DISCOVER (Eksplorasi Pariwisata) */}
-        {currentPage === 'discover' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            {selectedDiscoverId === null ? (
-              <>
-                <div className="text-center max-w-2xl mx-auto mb-12">
-                  <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Eksplorasi Desa</p>
-                  <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Discover Padaleu</h1>
-                  <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-                </div>
-
-                {/* Filter Tabs */}
-                <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
-                  {['Semua', 'Alam', 'Budaya', 'Kuliner', 'Penginapan'].map((filter) => (
-                    <button
-                      key={filter}
-                      onClick={() => setDiscoverFilter(filter as any)}
-                      className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
-                        discoverFilter === filter
-                          ? 'bg-[#1e4620] text-white shadow-sm'
-                          : 'bg-white text-[#0f2811]/70 hover:bg-green-light'
-                      }`}
-                    >
-                      {filter}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Discover Grid */}
-                <div className="grid md:grid-cols-3 gap-8">
-                  {discoverItems
-                    .filter(item => discoverFilter === 'Semua' || item.category === discoverFilter)
-                    .map(item => (
-                      <div 
-                        key={item.id} 
-                        onClick={() => setSelectedDiscoverId(item.id)}
-                        className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md border border-[#1e4620]/5 cursor-pointer hover-lift group"
-                      >
-                        <div className="h-60 overflow-hidden relative">
-                          <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                          <span className="absolute top-4 left-4 bg-[#1e4620] text-white text-[9px] font-extrabold uppercase px-3 py-1 rounded-full">{item.category}</span>
-                        </div>
-                        <div className="p-6">
-                          <p className="text-slate-400 text-[10px] font-bold uppercase">{item.location}</p>
-                          <h3 className="font-extrabold text-base text-[#0f2811] mt-1.5 leading-snug">{item.title}</h3>
-                          <p className="text-slate-500 text-xs mt-3 line-clamp-3 leading-relaxed">{item.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </>
-            ) : (
-              /* Discover Detail Page / Overlay */
-              (() => {
-                const item = discoverItems.find(d => d.id === selectedDiscoverId)
-                if (!item) return null
-                return (
-                  <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-100">
-                    <button 
-                      onClick={() => setSelectedDiscoverId(null)}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1e4620] hover:text-[#d4af37] uppercase tracking-wider mb-8"
-                    >
-                      &larr; Kembali ke Discover
-                    </button>
-
-                    <div className="h-96 overflow-hidden rounded-2xl mb-8 relative">
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                      <span className="absolute top-4 left-4 bg-[#d4af37] text-[#0f2811] text-xs font-extrabold uppercase px-4 py-1.5 rounded-full">{item.category}</span>
-                    </div>
-
-                    <p className="text-xs font-bold text-[#d4af37] uppercase tracking-widest mb-1">{item.location}</p>
-                    <h1 className="text-3xl sm:text-4xl font-bold font-swiss-title text-[#0f2811] tracking-tight leading-none mb-6">{item.title}</h1>
-                    
-                    <p className="text-slate-600 text-sm leading-relaxed mb-8">{item.description}</p>
-
-                    <div className="grid md:grid-cols-2 gap-8 border-t border-slate-100 pt-8">
-                      <div>
-                        <h4 className="font-bold text-xs uppercase text-[#0f2811] mb-3">Fasilitas & Layanan</h4>
-                        <ul className="text-xs space-y-2 text-slate-500">
-                          {item.facilities.map((fac, idx) => <li key={idx}>✓ {fac}</li>)}
-                        </ul>
-                      </div>
-                      <div className="space-y-4">
-                        <p className="text-xs"><span className="font-bold text-[#0f2811] block mb-1">Jam Operasional:</span> <span className="text-slate-500">{item.hours}</span></p>
-                        <p className="text-xs"><span className="font-bold text-[#0f2811] block mb-1">Kontak Informasi:</span> <span className="text-slate-500">{item.contact}</span></p>
-                        <button 
-                          onClick={() => { setCurrentPage('peta'); triggerToast(`Menampilkan lokasi ${item.title} di peta...`) }}
-                          className="px-6 py-2.5 bg-[#f1f6f1] hover:bg-[#1e4620] hover:text-white text-[#1e4620] font-bold text-xs rounded-xl uppercase transition-all"
-                        >
-                          Tampilkan di Peta Digital
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })()
-            )}
-          </div>
-        )}
-
-        {/* Halaman: PROFIL DESA */}
-        {currentPage === 'profil' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            {/* Header */}
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Tentang Padaleu</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Sejarah & Profil Desa</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
+        {/* 2. SEJARAH DESA & KEPEMIMPINAN TAHUN KE TAHUN */}
+        <section className="section" id="sejarah" style={{ background: 'var(--white)' }}>
+          <div className="container">
+            <div className="section-header reveal">
+              <div className="overline">Jejak Langkah & Sejarah</div>
+              <h2>Sejarah & Perjalanan Kepemimpinan Desa Padaleu</h2>
+              <p>Sejak pertama kali berdiri di pesisir Lembo, Desa Padaleu telah tumbuh menjadi desa mandiri yang kaya akan hasil bumi dan potensi maritim melalui kepemimpinan yang berkesinambungan.</p>
+              <div className="divider"></div>
             </div>
 
-            {/* Grid Sejarah & Visi Misi */}
-            <div className="grid md:grid-cols-2 gap-12 mb-20">
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-[#1e4620]/5">
-                <h2 className="text-xl font-bold font-swiss-title text-[#0f2811] swiss-border pb-3 mb-4">Sejarah Singkat Desa</h2>
-                <div className="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
-                  <p>
-                    Desa Padaleu didirikan pada awal dekade 1980-an yang mulanya berawal dari pemukiman transmigran lokal dan petani komoditas perkebunan di Kecamatan Lembo. Nama "Padaleu" sendiri diambil dari bahasa daerah setempat yang melambangkan kesuburan tanah dan keteduhan daerah pesisir.
-                  </p>
-                  <p>
-                    Seiring dibentuknya pemekaran Kabupaten Konawe Utara, Desa Padaleu terus berbenah secara administratif dan bergotong royong membangun infrastruktur. Dari sentra pertanian tadah hujan tradisional, Padaleu kini bertransformasi menjadi salah satu desa percontohan digitalisasi informasi serta lumbung cengkeh unggulan di wilayah Lembo.
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-[#0f2811] text-white p-8 rounded-3xl shadow-lg relative overflow-hidden">
-                <h2 className="text-xl font-bold font-swiss-title text-[#d4af37] border-b border-white/20 pb-3 mb-4">Visi & Misi Desa</h2>
-                <div className="mb-6">
-                  <p className="text-xs uppercase tracking-widest text-[#d4af37] font-bold">Visi</p>
-                  <p className="text-sm font-semibold italic mt-1 text-[#f1f6f1]">
-                    "Mewujudkan Desa Padaleu yang Sejahtera, Mandiri, Transparan, Berbasis Sektor Perkebunan Unggul dan Pemanfaatan Teknologi Informasi."
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-[#d4af37] font-bold mb-2">Misi Utama</p>
-                  <ul className="text-xs space-y-2 text-[#f1f6f1]/80 leading-relaxed">
-                    <li>1. Mewujudkan pelayanan prima yang berbasis teknologi informasi (E-Government).</li>
-                    <li>2. Mengakselerasi infrastruktur jalan tani dan irigasi guna mempermudah hasil panen cengkeh.</li>
-                    <li>3. Membina kemandirian ekonomi pemuda dan UMKM lokal melalui penyaluran stimulus BUMDes.</li>
-                    <li>4. Meningkatkan keterbukaan penggunaan APBDes secara akuntabel dan transparan kepada masyarakat.</li>
-                  </ul>
-                </div>
-              </div>
+            <div style={{ maxWidth: '800px', margin: '0 auto 3.5rem', textAlign: 'center' }} className="reveal">
+              <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem', lineHeight: '1.8' }}>
+                Desa Padaleu dibentuk melalui semangat gotong royong para tetua adat dan tokoh masyarakat pesisir Konawe Utara. Nama <strong>"Padaleu"</strong> diambil dari perpaduan kata lokal yang bermakna <em>"Hamparan Hijau yang Subur dan Damai"</em>. Berikut adalah jejak kepemimpinan Kepala Desa Padaleu dari masa ke masa:
+              </p>
             </div>
 
-            {/* Struktur Organisasi & Aparatur */}
-            <div className="mb-20">
-              <h2 className="text-2xl font-bold text-center text-[#0f2811] mb-12">Pemerintahan & Perangkat Desa</h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { nama: 'Suprianto, S.Sos.', jabatan: 'Kepala Desa', desk: 'Bertanggung jawab penuh atas penyelenggaraan pemerintahan dan pembangunan fisik/non-fisik desa.', img: imgKepDes },
-                  { nama: 'Hardiansyah, A.Md.', jabatan: 'Sekretaris Desa', desk: 'Mengkoordinasikan administrasi umum, pelayanan data publik, kearsipan, serta penyusunan draf APBDes.', img: imgKKN },
-                  { nama: 'Nurlina, S.E.', jabatan: 'Bendahara Desa', desk: 'Mengelola siklus pembukuan, realisasi dana anggaran desa, perpajakan, serta pelaporan SPJ APBDes.', img: imgAvatar },
-                  { nama: 'Rahmat Hidayat', jabatan: 'Kaur Pembangunan', desk: 'Melakukan monitoring lapangan, pemeliharaan infrastruktur jalan desa, jembatan tani, dan sarana umum.', img: imgProker }
-                ].map((aparat, i) => (
-                  <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover-lift text-center p-6">
-                    <img src={aparat.img} alt={aparat.nama} className="w-24 h-24 object-cover rounded-full mx-auto mb-4 border-2 border-[#d4af37]" />
-                    <h3 className="font-extrabold text-sm text-[#0f2811]">{aparat.nama}</h3>
-                    <p className="text-[11px] text-[#d4af37] font-bold uppercase tracking-wider mb-3">{aparat.jabatan}</p>
-                    <p className="text-slate-500 text-xs leading-relaxed">{aparat.desk}</p>
-                  </div>
-                ))}
-              </div>
+            <div className="section-header reveal" style={{ marginBottom: '2rem' }}>
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--red-accent)' }}>Kepemimpinan dari Tahun ke Tahun</span>
             </div>
-          </div>
-        )}
 
-        {/* Halaman: PETA DIGITAL DESA (Leaflet.js) */}
-        {currentPage === 'peta' && (
-          <div className="animate-fade-in">
-            <div className="grid lg:grid-cols-12 h-[calc(100vh-140px)] min-h-[500px]">
-              
-              {/* Sidebar Menu */}
-              <div className="lg:col-span-4 bg-white border-r border-[#1e4620]/10 flex flex-col p-6 overflow-y-auto">
-                <h1 className="text-xl font-bold font-swiss-title text-[#0f2811] mb-2">Peta Digital Pesisir</h1>
-                <p className="text-slate-500 text-xs leading-relaxed mb-6">Navigasi titik penting (POI) geografis Desa Padaleu, Kecamatan Lembo, Konawe Utara.</p>
-
-                {/* Categories */}
-                <div className="mb-6">
-                  <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#d4af37] mb-3">Filter Kategori</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {['Semua', 'Fasilitas', 'Ibadah', 'Pendidikan', 'Wisata', 'UMKM'].map((cat) => (
-                      <button
-                        key={cat}
-                        className="py-2.5 px-4 bg-[#f1f6f1] hover:bg-[#1e4620]/15 text-[#0f2811] text-xs font-bold rounded-xl transition-colors border border-transparent hover:border-[#1e4620]/10"
-                      >
-                        {cat}
-                      </button>
-                    ))}
-                  </div>
+            <div className="timeline-grid">
+              <div className="timeline-card reveal stagger-1">
+                <div className="timeline-img-wrap">
+                  <img src={imgKKN} alt="H. La Ode Rahman" />
+                  <div className="timeline-badge">Periode I</div>
                 </div>
-
-                {/* POI List */}
-                <div className="flex-grow">
-                  <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#d4af37] mb-3">Daftar Titik Lokasi ({mapMarkers.length})</p>
-                  <div className="space-y-3">
-                    {mapMarkers.map((marker) => (
-                      <div 
-                        key={marker.id} 
-                        className="bg-[#f8f9fa] border border-[#1e4620]/5 p-3 rounded-xl hover:bg-white hover:border-[#d4af37] hover:shadow-md transition-all cursor-pointer flex gap-3"
-                      >
-                        <img src={marker.image} alt={marker.title} className="w-12 h-12 object-cover rounded-lg" />
-                        <div>
-                          <h4 className="font-extrabold text-[#0f2811] text-xs leading-tight">{marker.title}</h4>
-                          <span className="text-[9px] font-bold text-[#d4af37] uppercase tracking-wider">{marker.category}</span>
-                          <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{marker.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">1998 — 2006</div>
+                  <h3 className="timeline-name">H. La Ode Rahman</h3>
+                  <p className="timeline-desc">Kepala Desa Pertama. Peletak fondasi administrasi wilayah desa, pembangunan Balai Desa pertama, dan pembukaan jalan rintisan antardusun.</p>
                 </div>
               </div>
 
-              {/* Leaflet GIS Map Container */}
-              <div className="lg:col-span-8 bg-slate-200 relative">
-                <LeafletMapComponent markers={mapMarkers} />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Halaman: DATA KEPENDUDUKAN (Dashboard) */}
-        {currentPage === 'kependudukan' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Sistem Informasi Kependudukan</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Dashboard Demografi Warga</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-            </div>
-
-            {/* Stats Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#1e4620]/5 text-center">
-                <p className="text-4xl font-extrabold text-[#1e4620]">{statistik.total}</p>
-                <p className="text-xs font-bold text-[#d4af37] uppercase tracking-wider mt-1">Total Penduduk</p>
-                <p className="text-[10px] text-slate-400">Jiwa terdata</p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#1e4620]/5 text-center">
-                <p className="text-4xl font-extrabold text-[#1e4620]">{statistik.lakiLaki}</p>
-                <p className="text-xs font-bold text-[#d4af37] uppercase tracking-wider mt-1">Laki-Laki</p>
-                <p className="text-[10px] text-slate-400">{Math.round((statistik.lakiLaki / statistik.total) * 100)}% Rasio</p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#1e4620]/5 text-center">
-                <p className="text-4xl font-extrabold text-[#1e4620]">{statistik.perempuan}</p>
-                <p className="text-xs font-bold text-[#d4af37] uppercase tracking-wider mt-1">Perempuan</p>
-                <p className="text-[10px] text-slate-400">{Math.round((statistik.perempuan / statistik.total) * 100)}% Rasio</p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#1e4620]/5 text-center">
-                <p className="text-4xl font-extrabold text-[#1e4620]">{statistik.kepalaKeluarga}</p>
-                <p className="text-xs font-bold text-[#d4af37] uppercase tracking-wider mt-1">Kepala Keluarga</p>
-                <p className="text-[10px] text-slate-400">KK Aktif</p>
-              </div>
-            </div>
-
-            {/* Demographics Grid */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-[#1e4620]/5">
-                <h2 className="text-base font-bold text-[#0f2811] mb-6 border-b pb-3 border-slate-100 flex items-center gap-2">
-                  <span>🎓</span> Tingkat Pendidikan Terakhir
-                </h2>
-                <div className="space-y-5">
-                  {statistik.pendidikan.map((edu, idx) => {
-                    const pct = Math.round((edu.jumlah / statistik.total) * 100)
-                    return (
-                      <div key={idx} className="text-xs">
-                        <div className="flex justify-between font-bold mb-1">
-                          <span className="text-slate-600">{edu.label}</span>
-                          <span className="text-[#1e4620]">{edu.jumlah} Jiwa ({pct}%)</span>
-                        </div>
-                        <div className="w-full bg-[#f1f6f1] h-2.5 rounded-full overflow-hidden">
-                          <div className="bg-[#1e4620] h-full rounded-full" style={{ width: `${pct}%` }} />
-                        </div>
-                      </div>
-                    )
-                  })}
+              <div className="timeline-card reveal stagger-2">
+                <div className="timeline-img-wrap">
+                  <img src={imgPenerimaan4} alt="Drs. Muhammad Yamin" />
+                  <div className="timeline-badge">Periode II</div>
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">2006 — 2014</div>
+                  <h3 className="timeline-name">Drs. Muhammad Yamin</h3>
+                  <p className="timeline-desc">Fokus pada penguatan sektor perkebunan cengkeh dan kelapa, perbaikan jalan desa beraspal, serta pendirian posyandu desa.</p>
                 </div>
               </div>
 
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-[#1e4620]/5">
-                <h2 className="text-base font-bold text-[#0f2811] mb-6 border-b pb-3 border-slate-100 flex items-center gap-2">
-                  <span>⏳</span> Kelompok Kelompok Umur
-                </h2>
-                <div className="space-y-5">
-                  {statistik.usia.map((age, idx) => (
-                    <div key={idx} className="text-xs">
-                      <div className="flex justify-between font-bold mb-1">
-                        <span className="text-slate-600">{age.label}</span>
-                        <span className="text-[#d4af37]">{age.jumlah} Jiwa ({age.pct}%)</span>
-                      </div>
-                      <div className="w-full bg-[#f1f6f1] h-2.5 rounded-full overflow-hidden">
-                        <div className="bg-[#d4af37] h-full rounded-full" style={{ width: `${age.pct}%` }} />
-                      </div>
-                    </div>
-                  ))}
+              <div className="timeline-card reveal stagger-3">
+                <div className="timeline-img-wrap">
+                  <img src={imgProker} alt="Ir. H. Andi Syamsul" />
+                  <div className="timeline-badge">Periode III</div>
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">2014 — 2021</div>
+                  <h3 className="timeline-name">Ir. H. Andi Syamsul</h3>
+                  <p className="timeline-desc">Pembangunan jaringan elektrifikasi terpadu, pembuatan dermaga tambatan perahu nelayan, dan pembentukan BUMDes Padaleu Sejahtera.</p>
+                </div>
+              </div>
+
+              <div className="timeline-card reveal stagger-4">
+                <div className="timeline-img-wrap">
+                  <img src={imgKepDes} alt="Suprianto, S.Sos." />
+                  <div className="timeline-badge" style={{ background: 'var(--teal-dark)' }}>Petahana</div>
+                </div>
+                <div class="timeline-body">
+                  <div className="timeline-period">2021 — Sekarang</div>
+                  <h3 className="timeline-name">Suprianto, S.Sos.</h3>
+                  <p className="timeline-desc">Transformasi digitalisasi desa, pengembangan Ekowisata Mangrove Padaleu, transparansi APBDes, serta keterbukaan informasi publik.</p>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </section>
 
-        {/* Halaman: BERITA DESA */}
-        {currentPage === 'berita' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            {selectedBeritaId === null ? (
-              <>
-                <div className="text-center max-w-2xl mx-auto mb-16">
-                  <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Media Publikasi</p>
-                  <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Kabar Berita Desa</h1>
-                  <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-8">
-                  {berita.map((item) => (
-                    <div 
-                      key={item.id} 
-                      onClick={() => setSelectedBeritaId(item.id)}
-                      className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md border border-[#1e4620]/5 cursor-pointer hover-lift flex flex-col justify-between"
-                    >
-                      <div>
-                        <div className="h-52 overflow-hidden relative">
-                          <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                          <span className="absolute top-4 left-4 bg-[#1e4620] text-white text-[9px] font-extrabold uppercase px-3 py-1 rounded-full shadow-sm">{item.category}</span>
-                        </div>
-                        <div className="p-6">
-                          <p className="text-slate-400 text-[10px] font-medium mb-1">📅 {item.date}</p>
-                          <h3 className="font-extrabold text-[#0f2811] text-base leading-snug line-clamp-2 hover:text-[#d4af37] transition-colors">{item.title}</h3>
-                          <p className="text-slate-500 text-xs mt-3 line-clamp-3 leading-relaxed">{item.excerpt}</p>
-                        </div>
-                      </div>
-                      <div className="p-6 pt-0 flex justify-between items-center text-[10px] font-bold text-[#1e4620] uppercase tracking-wider border-t border-slate-50 mt-4 pt-4">
-                        <span>Baca Selengkapnya</span>
-                        <IconArrowRight />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            ) : (
-              (() => {
-                const article = berita.find(b => b.id === selectedBeritaId)
-                if (!article) return null
-                return (
-                  <article className="max-w-3xl mx-auto bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-100">
-                    <button 
-                      onClick={() => setSelectedBeritaId(null)}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1e4620] hover:text-[#d4af37] uppercase tracking-wider mb-8"
-                    >
-                      ← Kembali ke Daftar Berita
-                    </button>
-                    
-                    <span className="bg-[#d4af37]/20 text-[#0f2811] text-xs font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full">{article.category}</span>
-                    <h1 className="text-3xl sm:text-4xl font-bold font-swiss-title text-[#0f2811] tracking-tight leading-tight mt-4 mb-4">{article.title}</h1>
-                    
-                    <div className="flex items-center justify-between text-xs text-slate-400 border-b pb-6 border-slate-100 mb-8">
-                      <span>Tanggal: <b>{article.date}</b></span>
-                      <span>Oleh: <b>{article.author}</b></span>
-                    </div>
-
-                    <img src={article.image} alt={article.title} className="w-full h-96 object-cover rounded-2xl shadow-md mb-8" />
-                    
-                    <div className="prose prose-slate max-w-none text-slate-600 text-sm leading-relaxed space-y-6 whitespace-pre-line">
-                      {article.content}
-                    </div>
-                  </article>
-                )
-              })()
-            )}
-          </div>
-        )}
-
-        {/* Halaman: AGENDA DESA */}
-        {currentPage === 'agenda' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Jadwal Agenda Warga</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Kalender Kegiatan Desa</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
+        {/* 3. STRUKTUR DESA (Aparatur - Foto Placeholder Avatar) */}
+        <section className="section" id="struktur" style={{ background: 'var(--gray-50)' }}>
+          <div className="container">
+            <div className="section-header reveal">
+              <div className="overline">Pemerintahan Desa</div>
+              <h2>Struktur Organisasi & Aparatur Desa</h2>
+              <p>Susunan aparatur Pemerintah Desa Padaleu yang bertugas melayani kebutuhan dan aspirasi masyarakat.</p>
+              <div className="divider"></div>
             </div>
 
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
-              {/* Calendar Grid View */}
-              <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-[#1e4620]/5">
-                <div className="flex items-center justify-between mb-8">
-                  <h3 className="font-extrabold text-[#0f2811] text-base uppercase tracking-wider">Agustus 2026</h3>
-                </div>
-
-                <div className="grid grid-cols-7 gap-2 text-center text-[10px] font-bold text-slate-400 uppercase mb-4">
-                  <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
-                </div>
-
-                <div className="grid grid-cols-7 gap-2">
-                  {[1, 2, 3, 4, 5].map((e) => <div key={`empty-${e}`} className="h-16 sm:h-20 bg-slate-50/40 rounded-xl" />)}
-                  {Array.from({ length: 31 }).map((_, dIdx) => {
-                    const dayNum = dIdx + 1
-                    const paddedDay = dayNum < 10 ? `0${dayNum}` : `${dayNum}`
-                    const fullDateStr = `2026-08-${paddedDay}`
-                    const hasEvent = agendas.find(a => a.date === fullDateStr)
-
-                    return (
-                      <div 
-                        key={dayNum} 
-                        className={`h-16 sm:h-20 p-2 rounded-xl flex flex-col justify-between transition-all border ${
-                          hasEvent 
-                            ? 'bg-[#f1f6f1] border-[#d4af37]' 
-                            : 'bg-white border-slate-100 hover:bg-slate-50'
-                        }`}
-                      >
-                        <span className={`text-xs font-bold ${hasEvent ? 'text-[#1e4620]' : 'text-slate-500'}`}>{dayNum}</span>
-                        {hasEvent && (
-                          <div 
-                            onClick={() => triggerToast(`Detail: ${hasEvent.title}`)}
-                            className="bg-[#d4af37] text-[#0f2811] text-[8px] font-extrabold uppercase px-1 py-0.5 rounded truncate cursor-pointer"
-                          >
-                            📍 {hasEvent.title}
-                          </div>
-                        )}
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {/* List */}
-              <div className="lg:col-span-4 space-y-6">
-                <h3 className="font-extrabold text-[#0f2811] text-base uppercase tracking-wider mb-6">Daftar Rincian Agenda</h3>
-                {agendas.map((item) => (
-                  <div key={item.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-                    <span className="bg-[#d4af37] text-[#0f2811] text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full">📅 {item.date}</span>
-                    <h4 className="font-extrabold text-sm text-[#0f2811] mt-2">{item.title}</h4>
-                    <p className="text-[11px] text-[#1e4620] font-bold mt-1">📍 {item.loc}</p>
-                    <p className="text-slate-500 text-xs mt-2">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Halaman: POTENSI DESA & WISATA */}
-        {currentPage === 'potensi' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Potensi Perekonomian</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Komoditas & Potensi Desa</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center">
-                <img src={imgCengkeh} alt="Perkebunan Cengkeh" className="w-full md:w-44 h-44 object-cover rounded-2xl" />
-                <div>
-                  <span className="bg-[#1e4620]/10 text-[#1e4620] text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full">Komoditas Utama</span>
-                  <h3 className="font-extrabold text-base text-[#0f2811] mt-2">Cengkeh Lembo</h3>
-                  <p className="text-slate-500 text-xs leading-relaxed mt-2">
-                    Sektor perkebunan cengkeh merupakan tulang punggung perekonomian utama Desa Padaleu yang menyuplai komoditas rempah-rempah berkualitas prima ke pasar nasional.
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center">
-                <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500&h=350&fit=crop" alt="Madu Hutan" className="w-full md:w-44 h-44 object-cover rounded-2xl" />
-                <div>
-                  <span className="bg-[#1e4620]/10 text-[#1e4620] text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full">Hasil Hutan</span>
-                  <h3 className="font-extrabold text-base text-[#0f2811] mt-2">Madu Hutan Liar</h3>
-                  <p className="text-slate-500 text-xs leading-relaxed mt-2">
-                    Madu liar murni yang dipanen dari pohon-pohon besar di pedalaman hutan Lembo, dikemas secara tradisional dan sehat.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Halaman: UMKM DESA */}
-        {currentPage === 'umkm' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Produk Unggulan</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Katalog UMKM Desa</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {umkmList.map((umkm) => (
-                <div key={umkm.id} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-[#1e4620]/5 flex flex-col justify-between">
-                  <div>
-                    <div className="h-56 overflow-hidden relative">
-                      <img src={umkm.image} alt={umkm.name} className="w-full h-full object-cover" />
-                      <span className="absolute top-4 left-4 bg-[#1e4620] text-white text-[9px] font-extrabold uppercase px-3 py-1 rounded-full shadow-sm">{umkm.category}</span>
-                    </div>
-                    <div className="p-6">
-                      <p className="text-[#d4af37] text-[10px] font-extrabold uppercase tracking-wider">{umkm.seller}</p>
-                      <h3 className="font-extrabold text-[#0f2811] text-base leading-snug mt-1 mb-2">{umkm.name}</h3>
-                      <p className="text-[#1e4620] font-extrabold text-base mb-3">{umkm.price}</p>
-                      <p className="text-slate-500 text-xs leading-relaxed line-clamp-3">{umkm.description}</p>
-                    </div>
-                  </div>
-
-                  <div className="p-6 pt-0 mt-4">
-                    <a
-                      href={`https://wa.me/${umkm.phone}?text=Halo%20penjual%20di%20Web%20Desa%20Padaleu%2C%20saya%20tertarik%20untuk%20membeli%20produk%20"${encodeURIComponent(umkm.name)}".%20Mohon%20info%20ketersediaan%20barang.%20Terima%20kasih.`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-3 bg-[#1b5e20] hover:bg-[#123c14] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 hover:shadow-md"
-                    >
-                      <span>💬 Hubungi via WhatsApp</span>
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Halaman: APBDES (Transparansi) */}
-        {currentPage === 'apbdes' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Keterbukaan Anggaran</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Laporan Anggaran APBDes {apbdes.tahun}</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#1e4620]/5">
-                <p className="text-xs font-bold text-slate-400 uppercase">Total Pendapatan Desa</p>
-                <p className="text-3xl font-extrabold text-[#1e4620] mt-1">Rp {apbdes.pendapatan.total.toLocaleString('id-ID')}</p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#1e4620]/5">
-                <p className="text-xs font-bold text-slate-400 uppercase">Total Belanja / Realisasi</p>
-                <p className="text-3xl font-extrabold text-[#d4af37] mt-1">Rp {apbdes.belanja.total.toLocaleString('id-ID')}</p>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#1e4620]/5">
-                <p className="text-xs font-bold text-slate-400 uppercase">Pembiayaan / SILPA</p>
-                <p className="text-3xl font-extrabold text-[#1e293b] mt-1">Rp {apbdes.pembiayaan.total.toLocaleString('id-ID')}</p>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-[#1e4620]/5">
-                <h3 className="font-extrabold text-base text-[#0f2811] mb-6 flex justify-between border-b pb-3 border-slate-100">
-                  <span>💰 Pos Pendapatan Desa</span>
-                </h3>
-                <div className="space-y-4">
-                  {apbdes.pendapatan.items.map((item: any, idx: number) => {
-                    const pct = Math.round((item.nilai / apbdes.pendapatan.total) * 100)
-                    return (
-                      <div key={idx} className="text-xs">
-                        <div className="flex justify-between font-bold mb-1">
-                          <span className="text-slate-600">{item.nama}</span>
-                          <span className="text-[#1e4620]">Rp {item.nilai.toLocaleString('id-ID')} ({pct}%)</span>
-                        </div>
-                        <div className="w-full bg-[#f1f6f1] h-2.5 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full" style={{ backgroundColor: item.color, width: `${pct}%` }} />
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-[#1e4620]/5">
-                <h3 className="font-extrabold text-base text-[#0f2811] mb-6 flex justify-between border-b pb-3 border-slate-100">
-                  <span>🛒 Rincian Alokasi Belanja</span>
-                </h3>
-                <div className="space-y-4">
-                  {apbdes.belanja.items.map((item: any, idx: number) => {
-                    const pct = Math.round((item.nilai / apbdes.belanja.total) * 100)
-                    return (
-                      <div key={idx} className="text-xs">
-                        <div className="flex justify-between font-bold mb-1">
-                          <span className="text-slate-600">{item.nama}</span>
-                          <span className="text-[#d4af37]">Rp {item.nilai.toLocaleString('id-ID')} ({pct}%)</span>
-                        </div>
-                        <div className="w-full bg-[#f1f6f1] h-2.5 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full" style={{ backgroundColor: item.color, width: `${pct}%` }} />
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Halaman: PPID */}
-        {currentPage === 'ppid' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Informasi Dokumen</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">PPID & Regulasi Publik</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-            </div>
-
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs text-left text-slate-600">
-                  <thead className="bg-[#f1f6f1] text-[#0f2811] font-bold uppercase tracking-wider border-b border-slate-100">
-                    <tr>
-                      <th className="p-4 rounded-l-xl">Nama Dokumen</th>
-                      <th className="p-4">Kategori</th>
-                      <th className="p-4">Tanggal Rilis</th>
-                      <th className="p-4 rounded-r-xl text-center">Unduh</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {ppidDocs.map((doc) => (
-                      <tr key={doc.id} className="border-b border-slate-100 hover:bg-[#f1f6f1]/20 transition-colors">
-                        <td className="p-4 font-bold text-[#0f2811] flex items-center gap-2">
-                          <IconFileText />
-                          <span>{doc.title}</span>
-                        </td>
-                        <td className="p-4">{doc.type}</td>
-                        <td className="p-4">{doc.date}</td>
-                        <td className="p-4 text-center">
-                          <button 
-                            onClick={() => triggerToast(`Mengunduh ${doc.title}...`)}
-                            className="p-2 bg-[#f1f6f1] hover:bg-[#1e4620] hover:text-white rounded-lg transition-colors text-[#1e4620]"
-                          >
-                            <IconDownload />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Halaman: GALERI DESA */}
-        {currentPage === 'galeri' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Galeri Dokumentasi</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Kegiatan & Pembangunan Desa</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="aparatur-grid">
               {[
-                { title: 'Penyambutan KKN UHO', img: imgKKN, count: 12, desc: 'Pemerimaan dan pemaparan program pengabdian.' },
-                { title: 'Pembahasan Rencana Kerja', img: imgProker, count: 8, desc: 'Rapat aparat merumuskan arah pembangunan.' },
-                { title: 'Sosialisasi Bantuan Tani', img: imgGallery2, count: 6, desc: 'Pemberian pupuk dan arahan penyuluh.' },
-                { title: 'Penerimaan Studi Banding', img: imgGallery3, count: 5, desc: 'Studi banding dari desa tetangga di Konawe Utara.' },
-                { title: 'Kerja Bakti Masal Dusun II', img: imgGallery4, count: 15, desc: 'Kerja bakti pembersihan jembatan.' }
-              ].map((album, idx) => (
-                <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 hover-lift group">
-                  <div className="h-64 overflow-hidden relative">
-                    <img src={album.img} alt={album.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <span className="absolute top-4 right-4 bg-[#d4af37] text-[#0f2811] text-xs font-extrabold px-3 py-1 rounded-full">{album.count} Foto</span>
+                { role: 'Kepala Desa', name: 'Suprianto, S.Sos.' },
+                { role: 'Sekretaris Desa', name: 'Ahmad Fauzi, S.IP.' },
+                { role: 'Kaur Keuangan', name: 'Nurhayati, S.E.' },
+                { role: 'Kaur Perencanaan', name: 'Rahmat Hidayat' },
+                { role: 'Kasi Pemerintahan', name: 'Siti Badriah' },
+                { role: 'Kasi Kesejahteraan', name: 'Bambang Sutrisno' },
+                { role: 'Kepala Dusun I', name: 'Hasanuddin' },
+                { role: 'Kepala Dusun II', name: 'Darmawan' }
+              ].map((item, idx) => (
+                <div key={idx} className={`aparatur-card reveal stagger-${(idx % 4) + 1}`}>
+                  <div className="aparatur-avatar">
+                    <img src={imgAvatar} alt={item.name} />
                   </div>
-                  <div className="p-6">
-                    <h3 className="font-extrabold text-base text-[#0f2811]">{album.title}</h3>
-                    <p className="text-slate-500 text-xs mt-2">{album.desc}</p>
+                  <div className="aparatur-role">{item.role}</div>
+                  <h3 className="aparatur-name">{item.name}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. SAMBUTAN KEPALA DESA (Foto Placeholder Avatar) */}
+        <section className="section" id="sambutan" style={{ background: 'var(--white)' }}>
+          <div className="container">
+            <div className="welcome-grid">
+              <div className="welcome-img-wrap reveal-left">
+                <img src={imgAvatar} alt="Kepala Desa Padaleu" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '2rem' }} />
+                <div className="caption-bar">
+                  <h4>Masiudin, S.Si.</h4>
+                  <span>Kepala Desa Padaleu (2021—Sekarang)</span>
+                </div>
+              </div>
+              <div className="welcome-text reveal-right">
+                <div className="overline">Sambutan Kepala Desa</div>
+                <h2>Membangun Desa Digital Melalui Transparansi & Keterbukaan</h2>
+                <p>"Selamat datang di portal resmi Desa Padaleu. Melalui platform digital ini, kami berupaya mendekatkan pelayanan pemerintahan desa kepada seluruh lapisan masyarakat. Website ini merupakan pilar keterbukaan anggaran, promosi komoditas unggulan, pariwisata terpadu, serta sistem koordinasi peta digital desa."</p>
+                <p>"Mari bersama-sama bersinergi mewujudkan pembangunan desa yang transparan, modern, dan membawa kesejahteraan bagi segenap warga Lembo, Konawe Utara."</p>
+                <a href="#kontak-sec" className="link-arrow">
+                  Kirim Aspirasi & Hubungi Kami
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. KOMODITAS UNGGULAN (Khusus Cengkeh Organik) */}
+        <section className="section" id="komoditas" style={{ background: 'var(--gray-50)' }}>
+          <div className="container">
+            <div className="section-header reveal">
+              <div className="overline">Potensi Utama Desa</div>
+              <h2>Komoditas Unggulan: Cengkeh Organik Padaleu</h2>
+              <p>Cengkeh merupakan satu-satunya komoditas perkebunan utama yang menjadi pilar utama perekonomian dan kebanggaan warga Desa Padaleu, Kecamatan Lembo.</p>
+              <div className="divider"></div>
+            </div>
+
+            <div className="welcome-grid reveal" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', padding: '2rem', borderRadius: '6px', marginBottom: '2.5rem' }}>
+              <div className="welcome-img-wrap" style={{ height: '380px' }}>
+                <img src={imgCengkeh} alt="Perkebunan Cengkeh Organik Padaleu" style={{ height: '100%' }} />
+                <div className="caption-bar">
+                  <h4>Cengkeh Organik Konawe Utara</h4>
+                  <span>Komoditas Perkebunan Utama Desa</span>
+                </div>
+              </div>
+              <div className="welcome-text">
+                <div className="overline" style={{ color: 'var(--red-accent)' }}>Hasil Bumi Utama</div>
+                <h2>Cengkeh Kualitas Ekspor Khas Lereng Bukit Lembo</h2>
+                <p>Perkebunan cengkeh di Desa Padaleu terhampar luas di sepanjang lereng perbukitan Lembo yang subur. Dipetik secara tradisional oleh para petani lokal dan dikeringkan di bawah sinar matahari alami untuk menjaga kualitas aroma dan kadar eugenol terbaik.</p>
+                <p>Panen cengkeh di Desa Padaleu merupakan penggerak roda ekonomi terbesar desa, yang disyukuri tiap tahun melalui tradisi pesta adat panen rempah cengkeh.</p>
+              </div>
+            </div>
+
+            <div className="komoditas-grid">
+              <div className="komoditas-card reveal stagger-1">
+                <div className="komoditas-img-wrap">
+                  <img src={imgCengkeh} alt="Lahan Perkebunan Cengkeh" />
+                </div>
+                <div className="komoditas-body">
+                  <div className="komoditas-tag">Lahan & Iklim Topografi</div>
+                  <h3 className="komoditas-title">Lahan Perbukitan Subur</h3>
+                  <p className="komoditas-desc">Ditanam di ketinggian ideal lereng Lembo dengan kondisi tanah vulkanik kaya unsur hara, menghasilkan pohon cengkeh yang lebat dan produktif.</p>
+                </div>
+              </div>
+
+              <div className="komoditas-card reveal stagger-2">
+                <div className="komoditas-img-wrap">
+                  <img src={imgCengkeh} alt="Kualitas Minyak Atsiri" />
+                </div>
+                <div className="komoditas-body">
+                  <div className="komoditas-tag">Mutu & Standar Minyak</div>
+                  <h3 className="komoditas-title">Kadar Minyak Atsiri Tinggi</h3>
+                  <p class="komoditas-desc">Bunga cengkeh Padaleu memiliki kadar eugenol murni yang tinggi, sangat diminati oleh industri minyak atsiri, farmasi, dan rempah ekspor.</p>
+                </div>
+              </div>
+
+              <div className="komoditas-card reveal stagger-3">
+                <div className="komoditas-img-wrap">
+                  <img src={imgCengkeh} alt="Pengolahan Tradisional" />
+                </div>
+                <div className="komoditas-body">
+                  <div className="komoditas-tag">Proses Alami</div>
+                  <h3 className="komoditas-title">Pengeringan Alami</h3>
+                  <p className="komoditas-desc">Dipetik secara manual dan dijemur secara alami tanpa bahan kimia, menghasilkan warna cokelat keemasan yang sempurna dan tahan lama.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. BERITA & PENGUMUMAN DESA */}
+        <section className="section" id="berita" style={{ background: 'var(--white)' }}>
+          <div className="container-wide">
+            <div className="section-header reveal">
+              <div className="overline">Kabar Terkini</div>
+              <h2>Berita & Kegiatan Desa Padaleu</h2>
+              <p>Pengumuman resmi, kegiatan gotong royong, dan kabar perkembangan pembangunan desa terbaru.</p>
+              <div className="divider"></div>
+            </div>
+
+            <div className="card-grid">
+              <div className="card reveal stagger-1">
+                <div className="card-img-wrap">
+                  <img src={imgProker} alt="Pembahasan Proker" />
+                  <div className="card-badge">Pembangunan</div>
+                </div>
+                <div className="card-body">
+                  <div className="location">28 Juli 2026 &middot; Oleh Admin Desa</div>
+                  <h3>Musyawarah Pembangunan Desa & Rencana Program Kerja Terpadu</h3>
+                  <p>Pemerintah Desa Padaleu bersama aparat dan tokoh masyarakat menggelar musyawarah desa pembahasan program kerja prioritas.</p>
+                  <a href="#berita" className="read-more">Baca Berita →</a>
+                </div>
+              </div>
+
+              <div className="card reveal stagger-2">
+                <div className="card-img-wrap">
+                  <img src={imgCengkeh} alt="Panen Cengkeh" />
+                  <div className="card-badge">Kegiatan Warga</div>
+                </div>
+                <div className="card-body">
+                  <div className="location">15 Juli 2026 &middot; Oleh Poktan Desa</div>
+                  <h3>Persiapan Pesta Adat Panen Rempah Cengkeh Raya 2026</h3>
+                  <p>Warga dusun bersiap menyambut syukuran tahunan panen cengkeh melimpah dengan tarian adat tradisional khas Konawe Utara.</p>
+                  <a href="#berita" className="read-more">Baca Berita →</a>
+                </div>
+              </div>
+
+              <div className="card reveal stagger-3">
+                <div className="card-img-wrap">
+                  <img src={imgKKN} alt="Penerimaan KKN" />
+                  <div className="card-badge">Pemberdayaan</div>
+                </div>
+                <div className="card-body">
+                  <div className="location">02 Juli 2026 &middot; Sekretariat Desa</div>
+                  <h3>Penerimaan Mahasiswa KKN & Program Kerja Kolaborasi Desa</h3>
+                  <p>Penyambutan mahasiswa KKN oleh Pemerintah Desa Padaleu guna mendukung program digitalisasi desa dan pemetaan potensi wisata.</p>
+                  <a href="#berita" className="read-more">Baca Berita →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. GALERI FOTO (Foto Placeholder Avatar) */}
+        <section className="section" id="galeri" style={{ background: 'var(--gray-50)' }}>
+          <div className="container-wide">
+            <div className="section-header reveal">
+              <div className="overline">Galeri Visual</div>
+              <h2>Pesona Desa dalam Bingkai Foto</h2>
+              <p>Koleksi dokumentasi keindahan alam, kegiatan masyarakat, dan potensi Desa Padaleu.</p>
+              <div className="divider"></div>
+            </div>
+
+            <div className="gallery-grid reveal-scale">
+              {[
+                { title: 'Dokumentasi Desa', category: 'Slot Foto Galeri' },
+                { title: 'Kegiatan Warga', category: 'Slot Foto Galeri' },
+                { title: 'Potensi Desa', category: 'Slot Foto Galeri' },
+                { title: 'Pembangunan Desa', category: 'Slot Foto Galeri' },
+                { title: 'Pemerintahan Desa', category: 'Slot Foto Galeri' }
+              ].map((item, idx) => (
+                <div key={idx} className={`gallery-item ${idx > 0 ? `reveal stagger-${idx}` : ''}`}>
+                  <img src={imgAvatar} alt={item.title} style={{ objectFit: 'contain', background: '#e7e5e4', padding: '2rem' }} />
+                  <div className="gallery-caption">
+                    <h4>{item.title}</h4>
+                    <span>{item.category}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        )}
+        </section>
 
-        {/* Halaman: HUBUNGI KAMI */}
-        {currentPage === 'kontak' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-[#d4af37] text-xs font-extrabold uppercase tracking-widest mb-3">Hubungi Kami</p>
-              <h1 className="text-4xl md:text-5xl font-bold font-swiss-title text-[#0f2811]">Kontak & Alamat</h1>
-              <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4" />
+        {/* 8. PETA DIGITAL GIS DESA */}
+        <section className="section" id="peta-sec" style={{ background: 'var(--white)' }}>
+          <div className="container">
+            <div className="section-header reveal">
+              <div className="overline">Peta Geografis Interaktif</div>
+              <h2>Peta Digital GIS Desa Padaleu</h2>
+              <p>Jelajahi lokasi fisik kantor desa, tempat wisata, dermaga, pos kesehatan, dan sarana publik desa secara langsung.</p>
+              <div className="divider"></div>
             </div>
 
-            <div className="grid md:grid-cols-12 gap-8 items-start">
-              <div className="md:col-span-7 bg-white p-8 rounded-3xl shadow-sm border border-[#1e4620]/5">
-                <h3 className="font-extrabold text-base text-[#0f2811] mb-6">✉ Kirim Pesan Aspirasi</h3>
-                <form onSubmit={(e) => { e.preventDefault(); triggerToast('Pesan aspirasi Anda terkirim!') }} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Nama Lengkap" className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required />
-                    <input type="email" placeholder="Email" className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required />
+            <div className="map-wrapper reveal">
+              <div ref={mapRef} id="home-map" style={{ width: '100%', height: '100%' }}></div>
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: '1.5rem' }} className="reveal">
+              <a href="https://www.google.com/maps/place/Desa+padaleu/@-3.7515053,122.3401347,642m/data=!3m1!1e3!4m6!3m5!1s0x2d9855761937d85b:0x26ace3d8a9a9e8ee!8m2!3d-3.7521192!4d122.3402454!16s%2Fg%2F11cs6ktnzy" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#e04336' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Buka Lokasi Desa Padaleu di Google Maps ↗</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* 9. KONTAK DESA & FORM ASPIRASI */}
+        <section className="cta-section" id="kontak-sec">
+          <div className="container">
+            <div className="reveal">
+              <h2 className="font-serif">Hubungi Pemerintah Desa Padaleu</h2>
+              <p>Silakan sampaikan pertanyaan, aspirasi warga, atau koordinasi kunjungan wisata melalui layanan kontak di bawah ini.</p>
+            </div>
+
+            <div className="contact-grid reveal">
+              <div style={{ background: 'var(--white)', padding: '2.5rem', border: '1px solid var(--gray-200)', borderRadius: '4px' }}>
+                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1.5rem' }}>Kantor Desa Padaleu</h3>
+
+                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.2rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <div><strong>Alamat:</strong><br />Jl. Trans Sulawesi, Desa Padaleu, Kec. Lembo, Kab. Konawe Utara, Sulawesi Tenggara 93354</div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.2rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <div><strong>Telepon / WhatsApp:</strong><br />+62 812-4455-6677 (Kantor Desa)</div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.2rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <div><strong>Email Resmi:</strong><br />desa.padaleu@konaweutarakab.go.id</div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <div><strong>Jam Pelayanan Publik:</strong><br />Senin — Jumat: 08:00 — 16:00 WITA</div>
+                </div>
+              </div>
+
+              <div style={{ background: 'var(--white)', padding: '2.5rem', border: '1px solid var(--gray-200)', borderRadius: '4px' }}>
+                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1.5rem' }}>Kirim Pesan / Aspirasi</h3>
+
+                <form onSubmit={(e) => { e.preventDefault(); alert('Terima kasih! Pesan/Aspirasi Anda telah terikirim ke Pemerintah Desa Padaleu.'); }}>
+                  <div className="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" className="form-control" placeholder="Masukkan nama Anda" required />
                   </div>
-                  <input type="text" placeholder="Subjek" className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required />
-                  <textarea rows={5} placeholder="Pesan Anda..." className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required></textarea>
-                  <button type="submit" className="w-full py-3 bg-[#1e4620] hover:bg-[#0f2811] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all">Kirim Aspirasi</button>
+
+                  <div className="form-group">
+                    <label>Nomor HP / WhatsApp</label>
+                    <input type="tel" className="form-control" placeholder="08xxxxxxxxxx" required />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Pesan / Aspirasi</label>
+                    <textarea className="form-control" rows={4} placeholder="Tuliskan pesan atau aspirasi Anda untuk desa..." required></textarea>
+                  </div>
+
+                  <button type="submit" className="btn-primary" style={{ width: '100%', textAlign: 'center', cursor: 'pointer' }}>Kirim Pesan Sekarang</button>
                 </form>
               </div>
-
-              <div className="md:col-span-5 bg-[#0f2811] text-white p-8 rounded-3xl shadow-lg space-y-6">
-                <h3 className="font-extrabold text-base text-[#d4af37]">Kantor Desa Padaleu</h3>
-                <p className="text-xs text-[#f1f6f1]/80 leading-relaxed font-light">
-                  Jalan Raya Trans Sulawesi No. 12, Pesisir Timur Lembo, Konawe Utara, Sulawesi Tenggara, Indonesia.
-                </p>
-                <div className="border-t border-white/10 pt-4 space-y-3 text-xs">
-                  <p className="flex justify-between"><span className="text-[#d4af37] font-bold">Hari Layanan</span> <span>Senin - Jumat</span></p>
-                  <p className="flex justify-between"><span className="text-[#d4af37] font-bold">Jam Kerja</span> <span>08:00 - 15:30 WITA</span></p>
-                  <p className="flex justify-between"><span className="text-[#d4af37] font-bold">Email Kantor</span> <span>desa.padaleu@konaweutarakab.go.id</span></p>
-                </div>
-              </div>
             </div>
           </div>
-        )}
-
-        {/* Halaman: ADMIN DASHBOARD PANEL */}
-        {currentPage === 'admin' && (
-          <div className="max-w-7xl mx-auto px-6 py-16 animate-fade-in">
-            <AdminPanelDashboard 
-              berita={berita} setBerita={setBerita}
-              umkmList={umkmList} setUmkmList={setUmkmList}
-              mapMarkers={mapMarkers} setMapMarkers={setMapMarkers}
-              apbdes={apbdes} setApbdes={setApbdes}
-              statistik={statistik} setStatistik={setStatistik}
-              discoverItems={discoverItems} setDiscoverItems={setDiscoverItems}
-              triggerToast={triggerToast}
-            />
-          </div>
-        )}
-
+        </section>
       </main>
 
-      {/* ── FOOTER ──────────────────────────────────────────────────────────── */}
-      <footer className="bg-[#0f2811] text-white pt-16 pb-8 border-t border-[#1e4620]">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
-          <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#1e4620] border border-[#d4af37] flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#d4af37" />
-                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#f1f6f1" strokeWidth="2" />
-                </svg>
-              </div>
-              <div>
-                <p className="font-extrabold text-sm tracking-tight text-white">DESA PADALEU</p>
-                <p className="text-[9px] uppercase font-bold text-[#d4af37]">Lembo • Konawe Utara</p>
-              </div>
-            </div>
-            <p className="text-xs text-white/60 leading-relaxed max-w-sm">
-              Sistem pariwisata terpadu dan portal informasi transparansi Desa Padaleu. Dikelola oleh pokdarwis dan perangkat desa.
+      {/* ═══════════ FOOTER ═══════════ */}
+      <footer className="footer">
+        <div className="footer-grid">
+          <div>
+            <h4>Tentang Desa</h4>
+            <p>Portal informasi pariwisata dan pemerintahan Desa Padaleu. Menyajikan transparansi, sejarah kepemimpinan, profil aparatur, peta digital, serta layanan kependudukan terpadu.</p>
+          </div>
+          <div>
+            <h4>Navigasi</h4>
+            <p>
+              <a href="#sejarah" style={{ display: 'block' }}>Sejarah Desa</a>
+              <a href="#struktur" style={{ display: 'block' }}>Struktur Desa</a>
+              <a href="#komoditas" style={{ display: 'block' }}>Komoditas Unggulan</a>
+              <a href="#peta-sec" style={{ display: 'block' }}>Peta Digital</a>
             </p>
           </div>
-          <div className="md:col-span-3 space-y-4">
-            <h4 className="font-bold text-xs uppercase text-[#d4af37] tracking-wider">Navigasi</h4>
-            <ul className="text-xs space-y-2 text-white/70">
-              <li><button onClick={() => setCurrentPage('discover')} className="hover:text-[#d4af37]">Discover Desa</button></li>
-              <li><button onClick={() => setCurrentPage('peta')} className="hover:text-[#d4af37]">Peta POI & Trekking</button></li>
-              <li><button onClick={() => setCurrentPage('profil')} className="hover:text-[#d4af37]">Struktur Pemerintahan</button></li>
-              <li><button onClick={() => setCurrentPage('kependudukan')} className="hover:text-[#d4af37]">Demografi Warga</button></li>
-            </ul>
-          </div>
-          <div className="md:col-span-4 space-y-4">
-            <h4 className="font-bold text-xs uppercase text-[#d4af37] tracking-wider">Dokumen Regulasi</h4>
-            <p className="text-xs text-white/50 leading-relaxed">
-              Hak Cipta Dilindungi. Seluruh informasi disajikan transparan sesuai dengan peraturan keterbukaan informasi publik (PPID).
+          <div>
+            <h4>Informasi</h4>
+            <p>
+              <a href="#berita" style={{ display: 'block' }}>Berita Desa</a>
+              <a href="#galeri" style={{ display: 'block' }}>Galeri Foto</a>
+              <a href="#kontak-sec" style={{ display: 'block' }}>Hubungi Kami</a>
             </p>
+          </div>
+          <div>
+            <h4>Kontak</h4>
+            <p>Kantor Desa Padaleu<br />Jl. Trans Sulawesi, Lembo<br />Konawe Utara, Sultra<br /><br />desa.padaleu@konaweutarakab.go.id</p>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 border-t border-[#1e4620]/30 pt-8 text-center text-xs text-white/50">
-          <p>© 2026 Pemerintah Desa Padaleu, Lembo, Konawe Utara. All Rights Reserved.</p>
+        <div className="footer-bottom">
+          © 2026 Pemerintah Desa Padaleu, Kecamatan Lembo, Kabupaten Konawe Utara. All Rights Reserved.
         </div>
       </footer>
 
-    </div>
-  )
-}
-
-// ── Leaflet GIS Map Sub-Component ─────────────────────────────────────────────
-
-function LeafletMapComponent({ markers }: { markers: any[] }) {
-  const mapRef = useRef<HTMLDivElement>(null)
-  const [mapErr, setMapErr] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (!mapRef.current) return
-    
-    const L = (window as any).L
-    if (!L) {
-      setMapErr('Memuat Peta Geografis Desa...')
-      return
-    }
-    
-    setMapErr(null)
-
-    // Center Map on Padaleu coordinates
-    const map = L.map(mapRef.current).setView([-2.855, 122.253], 14)
-
-    // OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map)
-
-    // Draw Boundaries (Polygon)
-    const boundsPolygon = L.polygon([
-      [-2.8450, 122.2450],
-      [-2.8420, 122.2580],
-      [-2.8550, 122.2640],
-      [-2.8650, 122.2520],
-      [-2.8610, 122.2420]
-    ], {
-      color: '#d4af37',
-      fillColor: '#1e4620',
-      fillOpacity: 0.08,
-      weight: 3
-    }).addTo(map)
-
-    boundsPolygon.bindTooltip('Batas Administrasi Desa Padaleu', { sticky: true })
-
-    // Draw Trekking Routes (Polylines)
-    const trekkingPath = L.polyline([
-      [-2.8620, 122.2490], // Mangrove
-      [-2.8590, 122.2510], // Beach
-      [-2.8540, 122.2530], // Office
-      [-2.8510, 122.2430]  // Waterfall
-    ], {
-      color: '#aa8c2c',
-      weight: 4,
-      dashArray: '8, 8',
-      opacity: 0.85
-    }).addTo(map)
-
-    trekkingPath.bindTooltip('Jalur Trekking Wisata Padaleu', { sticky: true })
-
-    // Load Markers
-    markers.forEach(item => {
-      const pinIcon = L.divIcon({
-        className: 'custom-div-icon',
-        html: `<div style="background-color:#1e4620; color:white; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #d4af37; box-shadow:0 2px 5px rgba(0,0,0,0.3); font-weight:bold; font-size:10px;">📍</div>`,
-        iconSize: [28, 28],
-        iconAnchor: [14, 14]
-      })
-
-      const popupContent = `
-        <div style="font-family: 'Inter', sans-serif; width: 220px; padding: 4px;">
-          <img src="${item.image}" style="width:100%; height:95px; object-fit:cover; border-radius:8px; margin-bottom:8px;" />
-          <h4 style="font-weight:bold; font-size:12px; color:#0f2811; margin-bottom:2px;">${item.title}</h4>
-          <span style="font-weight:bold; font-size:9px; color:#d4af37; text-transform:uppercase;">${item.category}</span>
-          <p style="font-size:10.5px; color:#64748b; margin-top:4px; line-height:1.4;">${item.description}</p>
-        </div>
-      `
-
-      L.marker([item.lat, item.lng], { icon: pinIcon })
-        .addTo(map)
-        .bindPopup(popupContent)
-    })
-
-    return () => {
-      map.remove()
-    }
-  }, [markers])
-
-  return (
-    <div className="w-full h-full relative">
-      {mapErr && (
-        <div className="absolute inset-0 bg-[#0f2811]/90 z-20 flex flex-col items-center justify-center text-[#f1f6f1] p-4 text-center">
-          <span className="w-10 h-10 rounded-full border-4 border-t-[#d4af37] border-white/20 animate-spin mb-4" />
-          <p className="text-sm font-semibold">{mapErr}</p>
-        </div>
-      )}
-      <div ref={mapRef} className="w-full h-full z-10" />
-    </div>
-  )
-}
-
-// ── Admin Dashboard Panel Sub-Component ───────────────────────────────────────
-
-interface AdminPanelProps {
-  berita: any[]
-  setBerita: React.Dispatch<React.SetStateAction<any[]>>
-  umkmList: any[]
-  setUmkmList: React.Dispatch<React.SetStateAction<any[]>>
-  mapMarkers: any[]
-  setMapMarkers: React.Dispatch<React.SetStateAction<any[]>>
-  apbdes: any
-  setApbdes: React.Dispatch<React.SetStateAction<any>>
-  statistik: any
-  setStatistik: React.Dispatch<React.SetStateAction<any>>
-  discoverItems: any[]
-  setDiscoverItems: React.Dispatch<React.SetStateAction<any[]>>
-  triggerToast: (msg: string) => void
-}
-
-function AdminPanelDashboard({
-  berita, setBerita,
-  umkmList, setUmkmList,
-  mapMarkers, setMapMarkers,
-  apbdes, setApbdes,
-  statistik, setStatistik,
-  discoverItems, setDiscoverItems,
-  triggerToast
-}: AdminPanelProps) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [role, setRole] = useState<'Administrator' | 'Operator' | 'Kepala Desa'>('Operator')
-
-  // Tabs: 'berita', 'umkm', 'peta', 'apbdes', 'discover', 'statistik'
-  const [adminTab, setAdminTab] = useState<'berita' | 'umkm' | 'peta' | 'apbdes' | 'discover' | 'statistik'>('berita')
-
-  // Form states for creating news
-  const [newTitle, setNewTitle] = useState('')
-  const [newCat, setNewCat] = useState('Kegiatan')
-  const [newExcerpt, setNewExcerpt] = useState('')
-  const [newContent, setNewContent] = useState('')
-
-  // Form states for creating UMKM
-  const [newUmkmName, setNewUmkmName] = useState('')
-  const [newUmkmCat, setNewUmkmCat] = useState('Pertanian')
-  const [newUmkmPrice, setNewUmkmPrice] = useState('')
-  const [newUmkmDesc, setNewUmkmDesc] = useState('')
-
-  // Form states for creating marker peta
-  const [newMarkerTitle, setNewMarkerTitle] = useState('')
-  const [newMarkerLat, setNewMarkerLat] = useState('')
-  const [newMarkerLng, setNewMarkerLng] = useState('')
-  const [newMarkerCat, setNewMarkerCat] = useState('Fasilitas')
-  const [newMarkerDesc, setNewMarkerDesc] = useState('')
-
-  // Form states for discover item
-  const [newDiscoverTitle, setNewDiscoverTitle] = useState('')
-  const [newDiscoverCat, setNewDiscoverCat] = useState('Alam')
-  const [newDiscoverLoc, setNewDiscoverLoc] = useState('')
-  const [newDiscoverDesc, setNewDiscoverDesc] = useState('')
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (username.toLowerCase() === 'admin' && password === 'admin') {
-      setIsLoggedIn(true)
-      triggerToast(`Login sukses sebagai ${role}!`)
-    } else {
-      triggerToast('Gagal: Gunakan username "admin" dan password "admin"!')
-    }
-  }
-
-  const addBerita = (e: React.FormEvent) => {
-    e.preventDefault()
-    const newArt = {
-      id: Date.now(),
-      title: newTitle,
-      category: newCat,
-      excerpt: newExcerpt,
-      content: newContent,
-      date: new Date().toISOString().split('T')[0],
-      image: 'https://images.unsplash.com/photo-1520052203542-d3095f1b6cf0?w=800&auto=format&fit=crop',
-      author: role
-    }
-    setBerita([newArt, ...berita])
-    triggerToast('Berita baru berhasil dipublikasi!')
-    setNewTitle('')
-    setNewExcerpt('')
-    setNewContent('')
-  }
-
-  const deleteBerita = (id: number) => {
-    setBerita(berita.filter(b => b.id !== id))
-    triggerToast('Berita berhasil dihapus!')
-  }
-
-  const addUmkm = (e: React.FormEvent) => {
-    e.preventDefault()
-    const newProduct = {
-      id: Date.now(),
-      name: newUmkmName,
-      category: newUmkmCat,
-      price: newUmkmPrice,
-      seller: `Binaan BUMDes (${role})`,
-      phone: '628123456789',
-      image: 'https://images.unsplash.com/photo-1531835551805-16d864c8d311?w=500&h=350&fit=crop',
-      description: newUmkmDesc
-    }
-    setUmkmList([newProduct, ...umkmList])
-    triggerToast('Produk UMKM berhasil didaftarkan!')
-    setNewUmkmName('')
-    setNewUmkmPrice('')
-    setNewUmkmDesc('')
-  }
-
-  const deleteUmkm = (id: number) => {
-    setUmkmList(umkmList.filter(u => u.id !== id))
-    triggerToast('Produk UMKM berhasil dihapus!')
-  }
-
-  const addMarker = (e: React.FormEvent) => {
-    e.preventDefault()
-    const latNum = parseFloat(newMarkerLat)
-    const lngNum = parseFloat(newMarkerLng)
-    if (isNaN(latNum) || isNaN(lngNum)) {
-      triggerToast('Koordinat GPS harus decimal!')
-      return
-    }
-    const newPoint = {
-      id: Date.now(),
-      title: newMarkerTitle,
-      lat: latNum,
-      lng: lngNum,
-      category: newMarkerCat,
-      description: newMarkerDesc,
-      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&h=300&fit=crop'
-    }
-    setMapMarkers([...mapMarkers, newPoint])
-    triggerToast('Marker baru berhasil dipetakan!')
-    setNewMarkerTitle('')
-    setNewMarkerLat('')
-    setNewMarkerLng('')
-    setNewMarkerDesc('')
-  }
-
-  const deleteMarker = (id: number) => {
-    setMapMarkers(mapMarkers.filter(m => m.id !== id))
-    triggerToast('Marker berhasil dihapus!')
-  }
-
-  const addDiscoverItem = (e: React.FormEvent) => {
-    e.preventDefault()
-    const newItem = {
-      id: Date.now(),
-      title: newDiscoverTitle,
-      category: newDiscoverCat,
-      location: newDiscoverLoc,
-      image: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=800&auto=format&fit=crop',
-      description: newDiscoverDesc,
-      facilities: ['Fasilitas Umum Standard', 'Spot Foto'],
-      hours: '08:00 - 18:00 WITA',
-      contact: '+62 812-3456-7890',
-      lat: -2.855,
-      lng: 122.253
-    }
-    setDiscoverItems([newItem, ...discoverItems])
-    triggerToast('Objek pariwisata baru didaftarkan!')
-    setNewDiscoverTitle('')
-    setNewDiscoverLoc('')
-    setNewDiscoverDesc('')
-  }
-
-  const deleteDiscoverItem = (id: number) => {
-    setDiscoverItems(discoverItems.filter(d => d.id !== id))
-    triggerToast('Objek pariwisata berhasil dihapus!')
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <div className="max-w-md mx-auto bg-white rounded-3xl p-8 shadow-sm border border-slate-100 mt-10">
-        <h2 className="text-xl font-bold font-swiss-title text-center text-[#0f2811] mb-2">Autentikasi Dashboard Desa</h2>
-        <p className="text-slate-400 text-xs text-center mb-8">Masuk untuk mengelola pariwisata & geografi Desa Padaleu.</p>
-        
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Peran</label>
-            <select 
-              value={role} 
-              onChange={(e) => setRole(e.target.value as any)}
-              className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none"
-            >
-              <option>Operator</option>
-              <option>Administrator</option>
-              <option>Kepala Desa</option>
-            </select>
-          </div>
-          <div>
-            <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Username</label>
-            <input 
-              type="text" 
-              placeholder="Masukkan admin" 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" 
-              required 
-            />
-          </div>
-          <div>
-            <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Password</label>
-            <input 
-              type="password" 
-              placeholder="Masukkan admin" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" 
-              required 
-            />
-          </div>
-          <button type="submit" className="w-full mt-4 py-3 bg-[#1e4620] hover:bg-[#0f2811] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md">
-            Masuk ke Panel
-          </button>
-        </form>
-      </div>
-    )
-  }
-
-  return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 grid lg:grid-cols-12 gap-8 mt-4">
-      
-      {/* Sidebar Panel Admin */}
-      <div className="lg:col-span-3 border-r border-slate-100 pr-6 flex flex-col justify-between">
-        <div>
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-2xl">🔒</span>
-            <div>
-              <h4 className="font-extrabold text-sm text-[#0f2811]">Pemerintahan Desa</h4>
-              <p className="text-[9px] font-bold text-[#d4af37] uppercase tracking-wider">{role}</p>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            {[
-              { id: 'berita', label: 'Kelola Berita', icon: '📝' },
-              { id: 'discover', label: 'Objek Discover', icon: '⛵' },
-              { id: 'umkm', label: 'Katalog UMKM', icon: '🛍️' },
-              { id: 'peta', label: 'Marker Peta GIS', icon: '📍' },
-              { id: 'apbdes', label: 'Kelola APBDes', icon: '💰' },
-              { id: 'statistik', label: 'Statistik Penduduk', icon: '📊' }
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setAdminTab(tab.id as any)}
-                className={`w-full py-3 px-4 rounded-xl text-xs font-bold text-left transition-all flex items-center gap-3 ${
-                  adminTab === tab.id
-                    ? 'bg-[#f1f6f1] text-[#1e4620] border-l-4 border-[#d4af37]'
-                    : 'text-slate-500 hover:bg-slate-50'
-                }`}
-              >
-                <span>{tab.icon}</span>
-                <span>{tab.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <button 
-          onClick={() => { setIsLoggedIn(false); triggerToast('Logout berhasil!') }}
-          className="mt-8 py-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2"
-        >
-          <IconLogOut /> Keluar
+      {/* ═══════════ FLOATING BUTTONS ═══════════ */}
+      <div className="floating-btn-group">
+        <a href="https://wa.me/6281244556677?text=Halo%20Admin%20Desa%20Padaleu,%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer" className="btn-float btn-whatsapp-float" title="Chat WhatsApp Desa">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </a>
+        <button className={`btn-float btn-back-to-top ${showBackToTop ? 'visible' : ''}`} title="Kembali ke Atas" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="18 15 12 9 6 15"/></svg>
         </button>
-      </div>
-
-      {/* Main Workspace */}
-      <div className="lg:col-span-9">
-        
-        {/* TAB: Kelola Berita */}
-        {adminTab === 'berita' && (
-          <div className="space-y-8">
-            <h3 className="font-bold text-[#0f2811] text-base swiss-border pb-2 mb-4">Publikasi Artikel & Berita Baru</h3>
-            <form onSubmit={addBerita} className="space-y-4">
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Judul Artikel</label>
-                <input 
-                  type="text" 
-                  placeholder="Contoh: Pembagian Pupuk Organik untuk Kelompok Tani" 
-                  value={newTitle}
-                  onChange={(e) => setNewTitle(e.target.value)}
-                  className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Kategori Berita</label>
-                  <select 
-                    value={newCat}
-                    onChange={(e) => setNewCat(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none"
-                  >
-                    <option>Kegiatan</option>
-                    <option>Pemerintahan</option>
-                    <option>Pengumuman</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Ringkasan Singkat (Excerpt)</label>
-                  <input 
-                    type="text" 
-                    placeholder="Deskripsi singkat yang tampil di halaman katalog..." 
-                    value={newExcerpt}
-                    onChange={(e) => setNewExcerpt(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Isi Berita Lengkap</label>
-                <textarea 
-                  rows={6} 
-                  placeholder="Ketik seluruh informasi lengkap terkait kegiatan desa di sini..." 
-                  value={newContent}
-                  onChange={(e) => setNewContent(e.target.value)}
-                  className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required
-                />
-              </div>
-              <button type="submit" className="px-6 py-3 bg-[#1e4620] hover:bg-[#0f2811] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2">
-                <IconPlus /> Terbitkan Berita
-              </button>
-            </form>
-
-            <div className="border-t border-slate-100 pt-6">
-              <h4 className="font-bold text-xs uppercase text-slate-400 tracking-wider mb-4">Daftar Berita Aktif</h4>
-              <div className="space-y-3">
-                {berita.map((art) => (
-                  <div key={art.id} className="bg-[#f8f9fa] p-4 rounded-xl flex items-center justify-between border border-slate-100">
-                    <div>
-                      <h5 className="font-bold text-xs text-[#0f2811] line-clamp-1">{art.title}</h5>
-                      <p className="text-[10px] text-slate-400">{art.date} • Kategori: {art.category}</p>
-                    </div>
-                    <button 
-                      onClick={() => deleteBerita(art.id)}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      <IconTrash />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: Objek Discover */}
-        {adminTab === 'discover' && (
-          <div className="space-y-8">
-            <h3 className="font-bold text-[#0f2811] text-base swiss-border pb-2 mb-4">Dafrar/Edit Objek Discover</h3>
-            <form onSubmit={addDiscoverItem} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Nama Objek Wisata/Daya Tarik</label>
-                  <input 
-                    type="text" 
-                    placeholder="Contoh: Air Terjun Puncak Lembo" 
-                    value={newDiscoverTitle}
-                    onChange={(e) => setNewDiscoverTitle(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Kategori Objek</label>
-                  <select 
-                    value={newDiscoverCat}
-                    onChange={(e) => setNewDiscoverCat(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none"
-                  >
-                    <option>Alam</option>
-                    <option>Budaya</option>
-                    <option>Kuliner</option>
-                    <option>Penginapan</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Lokasi Wilayah Desa</label>
-                <input 
-                  type="text" 
-                  placeholder="Contoh: Dusun III Hutan Lindung" 
-                  value={newDiscoverLoc}
-                  onChange={(e) => setNewDiscoverLoc(e.target.value)}
-                  className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Deskripsi Lengkap Wisata</label>
-                <textarea 
-                  rows={4} 
-                  placeholder="Detail keunikan objek wisata, fasilitas yang tersedia, tiket masuk, dll..." 
-                  value={newDiscoverDesc}
-                  onChange={(e) => setNewDiscoverDesc(e.target.value)}
-                  className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required
-                />
-              </div>
-              <button type="submit" className="px-6 py-3 bg-[#1e4620] hover:bg-[#0f2811] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2">
-                <IconPlus /> Tambah ke Discover
-              </button>
-            </form>
-
-            <div className="border-t border-slate-100 pt-6">
-              <h4 className="font-bold text-xs uppercase text-slate-400 tracking-wider mb-4">Daftar Objek Discover Aktif</h4>
-              <div className="space-y-3">
-                {discoverItems.map((item) => (
-                  <div key={item.id} className="bg-[#f8f9fa] p-4 rounded-xl flex items-center justify-between border border-slate-100">
-                    <div>
-                      <h5 className="font-bold text-xs text-[#0f2811]">{item.title}</h5>
-                      <p className="text-[10px] text-slate-400">{item.location} • Kategori: {item.category}</p>
-                    </div>
-                    <button 
-                      onClick={() => deleteDiscoverItem(item.id)}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      <IconTrash />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: Katalog UMKM */}
-        {adminTab === 'umkm' && (
-          <div className="space-y-8">
-            <h3 className="font-bold text-[#0f2811] text-base swiss-border pb-2 mb-4">Registrasi Produk UMKM Baru</h3>
-            <form onSubmit={addUmkm} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Nama Produk</label>
-                  <input 
-                    type="text" 
-                    placeholder="Contoh: Madu Hutan Asli Rimba" 
-                    value={newUmkmName}
-                    onChange={(e) => setNewUmkmName(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Harga Produk</label>
-                  <input 
-                    type="text" 
-                    placeholder="Contoh: Rp 120.000 / Botol" 
-                    value={newUmkmPrice}
-                    onChange={(e) => setNewUmkmPrice(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Kategori Produk</label>
-                <select 
-                  value={newUmkmCat}
-                  onChange={(e) => setNewUmkmCat(e.target.value)}
-                  className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none"
-                >
-                  <option>Pertanian</option>
-                  <option>Kuliner</option>
-                  <option>Kerajinan</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Deskripsi Produk & Kualitas</label>
-                <textarea 
-                  rows={4} 
-                  placeholder="Detail kualitas produk, kemasan, stok, dll..." 
-                  value={newUmkmDesc}
-                  onChange={(e) => setNewUmkmDesc(e.target.value)}
-                  className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required
-                />
-              </div>
-              <button type="submit" className="px-6 py-3 bg-[#1e4620] hover:bg-[#0f2811] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2">
-                <IconPlus /> Daftarkan Produk
-              </button>
-            </form>
-
-            <div className="border-t border-slate-100 pt-6">
-              <h4 className="font-bold text-xs uppercase text-slate-400 tracking-wider mb-4">Daftar Produk UMKM Terdaftar</h4>
-              <div className="space-y-3">
-                {umkmList.map((product) => (
-                  <div key={product.id} className="bg-[#f8f9fa] p-4 rounded-xl flex items-center justify-between border border-slate-100">
-                    <div>
-                      <h5 className="font-bold text-xs text-[#0f2811]">{product.name}</h5>
-                      <p className="text-[10px] text-slate-400">{product.price} • Penjual: {product.seller}</p>
-                    </div>
-                    <button 
-                      onClick={() => deleteUmkm(product.id)}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      <IconTrash />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: Marker Peta GIS */}
-        {adminTab === 'peta' && (
-          <div className="space-y-8">
-            <h3 className="font-bold text-[#0f2811] text-base swiss-border pb-2 mb-4">Penambahan Marker / POI Geografis</h3>
-            <form onSubmit={addMarker} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Nama Tempat / Fasilitas</label>
-                  <input 
-                    type="text" 
-                    placeholder="Contoh: Pos Kamling RT 03" 
-                    value={newMarkerTitle}
-                    onChange={(e) => setNewMarkerTitle(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Kategori Lokasi</label>
-                  <select 
-                    value={newMarkerCat}
-                    onChange={(e) => setNewMarkerCat(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none"
-                  >
-                    <option>Fasilitas</option>
-                    <option>Pendidikan</option>
-                    <option>Ibadah</option>
-                    <option>Wisata</option>
-                    <option>UMKM</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Latitude (Garis Lintang)</label>
-                  <input 
-                    type="text" 
-                    placeholder="Contoh: -2.8552" 
-                    value={newMarkerLat}
-                    onChange={(e) => setNewMarkerLat(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Longitude (Garis Bujur)</label>
-                  <input 
-                    type="text" 
-                    placeholder="Contoh: 122.2515" 
-                    value={newMarkerLng}
-                    onChange={(e) => setNewMarkerLng(e.target.value)}
-                    className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required 
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Deskripsi Singkat Lokasi</label>
-                <textarea 
-                  rows={3} 
-                  placeholder="Informasi detail..." 
-                  value={newMarkerDesc}
-                  onChange={(e) => setNewMarkerDesc(e.target.value)}
-                  className="bg-[#f8f9fa] border border-slate-200 rounded-xl p-3 text-xs w-full focus:outline-none" required
-                />
-              </div>
-
-              <button type="submit" className="px-6 py-3 bg-[#1e4620] hover:bg-[#0f2811] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2">
-                <IconPlus /> Tambah ke Peta Digital
-              </button>
-            </form>
-
-            <div className="border-t border-slate-100 pt-6">
-              <h4 className="font-bold text-xs uppercase text-slate-400 tracking-wider mb-4">Daftar Titik Penanda (Markers)</h4>
-              <div className="space-y-3">
-                {mapMarkers.map((marker) => (
-                  <div key={marker.id} className="bg-[#f8f9fa] p-4 rounded-xl flex items-center justify-between border border-slate-100">
-                    <div>
-                      <h5 className="font-bold text-xs text-[#0f2811]">{marker.title}</h5>
-                      <p className="text-[10px] text-slate-400">Lat: {marker.lat}, Lng: {marker.lng} • Kategori: {marker.category}</p>
-                    </div>
-                    <button 
-                      onClick={() => deleteMarker(marker.id)}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      <IconTrash />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: Kelola APBDes */}
-        {adminTab === 'apbdes' && (
-          <div className="space-y-8">
-            <h3 className="font-bold text-[#0f2811] text-base swiss-border pb-2 mb-4">Ubah Data Anggaran APBDes</h3>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Edit Pendapatan */}
-              <div className="bg-[#f8f9fa] p-6 rounded-2xl border border-slate-100">
-                <h4 className="font-bold text-xs uppercase text-[#1e4620] mb-4">Edit Nilai Pendapatan</h4>
-                <div className="space-y-3">
-                  {apbdes.pendapatan.items.map((item: any, idx: number) => (
-                    <div key={idx} className="text-xs">
-                      <label className="text-[10px] font-bold text-slate-400 block mb-1">{item.nama}</label>
-                      <input 
-                        type="number" 
-                        value={item.nilai}
-                        onChange={(e) => {
-                          const val = parseInt(e.target.value) || 0
-                          const updatedItems = [...apbdes.pendapatan.items]
-                          updatedItems[idx].nilai = val
-                          const updatedTotal = updatedItems.reduce((acc, cur) => acc + cur.nilai, 0)
-                          setApbdes({
-                            ...apbdes,
-                            pendapatan: { total: updatedTotal, items: updatedItems }
-                          })
-                        }}
-                        className="bg-white border border-slate-200 rounded-lg p-2 text-xs w-full focus:outline-none"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Edit Belanja */}
-              <div className="bg-[#f8f9fa] p-6 rounded-2xl border border-slate-100">
-                <h4 className="font-bold text-xs uppercase text-[#d4af37] mb-4">Edit Nilai Alokasi Belanja</h4>
-                <div className="space-y-3">
-                  {apbdes.belanja.items.map((item: any, idx: number) => (
-                    <div key={idx} className="text-xs">
-                      <label className="text-[10px] font-bold text-slate-400 block mb-1">{item.nama}</label>
-                      <input 
-                        type="number" 
-                        value={item.nilai}
-                        onChange={(e) => {
-                          const val = parseInt(e.target.value) || 0
-                          const updatedItems = [...apbdes.belanja.items]
-                          updatedItems[idx].nilai = val
-                          const updatedTotal = updatedItems.reduce((acc, cur) => acc + cur.nilai, 0)
-                          setApbdes({
-                            ...apbdes,
-                            belanja: { total: updatedTotal, items: updatedItems }
-                          })
-                        }}
-                        className="bg-white border border-slate-200 rounded-lg p-2 text-xs w-full focus:outline-none"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB: Kelola Statistik Penduduk */}
-        {adminTab === 'statistik' && (
-          <div className="space-y-8">
-            <h3 className="font-bold text-[#0f2811] text-base swiss-border pb-2 mb-4">Ubah Data Statistik Kependudukan</h3>
-            
-            <div className="grid md:grid-cols-2 gap-8 bg-[#f8f9fa] p-6 rounded-2xl border border-slate-100">
-              <div className="space-y-4">
-                <h4 className="font-bold text-xs uppercase text-[#1e4620]">Data Agregat Penduduk</h4>
-                <div>
-                  <label className="text-[10px] font-bold text-slate-400 block mb-1">Total Penduduk (Jiwa)</label>
-                  <input 
-                    type="number" 
-                    value={statistik.total}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value) || 0
-                      setStatistik({ ...statistik, total: val })
-                    }}
-                    className="bg-white border border-slate-200 rounded-lg p-2.5 text-xs w-full focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold text-slate-400 block mb-1">Jumlah Laki-Laki (Jiwa)</label>
-                  <input 
-                    type="number" 
-                    value={statistik.lakiLaki}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value) || 0
-                      setStatistik({ ...statistik, lakiLaki: val })
-                    }}
-                    className="bg-white border border-slate-200 rounded-lg p-2.5 text-xs w-full focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold text-slate-400 block mb-1">Jumlah Perempuan (Jiwa)</label>
-                  <input 
-                    type="number" 
-                    value={statistik.perempuan}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value) || 0
-                      setStatistik({ ...statistik, perempuan: val })
-                    }}
-                    className="bg-white border border-slate-200 rounded-lg p-2.5 text-xs w-full focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold text-slate-400 block mb-1">Kepala Keluarga (KK)</label>
-                  <input 
-                    type="number" 
-                    value={statistik.kepalaKeluarga}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value) || 0
-                      setStatistik({ ...statistik, kepalaKeluarga: val })
-                    }}
-                    className="bg-white border border-slate-200 rounded-lg p-2.5 text-xs w-full focus:outline-none"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col justify-center items-center text-center p-6 border border-dashed border-[#1e4620]/20 rounded-2xl bg-white">
-                <span className="text-4xl mb-2">📊</span>
-                <h4 className="font-bold text-xs text-[#0f2811]">Visualisasi Reaktif</h4>
-                <p className="text-[10px] text-slate-400 mt-1">Mengedit data kependudukan di samping akan langsung memperbaharui persentase rasio gender dan grafik progress bar di dashboard kependudukan utama secara instan.</p>
-              </div>
-            </div>
-          </div>
-        )}
-
       </div>
 
     </div>
