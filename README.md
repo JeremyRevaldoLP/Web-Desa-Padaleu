@@ -1,105 +1,58 @@
-# Web Desa Padaleu
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Aplikasi web modern yang dibangun dengan React, Vite, dan Tailwind CSS.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Prasyarat
+## About Laravel
 
-Sebelum memulai, pastikan Anda telah menginstall:
-- **Node.js** (versi 16 atau lebih tinggi) - [Download di sini](https://nodejs.org/)
-- **pnpm** - Package manager yang lebih cepat dan efisien
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-Untuk menginstall pnpm, jalankan:
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
+
+## Learning Laravel
+
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+
+## Agentic Development
+
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+
 ```bash
-npm install -g pnpm
+composer require laravel/boost --dev
+
+php artisan boost:install
 ```
 
-## Langkah-langkah Menjalankan Aplikasi
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-### 1. Clone Repository (Jika di-download dari Git)
-```bash
-git clone <repository-url>
-cd "Web Desa Padaleu"
-```
+## Contributing
 
-### 2. Install Dependencies
-Jalankan perintah berikut untuk menginstall semua package yang diperlukan:
-```bash
-pnpm install
-```
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### 3. Jalankan Development Server
-Mulai server pengembangan dengan:
-```bash
-pnpm run dev
-```
+## Code of Conduct
 
-Server akan berjalan di `http://localhost:5173` (atau port lain jika 5173 sudah digunakan).
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-### 4. Buka di Browser
-Buka browser Anda dan kunjungi URL yang ditampilkan di terminal.
+## Security Vulnerabilities
 
-## Build untuk Production
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-Ketika siap untuk production, jalankan:
-```bash
-pnpm run build
-```
+## License
 
-Hasilnya akan tersimpan di folder `dist/`.
-
-## Preview Build Production
-
-Untuk melihat preview dari build production secara lokal:
-```bash
-pnpm run preview
-```
-
-## Struktur Folder
-
-```
-.
-├── src/
-│   ├── App.tsx           # Komponen utama aplikasi
-│   ├── main.tsx          # Entry point React
-│   ├── index.css         # Style global dan Tailwind CSS
-│   └── imports/          # Folder untuk imports custom
-├── index.html            # File HTML utama
-├── vite.config.ts        # Konfigurasi Vite
-├── tsconfig.json         # Konfigurasi TypeScript
-└── package.json          # Dependencies dan scripts
-```
-
-## Stack Teknologi
-
-- **React** - UI Library
-- **Vite** - Build tool dan dev server
-- **TypeScript** - Type safety untuk JavaScript
-- **Tailwind CSS** - Utility-first CSS framework
-
-## Perintah Penting
-
-| Perintah | Deskripsi |
-|----------|-----------|
-| `pnpm install` | Install dependencies |
-| `pnpm run dev` | Jalankan development server |
-| `pnpm run build` | Build untuk production |
-| `pnpm run preview` | Preview production build |
-
-## Troubleshooting
-
-### Port sudah digunakan
-Jika port 5173 sudah digunakan, Vite akan otomatis menggunakan port berikutnya. Lihat terminal untuk URL yang benar.
-
-### Module tidak ditemukan
-Jika ada error module tidak ditemukan, coba jalankan ulang:
-```bash
-pnpm install
-```
-
-## Kontribusi
-
-Untuk berkontribusi pada proyek ini, silakan buat branch baru dan submit pull request.
-
-## Lisensi
-
-Proyek ini tersedia di bawah lisensi MIT.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
