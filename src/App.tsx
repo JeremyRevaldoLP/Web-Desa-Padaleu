@@ -248,7 +248,7 @@ export default function App() {
             <div className="timeline-grid">
               <div className="timeline-card reveal stagger-1">
                 <div className="timeline-img-wrap">
-                  <img src={imgKKN} alt="H. La Ode Rahman" />
+                  <img src={imgAvatar} alt="H. La Ode Rahman" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                   <div className="timeline-badge">Periode I</div>
                 </div>
                 <div className="timeline-body">
@@ -260,7 +260,7 @@ export default function App() {
 
               <div className="timeline-card reveal stagger-2">
                 <div className="timeline-img-wrap">
-                  <img src={imgPenerimaan4} alt="Drs. Muhammad Yamin" />
+                  <img src={imgAvatar} alt="Drs. Muhammad Yamin" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                   <div className="timeline-badge">Periode II</div>
                 </div>
                 <div className="timeline-body">
@@ -272,7 +272,7 @@ export default function App() {
 
               <div className="timeline-card reveal stagger-3">
                 <div className="timeline-img-wrap">
-                  <img src={imgProker} alt="Ir. H. Andi Syamsul" />
+                  <img src={imgAvatar} alt="Ir. H. Andi Syamsul" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                   <div className="timeline-badge">Periode III</div>
                 </div>
                 <div className="timeline-body">
@@ -284,49 +284,230 @@ export default function App() {
 
               <div className="timeline-card reveal stagger-4">
                 <div className="timeline-img-wrap">
-                  <img src={imgKepDes} alt="Suprianto, S.Sos." />
+                  <img src={imgAvatar} alt="Masiudin, S.Si" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                   <div className="timeline-badge" style={{ background: 'var(--teal-dark)' }}>Petahana</div>
                 </div>
-                <div class="timeline-body">
+                <div className="timeline-body">
                   <div className="timeline-period">2021 — Sekarang</div>
-                  <h3 className="timeline-name">Suprianto, S.Sos.</h3>
+                  <h3 className="timeline-name">Masiudin, S.Si</h3>
                   <p className="timeline-desc">Transformasi digitalisasi desa, pengembangan Ekowisata Mangrove Padaleu, transparansi APBDes, serta keterbukaan informasi publik.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* 3. STRUKTUR DESA (Aparatur - Foto Placeholder Avatar) */}
         <section className="section" id="struktur" style={{ background: 'var(--gray-50)' }}>
           <div className="container">
             <div className="section-header reveal">
-              <div className="overline">Pemerintahan Desa</div>
-              <h2>Struktur Organisasi & Aparatur Desa</h2>
-              <p>Susunan aparatur Pemerintah Desa Padaleu yang bertugas melayani kebutuhan dan aspirasi masyarakat.</p>
+              <div className="overline">Pemerintahan & Lembaga Desa</div>
+              <h2>Struktur Organisasi & Aparatur Desa Padaleu</h2>
+              <p>Susunan aparatur Pemerintah Desa Padaleu beserta lembaga pendukung dan wilayah kewilayahan yang bertugas melayani masyarakat.</p>
               <div className="divider"></div>
             </div>
 
-            <div className="aparatur-grid">
-              {[
-                { role: 'Kepala Desa', name: 'Suprianto, S.Sos.' },
-                { role: 'Sekretaris Desa', name: 'Ahmad Fauzi, S.IP.' },
-                { role: 'Kaur Keuangan', name: 'Nurhayati, S.E.' },
-                { role: 'Kaur Perencanaan', name: 'Rahmat Hidayat' },
-                { role: 'Kasi Pemerintahan', name: 'Siti Badriah' },
-                { role: 'Kasi Kesejahteraan', name: 'Bambang Sutrisno' },
-                { role: 'Kepala Dusun I', name: 'Hasanuddin' },
-                { role: 'Kepala Dusun II', name: 'Darmawan' }
-              ].map((item, idx) => (
-                <div key={idx} className={`aparatur-card reveal stagger-${(idx % 4) + 1}`}>
-                  <div className="aparatur-avatar">
-                    <img src={imgAvatar} alt={item.name} />
-                  </div>
-                  <div className="aparatur-role">{item.role}</div>
-                  <h3 className="aparatur-name">{item.name}</h3>
+            {/* 1. Pimpinan Eksekutif Desa */}
+            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.8rem', marginBottom: '3.5rem' }}>
+              <div className="aparatur-card reveal stagger-1" style={{ borderTop: '4px solid #004851', background: 'var(--white)', maxWidth: '320px', width: '100%' }}>
+                <div className="aparatur-avatar">
+                  <img src={imgAvatar} alt="Masiudin, S.Si" />
                 </div>
-              ))}
+                <div className="aparatur-role" style={{ color: '#004851', fontWeight: 800, letterSpacing: '0.15em' }}>Kepala Desa</div>
+                <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)' }}>Masiudin, S.Si</h3>
+              </div>
+
+              <div className="aparatur-card reveal stagger-2" style={{ borderTop: '4px solid var(--teal)', background: 'var(--white)', maxWidth: '320px', width: '100%' }}>
+                <div className="aparatur-avatar">
+                  <img src={imgAvatar} alt="Asrul" />
+                </div>
+                <div className="aparatur-role" style={{ color: 'var(--teal)', fontWeight: 700, letterSpacing: '0.15em' }}>Sekretaris Desa</div>
+                <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)' }}>Asrul</h3>
+              </div>
             </div>
+
+            {/* 2. Lembaga Pendukung Desa */}
+            <div className="reveal" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: '4px', padding: '2.2rem', marginBottom: '3.5rem', maxWidth: '850px', margin: '0 auto 3.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '1.5rem', borderBottom: '1.5px solid var(--gray-200)', paddingBottom: '0.8rem' }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M8 10v11M12 10v11M16 10v11M20 10v11"/></svg>
+                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.25rem', color: '#004851', fontWeight: 600, letterSpacing: '0.02em', margin: 0, textAlign: 'center' }}>
+                  Lembaga Pendukung Desa
+                </h3>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+                <div style={{ background: 'var(--gray-50)', padding: '1.4rem', borderRadius: '4px', borderLeft: '4px solid #004851' }}>
+                  <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Lembaga Legislatif Desa</div>
+                  <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', marginTop: '0.4rem' }}>Badan Permusyawaratan Desa (BPD)</h4>
+                </div>
+
+                <div style={{ background: 'var(--gray-50)', padding: '1.4rem', borderRadius: '4px', borderLeft: '4px solid var(--red-accent)' }}>
+                  <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--red-accent)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Lembaga Kemasyarakatan</div>
+                  <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', marginTop: '0.4rem' }}>Lembaga Ketahanan Desa (LKD / LAD)</h4>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Kepala Urusan (KAUR) */}
+            <div style={{ marginBottom: '3.5rem' }}>
+              <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '1.8rem' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0, textAlign: 'center' }}>
+                  Kepala Urusan (KAUR)
+                </h3>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.8rem' }}>
+                <div className="aparatur-card reveal stagger-1" style={{ maxWidth: '280px', width: '100%' }}>
+                  <div className="aparatur-avatar">
+                    <img src={imgAvatar} alt="Aris" />
+                  </div>
+                  <div className="aparatur-role">Kaur Perencanaan</div>
+                  <h3 className="aparatur-name">Aris</h3>
+                </div>
+
+                <div className="aparatur-card reveal stagger-2" style={{ maxWidth: '280px', width: '100%' }}>
+                  <div className="aparatur-avatar">
+                    <img src={imgAvatar} alt="Jois" />
+                  </div>
+                  <div className="aparatur-role">Kaur Administrasi & Umum</div>
+                  <h3 className="aparatur-name">Jois</h3>
+                </div>
+
+                <div className="aparatur-card reveal stagger-3" style={{ maxWidth: '280px', width: '100%' }}>
+                  <div className="aparatur-avatar">
+                    <img src={imgAvatar} alt="Arlis" />
+                  </div>
+                  <div className="aparatur-role">Kaur Keuangan</div>
+                  <h3 className="aparatur-name">Arlis</h3>
+                </div>
+              </div>
+            </div>
+
+            {/* 4. Kepala Seksi (KASI) */}
+            <div style={{ marginBottom: '3.5rem' }}>
+              <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '1.8rem' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0, textAlign: 'center' }}>
+                  Kepala Seksi (KASI)
+                </h3>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.8rem' }}>
+                <div className="aparatur-card reveal stagger-1" style={{ maxWidth: '280px', width: '100%' }}>
+                  <div className="aparatur-avatar">
+                    <img src={imgAvatar} alt="Ismail" />
+                  </div>
+                  <div className="aparatur-role">Kasi Pemerintahan</div>
+                  <h3 className="aparatur-name">Ismail</h3>
+                </div>
+
+                <div className="aparatur-card reveal stagger-2" style={{ maxWidth: '280px', width: '100%' }}>
+                  <div className="aparatur-avatar">
+                    <img src={imgAvatar} alt="Derman, S.P" />
+                  </div>
+                  <div className="aparatur-role">Kasi Pelayanan</div>
+                  <h3 className="aparatur-name">Derman, S.P</h3>
+                </div>
+
+                <div className="aparatur-card reveal stagger-3" style={{ maxWidth: '280px', width: '100%' }}>
+                  <div className="aparatur-avatar">
+                    <img src={imgAvatar} alt="Endang Fitriani" />
+                  </div>
+                  <div className="aparatur-role">Kasi Kesejahteraan</div>
+                  <h3 className="aparatur-name">Endang Fitriani</h3>
+                </div>
+              </div>
+            </div>
+
+            {/* 5. Wilayah Kewilayahan (Kepala Dusun & RT) */}
+            <div>
+              <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '2rem' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0 }}>
+                  Wilayah Kewilayahan (Kepala Dusun & Rukun Tetangga)
+                </h3>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.8rem' }}>
+                {/* Dusun I */}
+                <div className="reveal stagger-1" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: '4px', padding: '1.8rem' }}>
+                  <div style={{ background: '#004851', color: 'white', padding: '0.35rem 0.9rem', borderRadius: '3px', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', display: 'inline-block', marginBottom: '1.2rem' }}>
+                    Wilayah Dusun I
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
+                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
+                      <img src={imgAvatar} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun I</div>
+                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '2px 0 0' }}>Budugami</h4>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--gray-50)', padding: '0.65rem 0.9rem', borderRadius: '3px', fontSize: '0.85rem' }}>
+                      <span style={{ fontWeight: 600, color: 'var(--gray-600)' }}>Ketua RT 01</span>
+                      <span style={{ fontWeight: 700, color: 'var(--gray-800)' }}>Sarpin H.</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--gray-50)', padding: '0.65rem 0.9rem', borderRadius: '3px', fontSize: '0.85rem' }}>
+                      <span style={{ fontWeight: 600, color: 'var(--gray-600)' }}>Ketua RT 02</span>
+                      <span style={{ fontWeight: 700, color: 'var(--gray-800)' }}>Sucipto</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dusun II */}
+                <div className="reveal stagger-2" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: '4px', padding: '1.8rem' }}>
+                  <div style={{ background: '#004851', color: 'white', padding: '0.35rem 0.9rem', borderRadius: '3px', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', display: 'inline-block', marginBottom: '1.2rem' }}>
+                    Wilayah Dusun II
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
+                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
+                      <img src={imgAvatar} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun II</div>
+                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '2px 0 0' }}>Arit Noval</h4>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--gray-50)', padding: '0.65rem 0.9rem', borderRadius: '3px', fontSize: '0.85rem' }}>
+                      <span style={{ fontWeight: 600, color: 'var(--gray-600)' }}>Ketua RT 03</span>
+                      <span style={{ fontWeight: 700, color: 'var(--gray-800)' }}>Harsono</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--gray-50)', padding: '0.65rem 0.9rem', borderRadius: '3px', fontSize: '0.85rem' }}>
+                      <span style={{ fontWeight: 600, color: 'var(--gray-600)' }}>Ketua RT 04</span>
+                      <span style={{ fontWeight: 700, color: 'var(--gray-800)' }}>Mawa</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dusun III */}
+                <div className="reveal stagger-3" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: '4px', padding: '1.8rem' }}>
+                  <div style={{ background: '#004851', color: 'white', padding: '0.35rem 0.9rem', borderRadius: '3px', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', display: 'inline-block', marginBottom: '1.2rem' }}>
+                    Wilayah Dusun III
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
+                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
+                      <img src={imgAvatar} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun III</div>
+                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '2px 0 0' }}>Harman</h4>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--gray-50)', padding: '0.65rem 0.9rem', borderRadius: '3px', fontSize: '0.85rem' }}>
+                      <span style={{ fontWeight: 600, color: 'var(--gray-600)' }}>Ketua RT 05</span>
+                      <span style={{ fontWeight: 700, color: 'var(--gray-800)' }}>Ripai</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--gray-50)', padding: '0.65rem 0.9rem', borderRadius: '3px', fontSize: '0.85rem' }}>
+                      <span style={{ fontWeight: 600, color: 'var(--gray-600)' }}>Ketua RT 06</span>
+                      <span style={{ fontWeight: 700, color: 'var(--gray-800)' }}>Darman</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -593,20 +774,20 @@ export default function App() {
           </div>
           <div>
             <h4>Navigasi</h4>
-            <p>
-              <a href="#sejarah" style={{ display: 'block' }}>Sejarah Desa</a>
-              <a href="#struktur" style={{ display: 'block' }}>Struktur Desa</a>
-              <a href="#komoditas" style={{ display: 'block' }}>Komoditas Unggulan</a>
-              <a href="#peta-sec" style={{ display: 'block' }}>Peta Digital</a>
-            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <a href="#sejarah">Sejarah Desa</a>
+              <a href="#struktur">Struktur Desa</a>
+              <a href="#komoditas">Komoditas Unggulan</a>
+              <a href="#peta-sec">Peta Digital</a>
+            </div>
           </div>
           <div>
             <h4>Informasi</h4>
-            <p>
-              <a href="#berita" style={{ display: 'block' }}>Berita Desa</a>
-              <a href="#galeri" style={{ display: 'block' }}>Galeri Foto</a>
-              <a href="#kontak-sec" style={{ display: 'block' }}>Hubungi Kami</a>
-            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <a href="#berita">Berita Desa</a>
+              <a href="#galeri">Galeri Foto</a>
+              <a href="#kontak-sec">Hubungi Kami</a>
+            </div>
           </div>
           <div>
             <h4>Kontak</h4>
