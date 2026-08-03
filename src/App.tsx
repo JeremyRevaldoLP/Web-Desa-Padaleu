@@ -566,58 +566,58 @@ export default function App() {
           <div className="container">
             <div className="section-header reveal">
               <div className="overline">Potensi Utama Desa</div>
-              <h2>Komoditas Unggulan: Cengkeh Organik Padaleu</h2>
-              <p>Cengkeh merupakan satu-satunya komoditas perkebunan utama yang menjadi pilar utama perekonomian dan kebanggaan warga Desa Padaleu, Kecamatan Lembo.</p>
+              <h2>Komoditas Unggulan Desa Padaleu</h2>
+              <p>Desa Padaleu memiliki tiga komoditas unggulan yang menjadi sumber penghidupan dan kebanggaan masyarakat, yaitu Cengkeh, Milam, dan Sawit.</p>
               <div className="divider"></div>
             </div>
 
             <div className="welcome-grid reveal" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', padding: '2rem', borderRadius: '6px', marginBottom: '2.5rem' }}>
               <div className="welcome-img-wrap" style={{ height: '380px' }}>
-                <img src={imgCengkeh} alt="Perkebunan Cengkeh Organik Padaleu" style={{ height: '100%' }} />
+                <img src={imgCengkeh} alt="Komoditas unggulan Desa Padaleu" style={{ height: '100%' }} />
                 <div className="caption-bar">
-                  <h4>Cengkeh Organik Konawe Utara</h4>
-                  <span>Komoditas Perkebunan Utama Desa</span>
+                  <h4>Potensi Alam Padaleu</h4>
+                  <span>Komoditas Unggulan Masyarakat</span>
                 </div>
               </div>
               <div className="welcome-text">
-                <div className="overline" style={{ color: 'var(--red-accent)' }}>Hasil Bumi Utama</div>
-                <h2>Cengkeh Kualitas Ekspor Khas Lereng Bukit Lembo</h2>
-                <p>Perkebunan cengkeh di Desa Padaleu terhampar luas di sepanjang lereng perbukitan Lembo yang subur. Dipetik secara tradisional oleh para petani lokal dan dikeringkan di bawah sinar matahari alami untuk menjaga kualitas aroma dan kadar eugenol terbaik.</p>
-                <p>Panen cengkeh di Desa Padaleu merupakan penggerak roda ekonomi terbesar desa, yang disyukuri tiap tahun melalui tradisi pesta adat panen rempah cengkeh.</p>
+                <div className="overline" style={{ color: 'var(--red-accent)' }}>Andalan Desa</div>
+                <h2>3 Komoditas Unggulan yang Menjadi Kekuatan Ekonomi Desa</h2>
+                <p>Cengkeh, Milam, dan Sawit menjadi tiga komoditas utama yang memberikan nilai ekonomi penting bagi warga Desa Padaleu.</p>
+                <p>Ketiga komoditas ini menjadi simbol kekayaan alam dan harapan kesejahteraan masyarakat desa.</p>
               </div>
             </div>
 
             <div className="komoditas-grid">
               <div className="komoditas-card reveal stagger-1">
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Lahan Perkebunan Cengkeh" />
+                  <img src={imgCengkeh} alt="Cengkeh" />
                 </div>
                 <div className="komoditas-body">
-                  <div className="komoditas-tag">Lahan & Iklim Topografi</div>
-                  <h3 className="komoditas-title">Lahan Perbukitan Subur</h3>
-                  <p className="komoditas-desc">Ditanam di ketinggian ideal lereng Lembo dengan kondisi tanah vulkanik kaya unsur hara, menghasilkan pohon cengkeh yang lebat dan produktif.</p>
+                  <div className="komoditas-tag">Komoditas Utama</div>
+                  <h3 className="komoditas-title">Cengkeh</h3>
+                  <p className="komoditas-desc">Komoditas andalan masyarakat Desa Padaleu yang dikenal memiliki kualitas baik dan nilai ekonomi tinggi.</p>
                 </div>
               </div>
 
               <div className="komoditas-card reveal stagger-2">
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Kualitas Minyak Atsiri" />
+                  <img src={imgCengkeh} alt="Milam" />
                 </div>
                 <div className="komoditas-body">
-                  <div className="komoditas-tag">Mutu & Standar Minyak</div>
-                  <h3 className="komoditas-title">Kadar Minyak Atsiri Tinggi</h3>
-                  <p class="komoditas-desc">Bunga cengkeh Padaleu memiliki kadar eugenol murni yang tinggi, sangat diminati oleh industri minyak atsiri, farmasi, dan rempah ekspor.</p>
+                  <div className="komoditas-tag">Komoditas Unggulan</div>
+                  <h3 className="komoditas-title">Milam</h3>
+                  <p className="komoditas-desc">Salah satu hasil bumi penting yang turut mendukung ekonomi warga dan potensi desa.</p>
                 </div>
               </div>
 
               <div className="komoditas-card reveal stagger-3">
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Pengolahan Tradisional" />
+                  <img src={imgCengkeh} alt="Sawit" />
                 </div>
                 <div className="komoditas-body">
-                  <div className="komoditas-tag">Proses Alami</div>
-                  <h3 className="komoditas-title">Pengeringan Alami</h3>
-                  <p className="komoditas-desc">Dipetik secara manual dan dijemur secara alami tanpa bahan kimia, menghasilkan warna cokelat keemasan yang sempurna dan tahan lama.</p>
+                  <div className="komoditas-tag">Komoditas Unggulan</div>
+                  <h3 className="komoditas-title">Sawit</h3>
+                  <p className="komoditas-desc">Komoditas perkebunan yang menjadi salah satu sumber pendapatan masyarakat Desa Padaleu.</p>
                 </div>
               </div>
             </div>
