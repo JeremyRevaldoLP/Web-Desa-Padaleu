@@ -82,7 +82,7 @@ export default function App() {
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 350)
 
-      const sections = ['hero', 'sejarah', 'struktur', 'sambutan', 'komoditas', 'berita', 'galeri', 'peta-sec', 'kontak-sec']
+      const sections = ['hero', 'sejarah', 'struktur', 'komoditas', 'galeri', 'peta-sec', 'kontak-sec']
       const scrollY = window.scrollY + 220
       let current = 'hero'
       sections.forEach(id => {
@@ -177,9 +177,7 @@ export default function App() {
         <a href="#hero" className={activeSection === 'hero' ? 'active' : ''}>Beranda</a>
         <a href="#sejarah" className={activeSection === 'sejarah' ? 'active' : ''}>Sejarah Desa</a>
         <a href="#struktur" className={activeSection === 'struktur' ? 'active' : ''}>Struktur Desa</a>
-        <a href="#sambutan" className={activeSection === 'sambutan' ? 'active' : ''}>Sambutan</a>
         <a href="#komoditas" className={activeSection === 'komoditas' ? 'active' : ''}>Komoditas Unggulan</a>
-        <a href="#berita" className={activeSection === 'berita' ? 'active' : ''}>Berita</a>
         <a href="#galeri" className={activeSection === 'galeri' ? 'active' : ''}>Galeri</a>
         <a href="#peta-sec" className={activeSection === 'peta-sec' ? 'active' : ''}>Peta Digital</a>
         <a href="#kontak-sec" className={activeSection === 'kontak-sec' ? 'active' : ''}>Kontak</a>
@@ -208,19 +206,19 @@ export default function App() {
         {/* STATISTIK BAR */}
         <div className="stats-bar" id="statistik">
           <div className="stat-item reveal stagger-1">
-            <div className="stat-number">1,420</div>
+            <div className="stat-number">-</div>
             <div className="stat-label">Penduduk</div>
           </div>
           <div className="stat-item reveal stagger-2">
-            <div className="stat-number">412</div>
+            <div className="stat-number">-</div>
             <div className="stat-label">Kepala Keluarga</div>
           </div>
           <div className="stat-item reveal stagger-3">
-            <div className="stat-number">3</div>
+            <div className="stat-number">-</div>
             <div className="stat-label">Destinasi Wisata</div>
           </div>
           <div className="stat-item reveal stagger-4">
-            <div className="stat-number">2,026</div>
+            <div className="stat-number">2026</div>
             <div className="stat-label">Tahun Anggaran</div>
           </div>
         </div>
@@ -231,13 +229,13 @@ export default function App() {
             <div className="section-header reveal">
               <div className="overline">Jejak Langkah & Sejarah</div>
               <h2>Sejarah & Perjalanan Kepemimpinan Desa Padaleu</h2>
-              <p>Sejak pertama kali berdiri di pesisir Lembo, Desa Padaleu telah tumbuh menjadi desa mandiri yang kaya akan hasil bumi dan potensi maritim melalui kepemimpinan yang berkesinambungan.</p>
+              <p><strong>Desa Padaleu</strong> merupakan pemekaran dari desa lembo pada tahun 1967. Sekarang telah berubah status menjadi kelurahan dan menjadi ibukota kecamatan.</p>
               <div className="divider"></div>
             </div>
 
             <div style={{ maxWidth: '800px', margin: '0 auto 3.5rem', textAlign: 'center' }} className="reveal">
               <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem', lineHeight: '1.8' }}>
-                Desa Padaleu dibentuk melalui semangat gotong royong para tetua adat dan tokoh masyarakat pesisir Konawe Utara. Nama <strong>"Padaleu"</strong> diambil dari perpaduan kata lokal yang bermakna <em>"Hamparan Hijau yang Subur dan Damai"</em>. Berikut adalah jejak kepemimpinan Kepala Desa Padaleu dari masa ke masa:
+                Dalam perkembangannya <strong>Desa Padaleu</strong> telah memekarkan <strong>Desa Puulemo</strong> pada tahun 1979. <strong>Desa Pasir Putih</strong> pada tahun 1999 dan <strong>Desa Laramo</strong> pada tahun 2010. Secara lengkap berikut adalah sejarah singkat perjalanan kepemimpinan desa dari tahun ke tahun.
               </p>
             </div>
 
@@ -248,49 +246,101 @@ export default function App() {
             <div className="timeline-grid">
               <div className="timeline-card reveal stagger-1">
                 <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="H. La Ode Rahman" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                  <div className="timeline-badge">Periode I</div>
+                  <img src={imgAvatar} alt="ABUDU" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                 </div>
                 <div className="timeline-body">
-                  <div className="timeline-period">1998 — 2006</div>
-                  <h3 className="timeline-name">H. La Ode Rahman</h3>
-                  <p className="timeline-desc">Kepala Desa Pertama. Peletak fondasi administrasi wilayah desa, pembangunan Balai Desa pertama, dan pembukaan jalan rintisan antardusun.</p>
+                  <div className="timeline-period">1967 — 1969</div>
+                  <h3 className="timeline-name">ABUDU</h3>
                 </div>
               </div>
 
               <div className="timeline-card reveal stagger-2">
                 <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="Drs. Muhammad Yamin" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                  <div className="timeline-badge">Periode II</div>
+                  <img src={imgAvatar} alt="APUKA" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                 </div>
                 <div className="timeline-body">
-                  <div className="timeline-period">2006 — 2014</div>
-                  <h3 className="timeline-name">Drs. Muhammad Yamin</h3>
-                  <p className="timeline-desc">Fokus pada penguatan sektor perkebunan cengkeh dan kelapa, perbaikan jalan desa beraspal, serta pendirian posyandu desa.</p>
+                  <div className="timeline-period">1969 — 1986</div>
+                  <h3 className="timeline-name">APUKA</h3>
                 </div>
               </div>
 
               <div className="timeline-card reveal stagger-3">
                 <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="Ir. H. Andi Syamsul" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                  <div className="timeline-badge">Periode III</div>
+                  <img src={imgAvatar} alt="ZAINAL. MEKUO" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                 </div>
                 <div className="timeline-body">
-                  <div className="timeline-period">2014 — 2021</div>
-                  <h3 className="timeline-name">Ir. H. Andi Syamsul</h3>
-                  <p className="timeline-desc">Pembangunan jaringan elektrifikasi terpadu, pembuatan dermaga tambatan perahu nelayan, dan pembentukan BUMDes Padaleu Sejahtera.</p>
+                  <div className="timeline-period">1986 — 1990</div>
+                  <h3 className="timeline-name">ZAINAL. MEKUO</h3>
                 </div>
               </div>
 
               <div className="timeline-card reveal stagger-4">
                 <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="Masiudin, S.Si" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                  <div className="timeline-badge" style={{ background: 'var(--teal-dark)' }}>Petahana</div>
+                  <img src={imgAvatar} alt="SAPRUDIN" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
                 </div>
                 <div className="timeline-body">
-                  <div className="timeline-period">2021 — Sekarang</div>
-                  <h3 className="timeline-name">Masiudin, S.Si</h3>
-                  <p className="timeline-desc">Transformasi digitalisasi desa, pengembangan Ekowisata Mangrove Padaleu, transparansi APBDes, serta keterbukaan informasi publik.</p>
+                  <div className="timeline-period">1991 — 1994</div>
+                  <h3 className="timeline-name">SAPRUDIN</h3>
+                </div>
+              </div>              
+
+              <div className="timeline-card reveal stagger-5">
+                <div className="timeline-img-wrap">
+                  <img src={imgAvatar} alt="MUH. ARSYAD" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">1995 — 1999</div>
+                  <h3 className="timeline-name">MUH. ARSYAD</h3>
+                </div>
+              </div>
+
+              <div className="timeline-card reveal stagger-6">
+                <div className="timeline-img-wrap">
+                  <img src={imgAvatar} alt="ABDUL HAMID" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">2000 — 2008</div>
+                  <h3 className="timeline-name">ABDUL HAMID</h3>
+                </div>
+              </div>
+
+              <div className="timeline-card reveal stagger-7">
+                <div className="timeline-img-wrap">
+                  <img src={imgAvatar} alt="ASWAN" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">2008 — 2015</div>
+                  <h3 className="timeline-name">ASWAN</h3>
+                </div>
+              </div>
+
+              <div className="timeline-card reveal stagger-8">
+                <div className="timeline-img-wrap">
+                  <img src={imgAvatar} alt="ANTON ARSYAD" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">2015 — 2020</div>
+                  <h3 className="timeline-name">ANTON ARSYAD</h3>
+                </div>
+              </div>
+
+              <div className="timeline-card reveal stagger-9">
+                <div className="timeline-img-wrap">
+                  <img src={imgAvatar} alt="ARIPUDIN" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">2020 — 2022</div>
+                  <h3 className="timeline-name">ARIPUDIN</h3>
+                </div>
+              </div>                                          
+
+              <div className="timeline-card reveal stagger-10">
+                <div className="timeline-img-wrap">
+                  <img src={imgAvatar} alt="Masiudin, S.Si" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
+                </div>
+                <div className="timeline-body">
+                  <div className="timeline-period">2023 — Sekarang</div>
+                  <h3 className="timeline-name">MASIUDIN, S.Si</h3>
                 </div>
               </div>
             </div>
@@ -511,31 +561,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* 4. SAMBUTAN KEPALA DESA (Foto Placeholder Avatar) */}
-        <section className="section" id="sambutan" style={{ background: 'var(--white)' }}>
-          <div className="container">
-            <div className="welcome-grid">
-              <div className="welcome-img-wrap reveal-left">
-                <img src={imgAvatar} alt="Kepala Desa Padaleu" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '2rem' }} />
-                <div className="caption-bar">
-                  <h4>Masiudin, S.Si.</h4>
-                  <span>Kepala Desa Padaleu (2021—Sekarang)</span>
-                </div>
-              </div>
-              <div className="welcome-text reveal-right">
-                <div className="overline">Sambutan Kepala Desa</div>
-                <h2>Membangun Desa Digital Melalui Transparansi & Keterbukaan</h2>
-                <p>"Selamat datang di portal resmi Desa Padaleu. Melalui platform digital ini, kami berupaya mendekatkan pelayanan pemerintahan desa kepada seluruh lapisan masyarakat. Website ini merupakan pilar keterbukaan anggaran, promosi komoditas unggulan, pariwisata terpadu, serta sistem koordinasi peta digital desa."</p>
-                <p>"Mari bersama-sama bersinergi mewujudkan pembangunan desa yang transparan, modern, dan membawa kesejahteraan bagi segenap warga Lembo, Konawe Utara."</p>
-                <a href="#kontak-sec" className="link-arrow">
-                  Kirim Aspirasi & Hubungi Kami
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* 5. KOMODITAS UNGGULAN (Khusus Cengkeh Organik) */}
         <section className="section" id="komoditas" style={{ background: 'var(--gray-50)' }}>
           <div className="container">
@@ -593,59 +618,6 @@ export default function App() {
                   <div className="komoditas-tag">Proses Alami</div>
                   <h3 className="komoditas-title">Pengeringan Alami</h3>
                   <p className="komoditas-desc">Dipetik secara manual dan dijemur secara alami tanpa bahan kimia, menghasilkan warna cokelat keemasan yang sempurna dan tahan lama.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 6. BERITA & PENGUMUMAN DESA */}
-        <section className="section" id="berita" style={{ background: 'var(--white)' }}>
-          <div className="container-wide">
-            <div className="section-header reveal">
-              <div className="overline">Kabar Terkini</div>
-              <h2>Berita & Kegiatan Desa Padaleu</h2>
-              <p>Pengumuman resmi, kegiatan gotong royong, dan kabar perkembangan pembangunan desa terbaru.</p>
-              <div className="divider"></div>
-            </div>
-
-            <div className="card-grid">
-              <div className="card reveal stagger-1">
-                <div className="card-img-wrap">
-                  <img src={imgProker} alt="Pembahasan Proker" />
-                  <div className="card-badge">Pembangunan</div>
-                </div>
-                <div className="card-body">
-                  <div className="location">28 Juli 2026 &middot; Oleh Admin Desa</div>
-                  <h3>Musyawarah Pembangunan Desa & Rencana Program Kerja Terpadu</h3>
-                  <p>Pemerintah Desa Padaleu bersama aparat dan tokoh masyarakat menggelar musyawarah desa pembahasan program kerja prioritas.</p>
-                  <a href="#berita" className="read-more">Baca Berita →</a>
-                </div>
-              </div>
-
-              <div className="card reveal stagger-2">
-                <div className="card-img-wrap">
-                  <img src={imgCengkeh} alt="Panen Cengkeh" />
-                  <div className="card-badge">Kegiatan Warga</div>
-                </div>
-                <div className="card-body">
-                  <div className="location">15 Juli 2026 &middot; Oleh Poktan Desa</div>
-                  <h3>Persiapan Pesta Adat Panen Rempah Cengkeh Raya 2026</h3>
-                  <p>Warga dusun bersiap menyambut syukuran tahunan panen cengkeh melimpah dengan tarian adat tradisional khas Konawe Utara.</p>
-                  <a href="#berita" className="read-more">Baca Berita →</a>
-                </div>
-              </div>
-
-              <div className="card reveal stagger-3">
-                <div className="card-img-wrap">
-                  <img src={imgKKN} alt="Penerimaan KKN" />
-                  <div className="card-badge">Pemberdayaan</div>
-                </div>
-                <div className="card-body">
-                  <div className="location">02 Juli 2026 &middot; Sekretariat Desa</div>
-                  <h3>Penerimaan Mahasiswa KKN & Program Kerja Kolaborasi Desa</h3>
-                  <p>Penyambutan mahasiswa KKN oleh Pemerintah Desa Padaleu guna mendukung program digitalisasi desa dan pemetaan potensi wisata.</p>
-                  <a href="#berita" className="read-more">Baca Berita →</a>
                 </div>
               </div>
             </div>
@@ -724,41 +696,8 @@ export default function App() {
 
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.2rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  <div><strong>Telepon / WhatsApp:</strong><br />+62 812-4455-6677 (Kantor Desa)</div>
+                  <div><strong>Telepon / WhatsApp:</strong><br />+62 812-4777-1312 (Kantor Desa)</div>
                 </div>
-
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.2rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  <div><strong>Email Resmi:</strong><br />desa.padaleu@konaweutarakab.go.id</div>
-                </div>
-
-                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <div><strong>Jam Pelayanan Publik:</strong><br />Senin — Jumat: 08:00 — 16:00 WITA</div>
-                </div>
-              </div>
-
-              <div style={{ background: 'var(--white)', padding: '2.5rem', border: '1px solid var(--gray-200)', borderRadius: '4px' }}>
-                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1.5rem' }}>Kirim Pesan / Aspirasi</h3>
-
-                <form onSubmit={(e) => { e.preventDefault(); alert('Terima kasih! Pesan/Aspirasi Anda telah terikirim ke Pemerintah Desa Padaleu.'); }}>
-                  <div className="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" className="form-control" placeholder="Masukkan nama Anda" required />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Nomor HP / WhatsApp</label>
-                    <input type="tel" className="form-control" placeholder="08xxxxxxxxxx" required />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Pesan / Aspirasi</label>
-                    <textarea className="form-control" rows={4} placeholder="Tuliskan pesan atau aspirasi Anda untuk desa..." required></textarea>
-                  </div>
-
-                  <button type="submit" className="btn-primary" style={{ width: '100%', textAlign: 'center', cursor: 'pointer' }}>Kirim Pesan Sekarang</button>
-                </form>
               </div>
             </div>
           </div>
@@ -784,7 +723,6 @@ export default function App() {
           <div>
             <h4>Informasi</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <a href="#berita">Berita Desa</a>
               <a href="#galeri">Galeri Foto</a>
               <a href="#kontak-sec">Hubungi Kami</a>
             </div>
