@@ -736,4 +736,14 @@ body {
     .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 180px); }
     .subnav a { padding: 0 1rem; font-size: 0.9rem; }
     .hero { height: 100vh; }
+    .timeline-connector-line { left: 20px !important; transform: none !important; }
+    .timeline-roadmap-item { justify-content: flex-start !important; }
+    .timeline-roadmap-item > div:first-child { left: 20px !important; transform: translate(-50%, -50%) !important; }
+    .timeline-roadmap-card-body { width: calc(100% - 45px) !important; margin-left: 45px !important; text-align: left !important; border-left: 4px solid var(--teal) !important; border-right: none !important; }
+    .timeline-roadmap-header { justify-content: flex-start !important; }
+}
+
+.timeline-blur-card:hover {
+    filter: blur(0px) opacity(1) !important;
+    transform: scale(1.02) !important;
 }

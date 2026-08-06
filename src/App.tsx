@@ -18,8 +18,9 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero')
   const [showBackToTop, setShowBackToTop] = useState(false)
 
-  // ── 3. Leaflet Map Ref ──
+  // ── 3. Leaflet Map & Timeline Leader State ──
   const mapRef = useRef<HTMLDivElement>(null)
+  const [currentLeaderIdx, setCurrentLeaderIdx] = useState(0)
 
   // ── Typewriter Effect Engine ──
   useEffect(() => {
@@ -239,111 +240,215 @@ export default function App() {
               </p>
             </div>
 
+            {/* Section Sub-Header */}
             <div className="section-header reveal" style={{ marginBottom: '2rem' }}>
-              <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--red-accent)' }}>Kepemimpinan dari Tahun ke Tahun</span>
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--red-accent)' }}>
+                Rekam Jejak Kepemimpinan
+              </span>
+              <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.75rem', color: 'var(--gray-800)', marginTop: '0.4rem' }}>
+                Kepala Desa Padaleu dari Masa ke Masa
+              </h3>
             </div>
 
-            <div className="timeline-grid">
-              <div className="timeline-card reveal stagger-1">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="ABUDU" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">1967 — 1969</div>
-                  <h3 className="timeline-name">ABUDU</h3>
-                </div>
-              </div>
+            {/* Interactive 3-Card Focused Showcase Container */}
+            {(() => {
+              const leaders = [
+                { period: '2023 — Sekarang', name: 'MASIUDIN, S.Si', order: 'Kepala Desa Ke-10 (Petahana)', active: true },
+                { period: '2020 — 2022', name: 'ARIPUDIN', order: 'Kepala Desa Ke-9', active: false },
+                { period: '2015 — 2020', name: 'ANTON ARSYAD', order: 'Kepala Desa Ke-8', active: false },
+                { period: '2008 — 2015', name: 'ASWAN', order: 'Kepala Desa Ke-7', active: false },
+                { period: '2000 — 2008', name: 'ABDUL HAMID', order: 'Kepala Desa Ke-6', active: false },
+                { period: '1995 — 1999', name: 'MUH. ARSYAD', order: 'Kepala Desa Ke-5', active: false },
+                { period: '1991 — 1994', name: 'SAPRUDIN', order: 'Kepala Desa Ke-4', active: false },
+                { period: '1986 — 1990', name: 'ZAINAL. MEKUO', order: 'Kepala Desa Ke-3', active: false },
+                { period: '1969 — 1986', name: 'APUKA', order: 'Kepala Desa Ke-2', active: false },
+                { period: '1967 — 1969', name: 'ABUDU', order: 'Kepala Desa Ke-1', active: false }
+              ];
 
-              <div className="timeline-card reveal stagger-2">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="APUKA" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">1969 — 1986</div>
-                  <h3 className="timeline-name">APUKA</h3>
-                </div>
-              </div>
+              return (
+                <div className="reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '1rem 0', overflow: 'hidden' }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '1.2rem',
+                    position: 'relative',
+                    minHeight: '380px',
+                    padding: '1rem 0.5rem'
+                  }}>
 
-              <div className="timeline-card reveal stagger-3">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="ZAINAL. MEKUO" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">1986 — 1990</div>
-                  <h3 className="timeline-name">ZAINAL. MEKUO</h3>
-                </div>
-              </div>
+                    {/* Tombol Panah Kiri (<) */}
+                    <button
+                      onClick={() => setCurrentLeaderIdx(prev => Math.max(prev - 1, 0))}
+                      disabled={currentLeaderIdx === 0}
+                      title="Era Selanjutnya (Terbaru)"
+                      style={{
+                        position: 'absolute',
+                        left: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        width: '46px',
+                        height: '46px',
+                        borderRadius: '50%',
+                        background: currentLeaderIdx === 0 ? 'var(--gray-200)' : '#004851',
+                        color: 'white',
+                        border: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: currentLeaderIdx === 0 ? 'not-allowed' : 'pointer',
+                        boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
+                        opacity: currentLeaderIdx === 0 ? 0.35 : 1,
+                        zIndex: 20,
+                        transition: 'all 0.3s ease'
+                      }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
 
-              <div className="timeline-card reveal stagger-4">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="SAPRUDIN" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">1991 — 1994</div>
-                  <h3 className="timeline-name">SAPRUDIN</h3>
-                </div>
-              </div>              
+                    {/* Tombol Panah Kanan (>) */}
+                    <button
+                      onClick={() => setCurrentLeaderIdx(prev => Math.min(prev + 1, leaders.length - 1))}
+                      disabled={currentLeaderIdx === leaders.length - 1}
+                      title="Era Sebelumnya (Terlama)"
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        width: '46px',
+                        height: '46px',
+                        borderRadius: '50%',
+                        background: currentLeaderIdx === leaders.length - 1 ? 'var(--gray-200)' : '#004851',
+                        color: 'white',
+                        border: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: currentLeaderIdx === leaders.length - 1 ? 'not-allowed' : 'pointer',
+                        boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
+                        opacity: currentLeaderIdx === leaders.length - 1 ? 0.35 : 1,
+                        zIndex: 20,
+                        transition: 'all 0.3s ease'
+                      }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
 
-              <div className="timeline-card reveal stagger-5">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="MUH. ARSYAD" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">1995 — 1999</div>
-                  <h3 className="timeline-name">MUH. ARSYAD</h3>
-                </div>
-              </div>
+                    {/* Render Cards with Smooth Sliding & Blur Transitions */}
+                    {leaders.map((item, idx) => {
+                      const offset = idx - currentLeaderIdx;
+                      const isFocused = offset === 0;
+                      const isVisible = Math.abs(offset) <= 1;
 
-              <div className="timeline-card reveal stagger-6">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="ABDUL HAMID" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">2000 — 2008</div>
-                  <h3 className="timeline-name">ABDUL HAMID</h3>
-                </div>
-              </div>
+                      if (!isVisible) return null;
 
-              <div className="timeline-card reveal stagger-7">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="ASWAN" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">2008 — 2015</div>
-                  <h3 className="timeline-name">ASWAN</h3>
-                </div>
-              </div>
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => setCurrentLeaderIdx(idx)}
+                          style={{
+                            flex: isFocused ? '0 0 420px' : '0 0 240px',
+                            maxWidth: isFocused ? '420px' : '240px',
+                            background: item.active ? 'linear-gradient(135deg, #ffffff 0%, #f4fbf9 100%)' : 'var(--white)',
+                            border: item.active ? '2px solid #004851' : (isFocused ? '2px solid var(--teal)' : '1px solid var(--gray-200)'),
+                            borderTop: item.active ? '5px solid #004851' : '4px solid var(--teal)',
+                            borderRadius: '8px',
+                            padding: isFocused ? '2.2rem 1.8rem' : '1.5rem 1.2rem',
+                            boxShadow: isFocused
+                              ? (item.active ? '0 12px 36px rgba(0,72,81,0.18)' : '0 8px 28px rgba(0,0,0,0.08)')
+                              : '0 3px 12px rgba(0,0,0,0.03)',
+                            textAlign: 'center',
+                            filter: isFocused ? 'blur(0px) opacity(1)' : 'blur(4px) opacity(0.48)',
+                            transform: isFocused ? 'scale(1.04)' : 'scale(0.92)',
+                            cursor: isFocused ? 'default' : 'pointer',
+                            transition: 'all 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+                            zIndex: isFocused ? 10 : 3
+                          }}>
+                          
+                          {/* Badge Periode & Status */}
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', marginBottom: isFocused ? '1.2rem' : '0.6rem', flexWrap: 'wrap' }}>
+                            <span style={{
+                              background: item.active ? '#004851' : 'var(--teal)',
+                              color: 'white',
+                              fontSize: isFocused ? '0.76rem' : '0.68rem',
+                              fontWeight: 700,
+                              padding: isFocused ? '0.22rem 0.75rem' : '0.15rem 0.55rem',
+                              borderRadius: '20px',
+                              letterSpacing: '0.06em'
+                            }}>
+                              {item.period}
+                            </span>
+                            {item.active && (
+                              <span style={{ background: '#FFD700', color: '#004851', fontSize: isFocused ? '0.68rem' : '0.6rem', fontWeight: 800, padding: '0.18rem 0.5rem', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                                Kepala Desa Aktif
+                              </span>
+                            )}
+                          </div>
 
-              <div className="timeline-card reveal stagger-8">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="ANTON ARSYAD" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">2015 — 2020</div>
-                  <h3 className="timeline-name">ANTON ARSYAD</h3>
-                </div>
-              </div>
+                          {/* Photo Frame */}
+                          <div style={{
+                            width: isFocused ? '84px' : '58px',
+                            height: isFocused ? '84px' : '58px',
+                            borderRadius: '50%',
+                            overflow: 'hidden',
+                            border: item.active ? '3.5px solid #004851' : '2px solid var(--gray-300)',
+                            margin: '0 auto ' + (isFocused ? '1rem' : '0.6rem'),
+                            background: '#f5f5f4',
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                            transition: 'all 0.45s ease'
+                          }}>
+                            <img src={imgAvatar} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          </div>
 
-              <div className="timeline-card reveal stagger-9">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="ARIPUDIN" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
-                </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">2020 — 2022</div>
-                  <h3 className="timeline-name">ARIPUDIN</h3>
-                </div>
-              </div>                                          
+                          {/* Leader Name & Order */}
+                          <h3 style={{
+                            fontFamily: "'Recoleta', 'Playfair Display', serif",
+                            fontSize: isFocused ? '1.5rem' : '1.15rem',
+                            color: item.active ? '#004851' : 'var(--gray-900)',
+                            margin: '0.3rem 0 0.15rem',
+                            transition: 'font-size 0.45s ease'
+                          }}>
+                            {item.name}
+                          </h3>
+                          <div style={{
+                            fontSize: isFocused ? '0.8rem' : '0.72rem',
+                            fontWeight: 700,
+                            color: 'var(--teal)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em'
+                          }}>
+                            {item.order}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
 
-              <div className="timeline-card reveal stagger-10">
-                <div className="timeline-img-wrap">
-                  <img src={imgAvatar} alt="Masiudin, S.Si" style={{ objectFit: 'contain', background: '#f5f5f4', padding: '1.5rem' }} />
+                  {/* Era Quick Select Dots / Stepper Chips */}
+                  <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1.5rem' }}>
+                    {leaders.map((item, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentLeaderIdx(idx)}
+                        title={`${item.name} (${item.period})`}
+                        style={{
+                          background: currentLeaderIdx === idx ? '#004851' : 'var(--white)',
+                          color: currentLeaderIdx === idx ? 'white' : 'var(--gray-700)',
+                          border: currentLeaderIdx === idx ? '1px solid #004851' : '1px solid var(--gray-300)',
+                          padding: '0.35rem 0.7rem',
+                          borderRadius: '4px',
+                          fontSize: '0.72rem',
+                          fontWeight: currentLeaderIdx === idx ? 700 : 500,
+                          cursor: 'pointer',
+                          transition: 'all 0.25s ease',
+                          boxShadow: currentLeaderIdx === idx ? '0 2px 6px rgba(0,72,81,0.2)' : 'none'
+                        }}>
+                        {item.period.split(' ')[0]}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="timeline-body">
-                  <div className="timeline-period">2023 — Sekarang</div>
-                  <h3 className="timeline-name">MASIUDIN, S.Si</h3>
-                </div>
-              </div>
-            </div>
+              );
+            })()}
           </div>
         </section>
         <section className="section" id="struktur" style={{ background: 'var(--gray-50)' }}>
@@ -374,25 +479,77 @@ export default function App() {
               </div>
             </div>
 
-            {/* 2. Lembaga Pendukung Desa */}
-            <div className="reveal" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: '4px', padding: '2.2rem', marginBottom: '3.5rem', maxWidth: '850px', margin: '0 auto 3.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '1.5rem', borderBottom: '1.5px solid var(--gray-200)', paddingBottom: '0.8rem' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M8 10v11M12 10v11M16 10v11M20 10v11"/></svg>
-                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.25rem', color: '#004851', fontWeight: 600, letterSpacing: '0.02em', margin: 0, textAlign: 'center' }}>
-                  Lembaga Pendukung Desa
-                </h3>
+            {/* 2. Lembaga Pendukung Desa (Khusus BPD & Data Anggota Resmi) */}
+            <div className="reveal" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', borderRadius: '4px', padding: '2.2rem', marginBottom: '3.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '1.8rem', borderBottom: '1.5px solid var(--gray-200)', paddingBottom: '1.2rem' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M8 10v11M12 10v11M16 10v11M20 10v11"/></svg>
+                <div style={{ textAlign: 'center' }}>
+                  <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.35rem', color: '#004851', fontWeight: 600, letterSpacing: '0.02em', margin: 0 }}>
+                    Badan Permusyawaratan Desa (BPD) Desa Padaleu
+                  </h3>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--gray-500)', textTransform: 'uppercase', letterSpacing: '0.12em', marginTop: '0.3rem' }}>
+                    Kec. Lembo &middot; Kab. Konawe Utara &middot; Prov. Sulawesi Tenggara &middot; Periode 2019 – 2025
+                  </div>
+                </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
-                <div style={{ background: 'var(--gray-50)', padding: '1.4rem', borderRadius: '4px', borderLeft: '4px solid #004851' }}>
-                  <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Lembaga Legislatif Desa</div>
-                  <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', marginTop: '0.4rem' }}>Badan Permusyawaratan Desa (BPD)</h4>
-                </div>
+              {/* Card Ringkasan Anggota BPD */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.2rem', marginBottom: '2rem' }}>
+                {[
+                  { name: 'ANSAR', role: 'Ketua BPD', pend: 'SMA' },
+                  { name: 'AYU NUR', role: 'Wakil Ketua BPD', pend: 'SMA' },
+                  { name: 'SURIANTO, S.Pd', role: 'Sekretaris BPD', pend: 'S-1' },
+                  { name: 'JUHARNI', role: 'Anggota BPD', pend: '-' },
+                  { name: "SU'AIB, ST, M.Si", role: 'Anggota BPD', pend: 'S-2' }
+                ].map((bpd, idx) => (
+                  <div key={idx} style={{ background: 'var(--gray-50)', padding: '1.2rem', borderRadius: '4px', borderTop: idx === 0 ? '3px solid #004851' : '3px solid var(--teal)', textAlign: 'center' }}>
+                    <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{bpd.role}</div>
+                    <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.05rem', color: 'var(--gray-800)', marginTop: '0.3rem', marginBottom: '0.2rem' }}>{bpd.name}</h4>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--gray-500)', fontWeight: 500 }}>Pendidikan: {bpd.pend}</span>
+                  </div>
+                ))}
+              </div>
 
-                <div style={{ background: 'var(--gray-50)', padding: '1.4rem', borderRadius: '4px', borderLeft: '4px solid var(--red-accent)' }}>
-                  <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--red-accent)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Lembaga Kemasyarakatan</div>
-                  <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', marginTop: '0.4rem' }}>Lembaga Ketahanan Desa (LKD / LAD)</h4>
-                </div>
+              {/* Tabel Resmi Data Anggota BPD */}
+              <div style={{ overflowX: 'auto', border: '1px solid var(--gray-200)', borderRadius: '4px' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.82rem' }}>
+                  <thead>
+                    <tr style={{ background: '#004851', color: 'white', textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: '0.72rem' }}>
+                      <th style={{ padding: '0.8rem 1rem' }}>No</th>
+                      <th style={{ padding: '0.8rem 1rem' }}>Nama Lengkap</th>
+                      <th style={{ padding: '0.8rem 1rem' }}>Jabatan</th>
+                      <th style={{ padding: '0.8rem 1rem' }}>Tempat, Tgl Lahir</th>
+                      <th style={{ padding: '0.8rem 1rem' }}>Agama</th>
+                      <th style={{ padding: '0.8rem 1rem' }}>Pend.</th>
+                      <th style={{ padding: '0.8rem 1rem' }}>No. & Tgl Keputusan Pengangkatan</th>
+                      <th style={{ padding: '0.8rem 1rem' }}>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { no: 1, name: 'ANSAR', role: 'KETUA', ttl: 'PADALEU, 12 AGUSTUS 1976', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
+                      { no: 2, name: 'AYU NUR', role: 'WAKIL KETUA', ttl: 'PADALEU, 17 OKTOBER 1970', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
+                      { no: 3, name: 'SURIANTO, S.Pd', role: 'SEKRETARIS', ttl: 'PADALEU, 10 NOVEMBER 1983', agama: 'ISLAM', pend: 'S-1', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
+                      { no: 4, name: 'JUHARNI', role: 'ANGGOTA', ttl: '-', agama: 'ISLAM', pend: '-', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
+                      { no: 5, name: "SU'AIB, ST, M.Si", role: 'ANGGOTA', ttl: 'PADALEU KENDARI, 09 MEI 1964', agama: 'ISLAM', pend: 'S-2', sk: '-', status: 'AKTIF' }
+                    ].map((row, idx) => (
+                      <tr key={idx} style={{ background: idx % 2 === 0 ? 'white' : 'var(--gray-50)', borderBottom: '1px solid var(--gray-200)' }}>
+                        <td style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--gray-600)' }}>{row.no}</td>
+                        <td style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--gray-800)' }}>{row.name}</td>
+                        <td style={{ padding: '0.75rem 1rem', fontWeight: 600, color: '#004851' }}>{row.role}</td>
+                        <td style={{ padding: '0.75rem 1rem', color: 'var(--gray-600)' }}>{row.ttl}</td>
+                        <td style={{ padding: '0.75rem 1rem', color: 'var(--gray-600)' }}>{row.agama}</td>
+                        <td style={{ padding: '0.75rem 1rem', fontWeight: 600 }}>{row.pend}</td>
+                        <td style={{ padding: '0.75rem 1rem', color: 'var(--gray-600)', fontSize: '0.78rem' }}>{row.sk}</td>
+                        <td style={{ padding: '0.75rem 1rem' }}>
+                          <span style={{ background: 'rgba(37, 211, 102, 0.15)', color: '#128C7E', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '3px', fontSize: '0.7rem' }}>
+                            {row.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -677,27 +834,61 @@ export default function App() {
           </div>
         </section>
 
-        {/* 9. KONTAK DESA & FORM ASPIRASI */}
-        <section className="cta-section" id="kontak-sec">
+        {/* 9. KONTAK DESA */}
+        <section className="cta-section" id="kontak-sec" style={{ background: 'var(--cream)', padding: '5rem 2rem' }}>
           <div className="container">
-            <div className="reveal">
+            <div className="section-header reveal">
+              <div className="overline">Layanan Kontak Resmi</div>
               <h2 className="font-serif">Hubungi Pemerintah Desa Padaleu</h2>
-              <p>Silakan sampaikan pertanyaan, aspirasi warga, atau koordinasi kunjungan wisata melalui layanan kontak di bawah ini.</p>
+              <p>Silakan sampaikan pertanyaan, aspirasi warga, atau koordinasi kunjungan melalui layanan kontak resmi di bawah ini.</p>
+              <div className="divider"></div>
             </div>
 
-            <div className="contact-grid reveal">
-              <div style={{ background: 'var(--white)', padding: '2.5rem', border: '1px solid var(--gray-200)', borderRadius: '4px' }}>
-                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1.5rem' }}>Kantor Desa Padaleu</h3>
-
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.2rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <div><strong>Alamat:</strong><br />Jl. Trans Sulawesi, Desa Padaleu, Kec. Lembo, Kab. Konawe Utara, Sulawesi Tenggara 93354</div>
+            <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 480px))', justifyContent: 'center', gap: '2rem', marginTop: '2.5rem' }}>
+              {/* Card 1: Alamat Kantor Desa */}
+              <div style={{ background: 'var(--white)', padding: '2.8rem 2.2rem', border: '1px solid var(--gray-200)', borderRadius: '6px', borderTop: '4px solid #004851', textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(0,72,81,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.4rem' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
+                    Alamat Fisik
+                  </div>
+                  <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1rem' }}>
+                    Kantor Desa Padaleu
+                  </h3>
+                  <p style={{ fontSize: '0.92rem', color: 'var(--gray-600)', lineHeight: '1.6', margin: '0 0 1.8rem' }}>
+                    Jl. Trans Sulawesi, Desa Padaleu, Kec. Lembo, Kab. Konawe Utara, Sulawesi Tenggara 93354
+                  </p>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.2rem', fontSize: '0.9rem', color: 'var(--gray-600)' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  <div><strong>Telepon / WhatsApp:</strong><br />+62 812-4777-1312 (Kantor Desa)</div>
+                <a href="https://www.google.com/maps/place/Desa+padaleu/@-3.7515053,122.3401347,642m/data=!3m1!1e3!4m6!3m5!1s0x2d9855761937d85b:0x26ace3d8a9a9e8ee!8m2!3d-3.7521192!4d122.3402454!16s%2Fg%2F11cs6ktnzy" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#004851', width: '100%', justifyContent: 'center' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>Petunjuk Arah Google Maps</span>
+                </a>
+              </div>
+
+              {/* Card 2: Layanan Telepon & WhatsApp */}
+              <div style={{ background: 'var(--white)', padding: '2.8rem 2.2rem', border: '1px solid var(--gray-200)', borderRadius: '6px', borderTop: '4px solid #128C7E', textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(37,211,102,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.4rem' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#128C7E" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#128C7E', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
+                    Telepon / WhatsApp
+                  </div>
+                  <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1rem' }}>
+                    +62 812-4777-1312
+                  </h3>
+                  <p style={{ fontSize: '0.92rem', color: 'var(--gray-600)', lineHeight: '1.6', margin: '0 0 1.8rem' }}>
+                    Layanan Komunikasi & Informasi Publik Kantor Sekretariat Desa Padaleu
+                  </p>
                 </div>
+
+                <a href="https://wa.me/6281247771312?text=Halo%20Admin%20Desa%20Padaleu,%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#25D366', width: '100%', justifyContent: 'center' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                  <span>Hubungi via WhatsApp</span>
+                </a>
               </div>
             </div>
           </div>
