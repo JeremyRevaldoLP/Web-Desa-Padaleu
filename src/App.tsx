@@ -207,20 +207,20 @@ export default function App() {
         {/* STATISTIK BAR */}
         <div className="stats-bar" id="statistik">
           <div className="stat-item reveal stagger-1">
-            <div className="stat-number">-</div>
+            <div className="stat-number">550</div>
             <div className="stat-label">Penduduk</div>
           </div>
           <div className="stat-item reveal stagger-2">
-            <div className="stat-number">-</div>
+            <div className="stat-number">172</div>
             <div className="stat-label">Kepala Keluarga</div>
           </div>
           <div className="stat-item reveal stagger-3">
-            <div className="stat-number">-</div>
-            <div className="stat-label">Destinasi Wisata</div>
+            <div className="stat-number">6</div>
+            <div className="stat-label">Jumlah RT</div>
           </div>
-          <div className="stat-item reveal stagger-4">
-            <div className="stat-number">2026</div>
-            <div className="stat-label">Tahun Anggaran</div>
+          <div className="stat-item reveal stagger-3">
+            <div className="stat-number">3</div>
+            <div className="stat-label">Jumlah Dusun</div>
           </div>
         </div>
 
@@ -230,7 +230,7 @@ export default function App() {
             <div className="section-header reveal">
               <div className="overline">Jejak Langkah & Sejarah</div>
               <h2>Sejarah & Perjalanan Kepemimpinan Desa Padaleu</h2>
-              <p><strong>Desa Padaleu</strong> merupakan pemekaran dari desa lembo pada tahun 1967. Sekarang telah berubah status menjadi kelurahan dan menjadi ibukota kecamatan.</p>
+              <p><strong>Desa Padaleu</strong> merupakan pemekaran dari desa lembo pada tahun 1967. Sekarang telah berubah status menjadi kelurahan dan menjadi ibu kota kecamatan.</p>
               <div className="divider"></div>
             </div>
 
