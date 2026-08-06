@@ -724,7 +724,7 @@ export default function App() {
             <div className="section-header reveal">
               <div className="overline">Potensi Utama Desa</div>
               <h2>Komoditas Unggulan Desa Padaleu</h2>
-              <p>Desa Padaleu memiliki tiga komoditas unggulan yang menjadi sumber penghidupan dan kebanggaan masyarakat, yaitu Cengkeh, Milam, dan Sawit.</p>
+              <p>Desa Padaleu memiliki tiga komoditas unggulan yang menjadi sumber penghidupan dan kebanggaan masyarakat, yaitu Cengkeh, Nilam, dan Sawit.</p>
               <div className="divider"></div>
             </div>
 
@@ -739,7 +739,7 @@ export default function App() {
               <div className="welcome-text">
                 <div className="overline" style={{ color: 'var(--red-accent)' }}>Andalan Desa</div>
                 <h2>3 Komoditas Unggulan yang Menjadi Kekuatan Ekonomi Desa</h2>
-                <p>Cengkeh, Milam, dan Sawit menjadi tiga komoditas utama yang memberikan nilai ekonomi penting bagi warga Desa Padaleu.</p>
+                <p>Cengkeh, Nilam, dan Sawit menjadi tiga komoditas utama yang memberikan nilai ekonomi penting bagi warga Desa Padaleu.</p>
                 <p>Ketiga komoditas ini menjadi simbol kekayaan alam dan harapan kesejahteraan masyarakat desa.</p>
               </div>
             </div>
@@ -758,11 +758,11 @@ export default function App() {
 
               <div className="komoditas-card reveal stagger-2">
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Milam" />
+                  <img src={imgCengkeh} alt="Nilam" />
                 </div>
                 <div className="komoditas-body">
                   <div className="komoditas-tag">Komoditas Unggulan</div>
-                  <h3 className="komoditas-title">Milam</h3>
+                  <h3 className="komoditas-title">Nilam</h3>
                   <p className="komoditas-desc">Salah satu hasil bumi penting yang turut mendukung ekonomi warga dan potensi desa.</p>
                 </div>
               </div>
