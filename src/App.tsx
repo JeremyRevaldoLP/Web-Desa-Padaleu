@@ -398,7 +398,7 @@ export default function App() {
                           {/* Photo Frame */}
                           <div style={{
                             width: isFocused ? '92px' : '64px',
-                            height: isFocused ? '106px' : '74px',
+                            height: isFocused ? '86px' : '60px',
                             borderRadius: '12px',
                             overflow: 'hidden',
                             border: item.active ? '3px solid #004851' : '2px solid var(--gray-300)',
@@ -407,7 +407,7 @@ export default function App() {
                             boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                             transition: 'all 0.45s ease'
                           }}>
-                            <img src={item.active ? imgFotoKades : imgAvatar} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            <img src={item.active ? imgFotoKades : imgAvatar} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                           </div>
 
                           {/* Leader Name & Order */}
@@ -652,8 +652,8 @@ export default function App() {
                     Wilayah Dusun I
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '54px', height: '62px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
-                      <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ width: '54px', height: '50px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
+                      <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun I</div>
@@ -678,8 +678,8 @@ export default function App() {
                     Wilayah Dusun II
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '54px', height: '62px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
-                      <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ width: '54px', height: '50px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
+                      <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun II</div>
@@ -703,9 +703,9 @@ export default function App() {
                   <div style={{ background: '#004851', color: 'white', padding: '0.35rem 0.9rem', borderRadius: '3px', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', display: 'inline-block', marginBottom: '1.2rem' }}>
                     Wilayah Dusun III
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '54px', height: '62px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
-                      <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1.5px solid var(--gray-200)' }}>
+                    <div style={{ width: '54px', height: '50px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
+                      <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun III</div>
