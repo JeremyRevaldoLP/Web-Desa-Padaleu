@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import imgLogoKonaweUtara from './imports/Kabupaten Konawe Utara.png'
 import imgGambarHome from './imports/gambarhome.png'
 import imgAvatar from './imports/avatar_default.jpg'
+import imgFotoKades from './imports/fotokades.jpeg'
+import imgKaurKeuangan from './imports/kaurkeuangan.png'
+import imgSekdes from './imports/sekdes.png'
 import imgCengkeh from './imports/Cengkeh.jpeg'
 import imgProker from './imports/Pembahasan_Proker_Bersama_Aparat-1.jpeg'
 import imgKKN from './imports/Penerimaan_KKN_Aparat-1.jpeg'
@@ -396,7 +399,7 @@ export default function App() {
                             boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                             transition: 'all 0.45s ease'
                           }}>
-                            <img src={imgAvatar} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            <img src={item.active ? imgFotoKades : imgAvatar} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           </div>
 
                           {/* Leader Name & Order */}
@@ -464,7 +467,7 @@ export default function App() {
             <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.8rem', marginBottom: '3.5rem' }}>
               <div className="aparatur-card reveal stagger-1" style={{ borderTop: '4px solid #004851', background: 'var(--white)', maxWidth: '320px', width: '100%' }}>
                 <div className="aparatur-avatar">
-                  <img src={imgAvatar} alt="Masiudin, S.Si" />
+                  <img src={imgFotoKades} alt="Masiudin, S.Si" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                 </div>
                 <div className="aparatur-role" style={{ color: '#004851', fontWeight: 800, letterSpacing: '0.15em' }}>Kepala Desa</div>
                 <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)' }}>Masiudin, S.Si</h3>
@@ -472,7 +475,7 @@ export default function App() {
 
               <div className="aparatur-card reveal stagger-2" style={{ borderTop: '4px solid var(--teal)', background: 'var(--white)', maxWidth: '320px', width: '100%' }}>
                 <div className="aparatur-avatar">
-                  <img src={imgAvatar} alt="Asrul" />
+                  <img src={imgSekdes} alt="Asrul" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                 </div>
                 <div className="aparatur-role" style={{ color: 'var(--teal)', fontWeight: 700, letterSpacing: '0.15em' }}>Sekretaris Desa</div>
                 <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)' }}>Asrul</h3>
@@ -581,7 +584,7 @@ export default function App() {
 
                 <div className="aparatur-card reveal stagger-3" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
-                    <img src={imgAvatar} alt="Arlis" />
+                    <img src={imgKaurKeuangan} alt="Arlis" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
                   <div className="aparatur-role">Kaur Keuangan</div>
                   <h3 className="aparatur-name">Arlis</h3>
