@@ -413,21 +413,21 @@ body {
     border-color: var(--teal);
 }
 .aparatur-avatar {
-    width: 100px; height: 100px; border-radius: 50%;
+    width: 110px; height: 135px; border-radius: 8px;
     margin: 0 auto 1.2rem; overflow: hidden;
-    border: 3px solid var(--cream);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 2px solid var(--gray-200);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     background: #f5f5f4;
 }
 .aparatur-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(0.85);
+    transform: scale(1);
     transition: transform 0.3s ease;
 }
 .aparatur-card:hover .aparatur-avatar img {
-    transform: scale(0.92);
+    transform: scale(1.05);
 }
 .aparatur-role {
     font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
