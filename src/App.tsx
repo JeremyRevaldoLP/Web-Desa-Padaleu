@@ -114,33 +114,36 @@ export default function App() {
   useEffect(() => {
     if (mapRef.current && (window as any).L) {
       const L = (window as any).L
-      if ((mapRef.current as any)._leaflet_id) return
+      if ((mapRef.current as any)._leaflet_id) {
+        // Clear previous map container if re-rendered
+        mapRef.current.innerHTML = ""
+        delete (mapRef.current as any)._leaflet_id
+      }
 
       const padaleuLat = -3.7521192
       const padaleuLng = 122.3402454
-      const map = L.map(mapRef.current).setView([padaleuLat, padaleuLng], 16)
+      const map = L.map(mapRef.current).setView([padaleuLat, padaleuLng], 17)
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      // Satelit High-Resolution (Esri World Imagery)
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
-        attribution: '© OpenStreetMap contributors | Desa Padaleu GIS'
+        attribution: 'Tiles &copy; Esri, Earthstar Geographics | Satelit GIS Desa Padaleu'
       }).addTo(map)
 
-      const singleMarker = {
-        lat: -3.7521192,
-        lng: 122.3402454,
-        title: "Tugu Desa Padaleu",
-        desc: "Ikon Utama & Markah Geografis Wilayah Desa Padaleu, Kec. Lembo, Kab. Konawe Utara.",
-        category: "Ikon Desa"
-      }
+      // Label Nama Jalan & Batas Wilayah Transparan di atas Satelit
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 19
+      }).addTo(map)
 
+      // SATU-SATUNYA PIN POINT: TUGU PADALEU (TITIK TENGAH)
       const popupContent = `
         <div style="padding:0.4rem;text-align:center;">
-          <span style="font-size:0.65rem;font-weight:700;color:#004851;text-transform:uppercase;letter-spacing:0.08em;">${singleMarker.category}</span>
-          <h4 style="margin:0.25rem 0;font-size:1.05rem;color:#004851;font-family:'Recoleta',serif;">${singleMarker.title}</h4>
-          <p style="margin:0;font-size:0.8rem;color:#57534e;line-height:1.4;">${singleMarker.desc}</p>
+          <span style="font-size:0.65rem;font-weight:700;color:#004851;text-transform:uppercase;letter-spacing:0.08em;">Ikon Utama Desa</span>
+          <h4 style="margin:0.25rem 0;font-size:1.05rem;color:#004851;font-family:'Recoleta',serif;">Tugu Desa Padaleu</h4>
+          <p style="margin:0;font-size:0.8rem;color:#57534e;line-height:1.4;">Tugu & Markah Utama Wilayah Desa Padaleu, Kec. Lembo, Kab. Konawe Utara.</p>
         </div>
       `
-      L.marker([singleMarker.lat, singleMarker.lng]).addTo(map).bindPopup(popupContent).openPopup()
+      L.marker([padaleuLat, padaleuLng]).addTo(map).bindPopup(popupContent).openPopup()
     }
   }, [])
 
