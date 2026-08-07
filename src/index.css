@@ -413,7 +413,7 @@ body {
     border-color: var(--teal);
 }
 .aparatur-avatar {
-    width: 110px; height: 135px; border-radius: 8px;
+    width: 105px; height: 120px; border-radius: 14px;
     margin: 0 auto 1.2rem; overflow: hidden;
     border: 2px solid var(--gray-200);
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);

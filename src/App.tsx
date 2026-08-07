@@ -397,9 +397,9 @@ export default function App() {
 
                           {/* Photo Frame */}
                           <div style={{
-                            width: isFocused ? '96px' : '68px',
-                            height: isFocused ? '120px' : '84px',
-                            borderRadius: '8px',
+                            width: isFocused ? '92px' : '64px',
+                            height: isFocused ? '106px' : '74px',
+                            borderRadius: '12px',
                             overflow: 'hidden',
                             border: item.active ? '3px solid #004851' : '2px solid var(--gray-300)',
                             margin: '0 auto ' + (isFocused ? '1rem' : '0.6rem'),
@@ -652,7 +652,7 @@ export default function App() {
                     Wilayah Dusun I
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '56px', height: '68px', borderRadius: '6px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
+                    <div style={{ width: '54px', height: '62px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
                       <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div>
@@ -678,7 +678,7 @@ export default function App() {
                     Wilayah Dusun II
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '56px', height: '68px', borderRadius: '6px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
+                    <div style={{ width: '54px', height: '62px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
                       <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div>
@@ -704,7 +704,7 @@ export default function App() {
                     Wilayah Dusun III
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '56px', height: '68px', borderRadius: '6px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
+                    <div style={{ width: '54px', height: '62px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1.5px solid var(--gray-300)', background: '#f5f5f4' }}>
                       <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div>
