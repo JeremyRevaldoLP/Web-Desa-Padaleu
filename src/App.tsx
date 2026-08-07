@@ -118,50 +118,29 @@ export default function App() {
 
       const padaleuLat = -3.7521192
       const padaleuLng = 122.3402454
-      const map = L.map(mapRef.current).setView([padaleuLat, padaleuLng], 15)
+      const map = L.map(mapRef.current).setView([padaleuLat, padaleuLng], 16)
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors | Desa Padaleu GIS'
       }).addTo(map)
 
-      const markers = [
-        {
-          lat: -3.7521192, lng: 122.3402454,
-          title: "Desa Padaleu (Pusat Desa)",
-          desc: "Lokasi Geografis Resmi Desa Padaleu, Kec. Lembo, Kab. Konawe Utara.",
-          category: "Pusat Desa"
-        },
-        {
-          lat: -3.750500, lng: 122.341500,
-          title: "Kantor Desa Padaleu",
-          desc: "Pusat Pelayanan Publik & Balai Desa Padaleu.",
-          category: "Pemerintahan"
-        },
-        {
-          lat: -3.754000, lng: 122.345000,
-          title: "Perkebunan Cengkeh Organik",
-          desc: "Kawasan utama perkebunan cengkeh Desa Padaleu.",
-          category: "Komoditas"
-        },
-        {
-          lat: -3.756500, lng: 122.349000,
-          title: "Pesisir Teluk Lembo",
-          desc: "Kawasan pesisir pantai & dermaga tambatan perahu nelayan.",
-          category: "Wisata"
-        }
-      ]
+      const singleMarker = {
+        lat: -3.7521192,
+        lng: 122.3402454,
+        title: "Tugu Desa Padaleu",
+        desc: "Ikon Utama & Markah Geografis Wilayah Desa Padaleu, Kec. Lembo, Kab. Konawe Utara.",
+        category: "Ikon Desa"
+      }
 
-      markers.forEach(m => {
-        const popupContent = `
-          <div style="padding:0.4rem;">
-            <span style="font-size:0.6rem;font-weight:700;color:#c0392b;text-transform:uppercase;">${m.category}</span>
-            <h4 style="margin:0.2rem 0;font-size:0.95rem;color:#1a4a4a;">${m.title}</h4>
-            <p style="margin:0;font-size:0.78rem;color:#57534e;line-height:1.4;">${m.desc}</p>
-          </div>
-        `
-        L.marker([m.lat, m.lng]).addTo(map).bindPopup(popupContent)
-      })
+      const popupContent = `
+        <div style="padding:0.4rem;text-align:center;">
+          <span style="font-size:0.65rem;font-weight:700;color:#004851;text-transform:uppercase;letter-spacing:0.08em;">${singleMarker.category}</span>
+          <h4 style="margin:0.25rem 0;font-size:1.05rem;color:#004851;font-family:'Recoleta',serif;">${singleMarker.title}</h4>
+          <p style="margin:0;font-size:0.8rem;color:#57534e;line-height:1.4;">${singleMarker.desc}</p>
+        </div>
+      `
+      L.marker([singleMarker.lat, singleMarker.lng]).addTo(map).bindPopup(popupContent).openPopup()
     }
   }, [])
 
