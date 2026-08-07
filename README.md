@@ -1,58 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌐 Web Desa Padaleu
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Portal web resmi dan sistem informasi untuk **Desa / Kelurahan Padaleu** (Kecamatan Kambu, Kota Kendari, Sulawesi Tenggara). Website ini dirancang untuk meningkatkan transparansi, mempermudah akses informasi publik, serta mengoptimalkan pelayanan masyarakat secara digital.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Fitur Utama
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Beranda & Profil Desa**: Memuat latar belakang, sejarah, visi & misi, serta gambaran umum wilayah Desa Padaleu.
+- **Struktur Organisasi**: Informasi pengurus dan perangkat desa beserta tugas pokok dan fungsinya.
+- **Berita & Pengumuman**: Publikasi kegiatan desa, agenda mendatang, dan pengumuman resmi bagi masyarakat.
+- **Layanan Masyarakat / E-Surat**: Kemudahan akses informasi seputar persyaratan layanan administrasi dan pengajuan surat online.
+- **Potensi & UMKM Desa**: Media promosi untuk produk lokal, UMKM, dan potensi ekonomi/pariwisata di Padaleu.
+- **Galeri Kegiatan**: Dokumentasi foto dan video kegiatan kemasyarakatan desa.
+- **Kontak & Lokasi**: Informasi alamat kantor desa, peta interaktif, serta formulir pendaftaran/pengaduan.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🛠️ Teknologi yang Digunakan (Tech Stack)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Frontend**: HTML5, CSS3, JavaScript / Framework CSS (Bootstrap / Tailwind CSS)
+- **Backend**: PHP (Native / Framework Laravel / CodeIgniter)
+- **Database**: MySQL / MariaDB
+- **Web Server**: Apache / Nginx (XAMPP / Laragon)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 💻 Prasyarat & Instalasi Lokal
 
-## Agentic Development
+Untuk menjalankan proyek ini di lingkungan lokal (development), pastikan Anda telah menginstal:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+1. **Web Server & Database**: [XAMPP](https://www.apachefriends.org/) / [Laragon](https://laragon.org/)
+2. **PHP**: Versi 8.0 atau yang lebih baru
+3. **Composer** (jika menggunakan framework PHP): [getcomposer.org](https://getcomposer.org/)
+4. **Git**: [git-scm.com](https://git-scm.com/)
 
-```bash
-composer require laravel/boost --dev
+### Langkah Instalasi
 
-php artisan boost:install
+1. **Clone Repositori**
+
+   ```bash
+   git clone https://github.com/JeremyRevaldoLP/Web-Desa-Padaleu.git
+   cd Web-Desa-Padaleu
+   ```
+
+2. **Pindahkan Proyek ke Web Directory**
+
+   Pindahkan folder proyek ke dalam direktori `htdocs` (XAMPP) atau `www` (Laragon).
+
+3. **Konfigurasi Database**
+
+   - Buka phpMyAdmin (`http://localhost/phpmyadmin`).
+   - Buat database baru, misalnya `db_desa_padaleu`.
+   - Import file `.sql` jika tersedia di folder `database/` atau `sql/`.
+   - Atur koneksi database pada file konfigurasi seperti `config.php` atau `.env`.
+
+4. **Jalankan Aplikasi**
+
+   Buka browser dan akses:
+
+   ```text
+   http://localhost/Web-Desa-Padaleu
+   ```
+
+---
+
+## 📂 Struktur Direktori (Gambaran Umum)
+
+```text
+Web-Desa-Padaleu/
+├── assets/          # File statis (CSS, JS, Gambar, Font)
+├── config/          # File konfigurasi sistem & database
+├── controllers/     # Logika backend / penanganan permintaan
+├── database/        # File skema database (.sql / migrasi)
+├── views/           # Tampilan halaman web (HTML/PHP templates)
+├── index.php        # Halaman utama / entry point
+└── README.md        # Dokumentasi proyek
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 📝 Lisensi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Proyek ini dibuat untuk keperluan pengabdian dan pengembangan masyarakat Desa Padaleu. Lisensi dapat disesuaikan dengan kebutuhan pengembang.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 👨‍💻 Pengembang
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**JeremyRevaldoLP**
+**Adamachmad**
+**Andibrahim7**
+**arilandrian**
+**IqraJr**
+**prasstyoadhi2**
