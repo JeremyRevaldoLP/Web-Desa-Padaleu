@@ -210,20 +210,20 @@ export default function App() {
         {/* STATISTIK BAR */}
         <div className="stats-bar" id="statistik">
           <div className="stat-item reveal stagger-1">
-            <div className="stat-number">-</div>
+            <div className="stat-number">550</div>
             <div className="stat-label">Penduduk</div>
           </div>
           <div className="stat-item reveal stagger-2">
-            <div className="stat-number">-</div>
+            <div className="stat-number">172</div>
             <div className="stat-label">Kepala Keluarga</div>
           </div>
           <div className="stat-item reveal stagger-3">
-            <div className="stat-number">-</div>
-            <div className="stat-label">Destinasi Wisata</div>
+            <div className="stat-number">6</div>
+            <div className="stat-label">Jumlah RT</div>
           </div>
-          <div className="stat-item reveal stagger-4">
-            <div className="stat-number">2026</div>
-            <div className="stat-label">Tahun Anggaran</div>
+          <div className="stat-item reveal stagger-3">
+            <div className="stat-number">3</div>
+            <div className="stat-label">Jumlah Dusun</div>
           </div>
         </div>
 
@@ -233,7 +233,7 @@ export default function App() {
             <div className="section-header reveal">
               <div className="overline">Jejak Langkah & Sejarah</div>
               <h2>Sejarah & Perjalanan Kepemimpinan Desa Padaleu</h2>
-              <p><strong>Desa Padaleu</strong> merupakan pemekaran dari desa lembo pada tahun 1967. Sekarang telah berubah status menjadi kelurahan dan menjadi ibukota kecamatan.</p>
+              <p><strong>Desa Padaleu</strong> merupakan pemekaran dari desa lembo pada tahun 1967. Sekarang telah berubah status menjadi kelurahan dan menjadi ibu kota kecamatan.</p>
               <div className="divider"></div>
             </div>
 
@@ -727,7 +727,7 @@ export default function App() {
             <div className="section-header reveal">
               <div className="overline">Potensi Utama Desa</div>
               <h2>Komoditas Unggulan Desa Padaleu</h2>
-              <p>Desa Padaleu memiliki tiga komoditas unggulan yang menjadi sumber penghidupan dan kebanggaan masyarakat, yaitu Cengkeh, Milam, dan Sawit.</p>
+              <p>Desa Padaleu memiliki tiga komoditas unggulan yang menjadi sumber penghidupan dan kebanggaan masyarakat, yaitu Cengkeh, Nilam, dan Sawit.</p>
               <div className="divider"></div>
             </div>
 
@@ -742,7 +742,7 @@ export default function App() {
               <div className="welcome-text">
                 <div className="overline" style={{ color: 'var(--red-accent)' }}>Andalan Desa</div>
                 <h2>3 Komoditas Unggulan yang Menjadi Kekuatan Ekonomi Desa</h2>
-                <p>Cengkeh, Milam, dan Sawit menjadi tiga komoditas utama yang memberikan nilai ekonomi penting bagi warga Desa Padaleu.</p>
+                <p>Cengkeh, Nilam, dan Sawit menjadi tiga komoditas utama yang memberikan nilai ekonomi penting bagi warga Desa Padaleu.</p>
                 <p>Ketiga komoditas ini menjadi simbol kekayaan alam dan harapan kesejahteraan masyarakat desa.</p>
               </div>
             </div>
@@ -761,11 +761,11 @@ export default function App() {
 
               <div className="komoditas-card reveal stagger-2">
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Milam" />
+                  <img src={imgCengkeh} alt="Nilam" />
                 </div>
                 <div className="komoditas-body">
                   <div className="komoditas-tag">Komoditas Unggulan</div>
-                  <h3 className="komoditas-title">Milam</h3>
+                  <h3 className="komoditas-title">Nilam</h3>
                   <p className="komoditas-desc">Salah satu hasil bumi penting yang turut mendukung ekonomi warga dan potensi desa.</p>
                 </div>
               </div>
@@ -888,7 +888,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <a href="https://wa.me/6281247771312?text=Halo%20Admin%20Desa%20Padaleu,%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#25D366', width: '100%', justifyContent: 'center' }}>
+                <a href="https://wa.me/6281247771312?text=Halo%20Desa%20Padaleu,%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#25D366', width: '100%', justifyContent: 'center' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                   <span>Hubungi via WhatsApp</span>
                 </a>
