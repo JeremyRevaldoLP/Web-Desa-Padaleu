@@ -407,7 +407,7 @@ export default function App() {
                             boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                             transition: 'all 0.45s ease'
                           }}>
-                            <img src={item.active ? imgFotoKades : imgAvatar} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            <img src={item.active ? imgFotoKades : imgAvatar} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(0.85)' }} />
                           </div>
 
                           {/* Leader Name & Order */}
@@ -652,8 +652,8 @@ export default function App() {
                     Wilayah Dusun I
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
-                      <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)', background: '#f5f5f4' }}>
+                      <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(0.85)' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun I</div>
@@ -678,8 +678,8 @@ export default function App() {
                     Wilayah Dusun II
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
-                      <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)', background: '#f5f5f4' }}>
+                      <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(0.85)' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun II</div>
@@ -704,8 +704,8 @@ export default function App() {
                     Wilayah Dusun III
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
-                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
-                      <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)', background: '#f5f5f4' }}>
+                      <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(0.85)' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun III</div>
