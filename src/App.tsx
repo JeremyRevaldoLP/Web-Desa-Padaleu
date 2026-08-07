@@ -3,8 +3,16 @@ import imgLogoKonaweUtara from './imports/Kabupaten Konawe Utara.png'
 import imgGambarHome from './imports/gambarhome.png'
 import imgAvatar from './imports/avatar_default.jpg'
 import imgFotoKades from './imports/fotokades.jpeg'
-import imgKaurKeuangan from './imports/kaurkeuangan.png'
 import imgSekdes from './imports/sekdes.png'
+import imgKaurPerencanaan from './imports/kaurperencanaan.png'
+import imgKaurUmum from './imports/kaurumum.png'
+import imgKaurKeuangan from './imports/kaurkeuangan.png'
+import imgKasiPemerintahan from './imports/kasipemerintahan.png'
+import imgKasiPelayanan from './imports/kasipelayanan.png'
+import imgKasiKesejahteraan from './imports/kasikesejahteraan.png'
+import imgKadus1 from './imports/kadus1.png'
+import imgKadus2 from './imports/kadus2.png'
+import imgKadus3 from './imports/kadus3.png'
 import imgCengkeh from './imports/Cengkeh.jpeg'
 import imgProker from './imports/Pembahasan_Proker_Bersama_Aparat-1.jpeg'
 import imgKKN from './imports/Penerimaan_KKN_Aparat-1.jpeg'
@@ -568,7 +576,7 @@ export default function App() {
               <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.8rem' }}>
                 <div className="aparatur-card reveal stagger-1" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
-                    <img src={imgAvatar} alt="Aris" />
+                    <img src={imgKaurPerencanaan} alt="Aris" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
                   <div className="aparatur-role">Kaur Perencanaan</div>
                   <h3 className="aparatur-name">Aris</h3>
@@ -576,7 +584,7 @@ export default function App() {
 
                 <div className="aparatur-card reveal stagger-2" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
-                    <img src={imgAvatar} alt="Jois" />
+                    <img src={imgKaurUmum} alt="Jois" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
                   <div className="aparatur-role">Kaur Administrasi & Umum</div>
                   <h3 className="aparatur-name">Jois</h3>
@@ -604,7 +612,7 @@ export default function App() {
               <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.8rem' }}>
                 <div className="aparatur-card reveal stagger-1" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
-                    <img src={imgAvatar} alt="Ismail" />
+                    <img src={imgKasiPemerintahan} alt="Ismail" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
                   <div className="aparatur-role">Kasi Pemerintahan</div>
                   <h3 className="aparatur-name">Ismail</h3>
@@ -612,7 +620,7 @@ export default function App() {
 
                 <div className="aparatur-card reveal stagger-2" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
-                    <img src={imgAvatar} alt="Derman, S.P" />
+                    <img src={imgKasiPelayanan} alt="Derman, S.P" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
                   <div className="aparatur-role">Kasi Pelayanan</div>
                   <h3 className="aparatur-name">Derman, S.P</h3>
@@ -620,7 +628,7 @@ export default function App() {
 
                 <div className="aparatur-card reveal stagger-3" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
-                    <img src={imgAvatar} alt="Endang Fitriani" />
+                    <img src={imgKasiKesejahteraan} alt="Endang Fitriani" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
                   <div className="aparatur-role">Kasi Kesejahteraan</div>
                   <h3 className="aparatur-name">Endang Fitriani</h3>
@@ -645,7 +653,7 @@ export default function App() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
                     <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
-                      <img src={imgAvatar} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun I</div>
@@ -671,7 +679,7 @@ export default function App() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
                     <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
-                      <img src={imgAvatar} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun II</div>
@@ -697,7 +705,7 @@ export default function App() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.2rem', paddingBottom: '1rem', borderBottom: '1px solid var(--gray-200)' }}>
                     <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid var(--cream)' }}>
-                      <img src={imgAvatar} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun III</div>
