@@ -124,15 +124,11 @@ export default function App() {
       const padaleuLng = 122.3402454
       const map = L.map(mapRef.current).setView([padaleuLat, padaleuLng], 17)
 
-      // Satelit High-Resolution (Esri World Imagery)
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19,
-        attribution: 'Tiles &copy; Esri, Earthstar Geographics | Satelit GIS Desa Padaleu'
-      }).addTo(map)
-
-      // Label Nama Jalan & Batas Wilayah Transparan di atas Satelit
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19
+      // Satelit High-Resolution (Google Hybrid Satellite) - Bebas "Data Not Available" saat Zoom
+      L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        maxNativeZoom: 18,
+        attribution: '© Google Satellite | Satelit GIS Desa Padaleu'
       }).addTo(map)
 
       // SATU-SATUNYA PIN POINT: TUGU PADALEU (TITIK TENGAH)
