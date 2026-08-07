@@ -14,6 +14,13 @@ import imgKadus1 from './imports/kadus1.png'
 import imgKadus2 from './imports/kadus2.png'
 import imgKadus3 from './imports/kadus3.png'
 import imgCengkeh from './imports/Cengkeh.jpeg'
+import imgNilam from './imports/nilam.jpeg'
+import imgSawit from './imports/sawit.jpeg'
+import imgPemerintahanDesa from './imports/pemerintahandesa.png'
+import imgPembangunanDesa from './imports/pembangunandesa.png'
+import imgPotensiDesa from './imports/potensidesa.jpeg'
+import imgDokumentasiDesa from './imports/dokumentasidesa.png'
+import imgKegiatanWarga from './imports/kegiatanwarga.png'
 import imgProker from './imports/Pembahasan_Proker_Bersama_Aparat-1.jpeg'
 import imgKKN from './imports/Penerimaan_KKN_Aparat-1.jpeg'
 import imgPenerimaan2 from './imports/Penerimaan_2.jpeg'
@@ -747,7 +754,7 @@ export default function App() {
 
               <div className="komoditas-card reveal stagger-2">
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Nilam" />
+                  <img src={imgNilam} alt="Nilam" />
                 </div>
                 <div className="komoditas-body">
                   <div className="komoditas-tag">Komoditas Unggulan</div>
@@ -758,7 +765,7 @@ export default function App() {
 
               <div className="komoditas-card reveal stagger-3">
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Sawit" />
+                  <img src={imgSawit} alt="Sawit" />
                 </div>
                 <div className="komoditas-body">
                   <div className="komoditas-tag">Komoditas Unggulan</div>
@@ -782,14 +789,18 @@ export default function App() {
 
             <div className="gallery-grid reveal-scale">
               {[
-                { title: 'Dokumentasi Desa', category: 'Slot Foto Galeri' },
-                { title: 'Kegiatan Warga', category: 'Slot Foto Galeri' },
-                { title: 'Potensi Desa', category: 'Slot Foto Galeri' },
-                { title: 'Pembangunan Desa', category: 'Slot Foto Galeri' },
-                { title: 'Pemerintahan Desa', category: 'Slot Foto Galeri' }
+                { title: 'Pemerintahan Desa', category: 'Foto Galeri', image: imgPemerintahanDesa },
+                { title: 'Kegiatan Warga', category: 'Foto Galeri', image: imgKegiatanWarga },
+                { title: 'Potensi Desa', category: 'Foto Galeri', image: imgPotensiDesa },
+                { title: 'Pembangunan Desa', category: 'Foto Galeri', image: imgPembangunanDesa },
+                { title: 'Dokumentasi Desa', category: 'Foto Galeri', image: imgDokumentasiDesa }
               ].map((item, idx) => (
                 <div key={idx} className={`gallery-item ${idx > 0 ? `reveal stagger-${idx}` : ''}`}>
-                  <img src={imgAvatar} alt={item.title} style={{ objectFit: 'contain', background: '#e7e5e4', padding: '2rem' }} />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    style={{ objectFit: 'cover', width: '100%', height: '100%', background: '#e7e5e4' }}
+                  />
                   <div className="gallery-caption">
                     <h4>{item.title}</h4>
                     <span>{item.category}</span>
@@ -909,7 +920,7 @@ export default function App() {
           </div>
           <div>
             <h4>Kontak</h4>
-            <p>Kantor Desa Padaleu<br />Jl. Trans Sulawesi, Lembo<br />Konawe Utara, Sultra<br /><br />desa.padaleu@konaweutarakab.go.id</p>
+            <p>Kantor Desa Padaleu<br />Jl. Trans Sulawesi, Lembo<br />Konawe Utara, Sultra<br /></p>
           </div>
         </div>
         <div className="footer-bottom">
