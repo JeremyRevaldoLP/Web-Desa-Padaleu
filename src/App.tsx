@@ -35,6 +35,17 @@ export default function App() {
   // ── 2. Navigation & Floating State ──
   const [activeSection, setActiveSection] = useState('hero')
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const navItems = [
+    { id: 'hero', label: 'Beranda' },
+    { id: 'sejarah', label: 'Sejarah Desa' },
+    { id: 'struktur', label: 'Struktur Desa' },
+    { id: 'komoditas', label: 'Komoditas Unggulan' },
+    { id: 'galeri', label: 'Galeri' },
+    { id: 'peta-sec', label: 'Peta Digital' },
+    { id: 'kontak-sec', label: 'Kontak' },
+  ]
 
   // ── 3. Leaflet Map & Timeline Leader State ──
   const mapRef = useRef<HTMLDivElement>(null)
@@ -156,7 +167,7 @@ export default function App() {
       {/* ═══════════ TOP BAR (Mürren / Konawe Utara Style) ═══════════ */}
       <div className="topbar" id="topbar">
         <div className="topbar-left">
-          <a href="#hero" className="topbar-logo-box">
+          <a href="#hero" className="topbar-logo-box" onClick={() => setIsMobileMenuOpen(false)}>
             <img src={imgLogoKonaweUtara} alt="Logo Kabupaten Konawe Utara" className="topbar-logo-img" />
             <div className="topbar-logo-content">
               <span className="topbar-logo-text">DESA PADALEU</span>
@@ -167,18 +178,71 @@ export default function App() {
         <div className="topbar-right-info">
           Pemerintah Kabupaten Konawe Utara
         </div>
+
+        {/* Mobile Hamburger Menu Button */}
+        <button
+          className={`mobile-menu-toggle ${isMobileMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Navigation Menu"
+        >
+          <span className="hamburger-bar"></span>
+          <span className="hamburger-bar"></span>
+          <span className="hamburger-bar"></span>
+        </button>
       </div>
 
-      {/* ═══════════ SECONDARY NAV (Exact 9 Requested Menu Items) ═══════════ */}
+      {/* ═══════════ SECONDARY NAV (Desktop Subnav) ═══════════ */}
       <nav className="subnav" id="subnav">
-        <a href="#hero" className={activeSection === 'hero' ? 'active' : ''}>Beranda</a>
-        <a href="#sejarah" className={activeSection === 'sejarah' ? 'active' : ''}>Sejarah Desa</a>
-        <a href="#struktur" className={activeSection === 'struktur' ? 'active' : ''}>Struktur Desa</a>
-        <a href="#komoditas" className={activeSection === 'komoditas' ? 'active' : ''}>Komoditas Unggulan</a>
-        <a href="#galeri" className={activeSection === 'galeri' ? 'active' : ''}>Galeri</a>
-        <a href="#peta-sec" className={activeSection === 'peta-sec' ? 'active' : ''}>Peta Digital</a>
-        <a href="#kontak-sec" className={activeSection === 'kontak-sec' ? 'active' : ''}>Kontak</a>
+        {navItems.map((item) => (
+          <a
+            key={item.id}
+            href={`#${item.id}`}
+            className={activeSection === item.id ? 'active' : ''}
+          >
+            {item.label}
+          </a>
+        ))}
       </nav>
+
+      {/* ═══════════ MOBILE DRAWER MENU & BACKDROP OVERLAY ═══════════ */}
+      <div
+        className={`mobile-menu-overlay ${isMobileMenuOpen ? 'active' : ''}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+
+      <div className={`mobile-menu-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
+        <div className="mobile-menu-header">
+          <div className="mobile-menu-title">
+            <img src={imgLogoKonaweUtara} alt="Logo Konawe Utara" style={{ height: '32px', width: 'auto' }} />
+            <div>
+              <div style={{ fontFamily: "'Recoleta', serif", fontWeight: 700, fontSize: '1rem', color: '#004851', lineHeight: 1.1 }}>DESA PADALEU</div>
+              <div style={{ fontSize: '0.58rem', color: 'var(--gray-500)', letterSpacing: '0.12em', marginTop: '2px', textTransform: 'uppercase' }}>Konawe Utara</div>
+            </div>
+          </div>
+          <button className="mobile-menu-close" onClick={() => setIsMobileMenuOpen(false)} aria-label="Close menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <nav className="mobile-menu-nav">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`mobile-nav-link ${activeSection === item.id ? 'active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <span>{item.label}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          ))}
+        </nav>
+
+        <div className="mobile-menu-footer">
+          <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#004851', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pemerintah Desa Padaleu</div>
+          <div style={{ fontSize: '0.68rem', color: 'var(--gray-600)', marginTop: '3px' }}>Kecamatan Lembo, Kabupaten Konawe Utara</div>
+        </div>
+      </div>
 
       {/* ═══════════ MAIN CONTENT ═══════════ */}
       <main>
