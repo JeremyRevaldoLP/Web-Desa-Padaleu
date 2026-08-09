@@ -47,9 +47,22 @@ export default function App() {
     { id: 'kontak-sec', label: 'Kontak' },
   ]
 
-  // ── 3. Leaflet Map & Timeline Leader State ──
+  // ── 3. Leaflet Map, Gallery & Leader State ──
   const mapRef = useRef<HTMLDivElement>(null)
   const [currentLeaderIdx, setCurrentLeaderIdx] = useState(0)
+  const [selectedImage, setSelectedImage] = useState<{ title: string; category: string; image: string } | null>(null)
+
+  // ── ESC Key Handler to Close Modals ──
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null)
+        setIsMobileMenuOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   // ── Typewriter Effect Engine ──
   useEffect(() => {
@@ -327,18 +340,11 @@ export default function App() {
 
               return (
                 <div className="reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '1rem 0', overflow: 'hidden' }}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '1.2rem',
-                    position: 'relative',
-                    minHeight: '380px',
-                    padding: '1rem 0.5rem'
-                  }}>
+                  <div className="leadership-carousel-container">
 
                     {/* Tombol Panah Kiri (<) */}
                     <button
+                      className="leadership-nav-btn left"
                       onClick={() => setCurrentLeaderIdx(prev => Math.max(prev - 1, 0))}
                       disabled={currentLeaderIdx === 0}
                       title="Era Selanjutnya (Terbaru)"
@@ -367,6 +373,7 @@ export default function App() {
 
                     {/* Tombol Panah Kanan (>) */}
                     <button
+                      className="leadership-nav-btn right"
                       onClick={() => setCurrentLeaderIdx(prev => Math.min(prev + 1, leaders.length - 1))}
                       disabled={currentLeaderIdx === leaders.length - 1}
                       title="Era Sebelumnya (Terlama)"
@@ -405,9 +412,10 @@ export default function App() {
                         <div
                           key={idx}
                           onClick={() => setCurrentLeaderIdx(idx)}
+                          className={`leadership-card ${isFocused ? 'leadership-card-main' : 'leadership-card-side'}`}
                           style={{
-                            flex: isFocused ? '0 0 420px' : '0 0 240px',
-                            maxWidth: isFocused ? '420px' : '240px',
+                            flex: isFocused ? '0 0 min(420px, 86vw)' : '0 0 min(220px, 42vw)',
+                            maxWidth: isFocused ? 'min(420px, 86vw)' : 'min(220px, 42vw)',
                             background: item.active ? 'linear-gradient(135deg, #ffffff 0%, #f4fbf9 100%)' : 'var(--white)',
                             border: item.active ? '2px solid #004851' : (isFocused ? '2px solid var(--teal)' : '1px solid var(--gray-200)'),
                             borderTop: item.active ? '5px solid #004851' : '4px solid var(--teal)',
@@ -570,8 +578,8 @@ export default function App() {
                 ))}
               </div>
 
-              {/* Tabel Resmi Data Anggota BPD */}
-              <div style={{ overflowX: 'auto', border: '1px solid var(--gray-200)', borderRadius: '4px' }}>
+              {/* Tabel Resmi Data Anggota BPD (Tampilan Desktop) */}
+              <div className="bpd-table-desktop" style={{ overflowX: 'auto', border: '1px solid var(--gray-200)', borderRadius: '4px' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.82rem' }}>
                   <thead>
                     <tr style={{ background: '#004851', color: 'white', textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: '0.72rem' }}>
@@ -610,6 +618,46 @@ export default function App() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Tampilan Kartu Responsif BPD (Khusus HP / Mobile) */}
+              <div className="bpd-cards-mobile">
+                {[
+                  { no: 1, name: 'ANSAR', role: 'KETUA BPD', ttl: 'PADALEU, 12 AGUSTUS 1976', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
+                  { no: 2, name: 'AYU NUR', role: 'WAKIL KETUA BPD', ttl: 'PADALEU, 17 OKTOBER 1970', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
+                  { no: 3, name: 'SURIANTO, S.Pd', role: 'SEKRETARIS BPD', ttl: 'PADALEU, 10 NOVEMBER 1983', agama: 'ISLAM', pend: 'S-1', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
+                  { no: 4, name: 'JUHARNI', role: 'ANGGOTA BPD', ttl: '-', agama: 'ISLAM', pend: '-', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
+                  { no: 5, name: "SU'AIB, ST, M.Si", role: 'ANGGOTA BPD', ttl: 'PADALEU KENDARI, 09 MEI 1964', agama: 'ISLAM', pend: 'S-2', sk: '-', status: 'AKTIF' }
+                ].map((bpd, idx) => (
+                  <div key={idx} className="bpd-mobile-card">
+                    <div className="bpd-mobile-card-header">
+                      <div>
+                        <span className="bpd-mobile-no">#{bpd.no}</span>
+                        <span className="bpd-mobile-role">{bpd.role}</span>
+                      </div>
+                      <span className="bpd-mobile-status">{bpd.status}</span>
+                    </div>
+                    <h4 className="bpd-mobile-name">{bpd.name}</h4>
+                    <div className="bpd-mobile-details">
+                      <div className="bpd-detail-item">
+                        <span className="bpd-detail-label">Pendidikan</span>
+                        <span className="bpd-detail-val">{bpd.pend}</span>
+                      </div>
+                      <div className="bpd-detail-item">
+                        <span className="bpd-detail-label">Agama</span>
+                        <span className="bpd-detail-val">{bpd.agama}</span>
+                      </div>
+                      <div className="bpd-detail-item full-width">
+                        <span className="bpd-detail-label">Tempat, Tgl Lahir</span>
+                        <span className="bpd-detail-val">{bpd.ttl}</span>
+                      </div>
+                      <div className="bpd-detail-item full-width">
+                        <span className="bpd-detail-label">SK Pengangkatan</span>
+                        <span className="bpd-detail-val">{bpd.sk}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -859,7 +907,13 @@ export default function App() {
                 { title: 'Pembangunan Desa', category: 'Foto Galeri', image: imgPembangunanDesa },
                 { title: 'Dokumentasi Desa', category: 'Foto Galeri', image: imgDokumentasiDesa }
               ].map((item, idx) => (
-                <div key={idx} className={`gallery-item ${idx > 0 ? `reveal stagger-${idx}` : ''}`}>
+                <div
+                  key={idx}
+                  className={`gallery-item ${idx > 0 ? `reveal stagger-${idx}` : ''}`}
+                  onClick={() => setSelectedImage(item)}
+                  title="Klik untuk Perbesar Gambar (Zoom In)"
+                  style={{ cursor: 'pointer' }}
+                >
                   <img
                     src={item.image}
                     alt={item.title}
@@ -867,7 +921,7 @@ export default function App() {
                   />
                   <div className="gallery-caption">
                     <h4>{item.title}</h4>
-                    <span>{item.category}</span>
+                    <span>{item.category} &bull; Klik Zoom</span>
                   </div>
                 </div>
               ))}
@@ -1001,6 +1055,34 @@ export default function App() {
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="18 15 12 9 6 15"/></svg>
         </button>
       </div>
+
+      {/* ═══════════ GALERI ZOOM LIGHTBOX MODAL ═══════════ */}
+      {selectedImage && (
+        <div
+          className="gallery-modal-overlay active"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div
+            className="gallery-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="gallery-modal-close"
+              onClick={() => setSelectedImage(null)}
+              title="Tutup Preview Foto (ESC)"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div className="gallery-modal-img-box">
+              <img src={selectedImage.image} alt={selectedImage.title} className="gallery-modal-img" />
+            </div>
+            <div className="gallery-modal-info">
+              <span className="gallery-modal-category">{selectedImage.category}</span>
+              <h3 className="gallery-modal-title">{selectedImage.title}</h3>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   )
