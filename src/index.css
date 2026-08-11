@@ -22,16 +22,31 @@
 
 html { scroll-behavior: smooth; }
 
+/* ══════════════════════════════════════════════════════
+   SWISS STYLE TYPOGRAPHY SYSTEM
+   Heading: Frutiger → Outfit (closest free geometric humanist)
+   Body:    Helvetica Neue → Inter (closest free neo-grotesque)
+   ══════════════════════════════════════════════════════ */
+:root {
+    --font-heading: 'Frutiger', 'Frutiger Next', 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Helvetica Neue', Helvetica, 'Inter', Arial, sans-serif;
+}
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
     color: var(--gray-800);
     background: var(--white);
     line-height: 1.6;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
-.font-serif { font-family: 'Recoleta', 'Playfair Display', Georgia, serif; }
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
 
 /* ══════════════════════════════════════════════════════
    SCROLL REVEAL ANIMATION SYSTEM
@@ -135,7 +150,7 @@ body {
 }
 
 .topbar-logo-text {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.2rem;
     letter-spacing: 0.12em;
@@ -213,7 +228,7 @@ body {
 .subnav a {
     text-decoration: none;
     color: #004851;
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.1rem;
     font-weight: 600;
     padding: 0 1.8rem;
@@ -286,10 +301,10 @@ body {
     height: 1.5em;
 }
 .hero-title {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-shadow: 0 4px 40px rgba(0,0,0,0.3);
     line-height: 1.05;
 }
@@ -329,16 +344,19 @@ body {
 /* ══════════════════════════════════════════════════════
    SECTIONS
    ══════════════════════════════════════════════════════ */
-.section { padding: 6rem 2rem; }
+.section { padding: 6.5rem 2rem; }
+.section-bordered {
+    border-top: 1px solid rgba(0, 72, 81, 0.09);
+}
 .section-header { text-align: center; margin-bottom: 4rem; }
 .section-header .overline {
     font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.25em; color: var(--teal); margin-bottom: 0.85rem;
 }
 .section-header h2 {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 500; color: var(--gray-800);
+    font-weight: 700; color: var(--gray-800);
 }
 .section-header p {
     color: var(--gray-500); font-size: 0.95rem; max-width: 600px;
@@ -348,6 +366,16 @@ body {
     width: 60px; height: 3px; background: var(--teal);
     margin: 1.2rem auto 0;
 }
+
+/* Overrides untuk Seksi Video Dokumenter (Background #e7e5e4) */
+#dokumenter.section-bordered {
+    border-top: 1px solid rgba(0, 72, 81, 0.12);
+}
+#dokumenter .section-header .overline { color: #004851; font-weight: 700; }
+#dokumenter .section-header h2 { color: #1c1917; font-weight: 700; }
+#dokumenter .section-header p { color: #292524; font-weight: 500; font-size: 0.98rem; }
+#dokumenter .section-header .divider { background: #004851; }
+
 .container { max-width: 1200px; margin: 0 auto; }
 .container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
 
@@ -364,7 +392,7 @@ body {
 }
 .stat-item:last-child { border-right: none; }
 .stat-number {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.8rem; font-weight: 700;
 }
 .stat-label {
@@ -412,7 +440,7 @@ body {
     text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem;
 }
 .timeline-name {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.2rem; font-weight: 600; color: var(--gray-800);
     margin-bottom: 0.6rem;
 }
@@ -456,7 +484,7 @@ body {
     transform: scale(1.05);
 }
 .aparatur-name {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.1rem; font-weight: 600; color: var(--gray-800);
     margin-bottom: 0.25rem;
 }
@@ -496,11 +524,43 @@ body {
     letter-spacing: 0.12em; color: var(--red-accent); margin-bottom: 0.4rem;
 }
 .komoditas-title {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.25rem; font-weight: 600; color: var(--gray-800); margin-bottom: 0.6rem;
 }
 .komoditas-desc {
     font-size: 0.85rem; color: var(--gray-500); line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════════════════
+   VIDEO DOKUMENTER
+   ══════════════════════════════════════════════════════ */
+.video-player-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.video-frame {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.video-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .video-frame {
+        border-radius: 8px;
+    }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -529,7 +589,7 @@ body {
     letter-spacing: 0.25em; color: var(--teal); margin-bottom: 0.85rem;
 }
 .welcome-text h2 {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.2rem; font-weight: 500; color: var(--gray-800);
     line-height: 1.25; margin-bottom: 1.5rem;
 }
@@ -579,7 +639,7 @@ body {
     text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600;
 }
 .card-body h3 {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.25rem; font-weight: 600; color: var(--gray-800);
     margin: 0.5rem 0; line-height: 1.3;
 }
@@ -605,7 +665,7 @@ body {
     max-width: 700px; padding: 0 2rem;
 }
 .parallax-content h2 {
-    font-family: 'Recoleta', 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-family: var(--font-heading); font-size: clamp(1.8rem, 3vw, 2.5rem);
     font-weight: 500; margin-bottom: 1rem;
 }
 .parallax-content p { font-size: 0.95rem; line-height: 1.8; opacity: 0.85; }
@@ -881,7 +941,7 @@ body {
     justify-content: space-between;
     padding: 1rem 1.6rem;
     color: var(--gray-800);
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.05rem;
     font-weight: 600;
     text-decoration: none;
@@ -1081,7 +1141,7 @@ body {
     color: #FFD700;
 }
 .gallery-modal-title {
-    font-family: 'Recoleta', 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.35rem;
     margin: 0.2rem 0 0;
     color: #ffffff;
@@ -1145,7 +1205,7 @@ body {
 }
 
 .bpd-mobile-name {
-    font-family: 'Recoleta', serif;
+    font-family: var(--font-heading);
     font-size: 1.15rem;
     color: var(--gray-800);
     margin: 0.3rem 0 0.8rem;

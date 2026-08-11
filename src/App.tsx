@@ -44,6 +44,7 @@ export default function App() {
     { id: 'komoditas', label: 'Komoditas Unggulan' },
     { id: 'galeri', label: 'Galeri' },
     { id: 'peta-sec', label: 'Peta Digital' },
+    { id: 'dokumenter', label: 'Dokumenter' },
     { id: 'kontak-sec', label: 'Kontak' },
   ]
 
@@ -238,7 +239,7 @@ export default function App() {
           <div className="mobile-menu-title">
             <img src={imgLogoKonaweUtara} alt="Logo Konawe Utara" style={{ height: '32px', width: 'auto' }} />
             <div>
-              <div style={{ fontFamily: "'Recoleta', serif", fontWeight: 700, fontSize: '1rem', color: '#004851', lineHeight: 1.1 }}>DESA PADALEU</div>
+              <div style={{ fontFamily: "inherit", fontWeight: 700, fontSize: '1rem', color: '#004851', lineHeight: 1.1 }}>DESA PADALEU</div>
               <div style={{ fontSize: '0.58rem', color: 'var(--gray-500)', letterSpacing: '0.12em', marginTop: '2px', textTransform: 'uppercase' }}>Konawe Utara</div>
             </div>
           </div>
@@ -308,7 +309,7 @@ export default function App() {
         </div>
 
         {/* 2. SEJARAH DESA & KEPEMIMPINAN TAHUN KE TAHUN */}
-        <section className="section" id="sejarah" style={{ background: 'var(--white)' }}>
+        <section className="section section-bordered" id="sejarah" style={{ background: '#ffffff' }}>
           <div className="container">
             <div className="section-header reveal">
               <div className="overline">Jejak Langkah & Sejarah</div>
@@ -328,7 +329,7 @@ export default function App() {
               <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--red-accent)' }}>
                 Rekam Jejak Kepemimpinan
               </span>
-              <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.75rem', color: 'var(--gray-800)', marginTop: '0.4rem' }}>
+              <h3 style={{ fontFamily: "inherit", fontSize: '1.75rem', color: 'var(--gray-800)', marginTop: '0.4rem' }}>
                 Kepala Desa Padaleu dari Masa ke Masa
               </h3>
             </div>
@@ -479,7 +480,7 @@ export default function App() {
 
                           {/* Leader Name & Order */}
                           <h3 style={{
-                            fontFamily: "'Recoleta', 'Playfair Display', serif",
+                            fontFamily: "inherit",
                             fontSize: isFocused ? '1.5rem' : '1.15rem',
                             color: item.active ? '#004851' : 'var(--gray-900)',
                             margin: '0.3rem 0 0.15rem',
@@ -529,7 +530,7 @@ export default function App() {
             })()}
           </div>
         </section>
-        <section className="section" id="struktur" style={{ background: 'var(--gray-50)' }}>
+        <section className="section section-bordered" id="struktur" style={{ background: '#f8f7f4' }}>
           <div className="container">
             <div className="section-header reveal">
               <div className="overline">Pemerintahan & Lembaga Desa</div>
@@ -562,7 +563,7 @@ export default function App() {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '1.8rem', borderBottom: '1.5px solid var(--gray-200)', paddingBottom: '1.2rem' }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M8 10v11M12 10v11M16 10v11M20 10v11"/></svg>
                 <div style={{ textAlign: 'center' }}>
-                  <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.35rem', color: '#004851', fontWeight: 600, letterSpacing: '0.02em', margin: 0 }}>
+                  <h3 style={{ fontFamily: "inherit", fontSize: '1.35rem', color: '#004851', fontWeight: 600, letterSpacing: '0.02em', margin: 0 }}>
                     Badan Permusyawaratan Desa (BPD) Desa Padaleu
                   </h3>
                   <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--gray-500)', textTransform: 'uppercase', letterSpacing: '0.12em', marginTop: '0.3rem' }}>
@@ -581,7 +582,7 @@ export default function App() {
                   { name: 'JUHARNI', role: 'Anggota BPD', pend: '-' }
                 ].map((bpd, idx) => (
                   <div key={idx} style={{ background: 'var(--gray-50)', padding: '1.2rem', borderRadius: '4px', borderTop: idx === 0 ? '3px solid #004851' : '3px solid var(--teal)', textAlign: 'center' }}>
-                    <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.05rem', color: 'var(--gray-800)', marginTop: '0.2rem', marginBottom: '0.2rem' }}>{bpd.name}</h4>
+                    <h4 style={{ fontFamily: "inherit", fontSize: '1.05rem', color: 'var(--gray-800)', marginTop: '0.2rem', marginBottom: '0.2rem' }}>{bpd.name}</h4>
                     <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.3rem' }}>{bpd.role}</div>
                     <span style={{ fontSize: '0.72rem', color: 'var(--gray-500)', fontWeight: 500 }}>Pendidikan: {bpd.pend}</span>
                   </div>
@@ -675,7 +676,7 @@ export default function App() {
             <div style={{ marginBottom: '3.5rem' }}>
               <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '1.8rem' }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0, textAlign: 'center' }}>
+                <h3 style={{ fontFamily: "inherit", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0, textAlign: 'center' }}>
                   Kepala Urusan (KAUR)
                 </h3>
               </div>
@@ -711,7 +712,7 @@ export default function App() {
             <div style={{ marginBottom: '3.5rem' }}>
               <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '1.8rem' }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0, textAlign: 'center' }}>
+                <h3 style={{ fontFamily: "inherit", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0, textAlign: 'center' }}>
                   Kepala Seksi (KASI)
                 </h3>
               </div>
@@ -747,7 +748,7 @@ export default function App() {
             <div>
               <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '2rem' }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#004851" strokeWidth="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0 }}>
+                <h3 style={{ fontFamily: "inherit", fontSize: '1.3rem', color: 'var(--gray-800)', margin: 0 }}>
                   Wilayah Kewilayahan (Kepala Dusun & Rukun Tetangga)
                 </h3>
               </div>
@@ -763,7 +764,7 @@ export default function App() {
                       <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
-                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Budugami</h4>
+                      <h4 style={{ fontFamily: "inherit", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Budugami</h4>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun I</div>
                     </div>
                   </div>
@@ -789,7 +790,7 @@ export default function App() {
                       <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
-                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Arit Noval</h4>
+                      <h4 style={{ fontFamily: "inherit", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Arit Noval</h4>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun II</div>
                     </div>
                   </div>
@@ -815,7 +816,7 @@ export default function App() {
                       <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
-                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Harman</h4>
+                      <h4 style={{ fontFamily: "inherit", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Harman</h4>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun III</div>
                     </div>
                   </div>
@@ -837,7 +838,7 @@ export default function App() {
         </section>
 
         {/* 5. KOMODITAS UNGGULAN (Khusus Cengkeh Organik) */}
-        <section className="section" id="komoditas" style={{ background: 'var(--gray-50)' }}>
+        <section className="section section-bordered" id="komoditas" style={{ background: '#ffffff' }}>
           <div className="container">
             <div className="section-header reveal">
               <div className="overline">Potensi Utama Desa</div>
@@ -863,7 +864,7 @@ export default function App() {
             </div>
 
             <div className="komoditas-grid">
-              <div className="komoditas-card reveal stagger-1">
+              <a href="https://id.wikipedia.org/wiki/Cengkih" target="_blank" rel="noopener noreferrer" className="komoditas-card reveal stagger-1" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="komoditas-img-wrap">
                   <img src={imgCengkeh} alt="Cengkeh" />
                 </div>
@@ -872,9 +873,9 @@ export default function App() {
                   <h3 className="komoditas-title">Cengkeh</h3>
                   <p className="komoditas-desc">Komoditas andalan masyarakat Desa Padaleu yang dikenal memiliki kualitas baik dan nilai ekonomi tinggi.</p>
                 </div>
-              </div>
+              </a>
 
-              <div className="komoditas-card reveal stagger-2">
+              <a href="https://id.wikipedia.org/wiki/Nilam" target="_blank" rel="noopener noreferrer" className="komoditas-card reveal stagger-2" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="komoditas-img-wrap">
                   <img src={imgNilam} alt="Nilam" />
                 </div>
@@ -883,9 +884,9 @@ export default function App() {
                   <h3 className="komoditas-title">Nilam</h3>
                   <p className="komoditas-desc">Salah satu hasil bumi penting yang turut mendukung ekonomi warga dan potensi desa.</p>
                 </div>
-              </div>
+              </a>
 
-              <div className="komoditas-card reveal stagger-3">
+              <a href="https://id.wikipedia.org/wiki/Kelapa_sawit" target="_blank" rel="noopener noreferrer" className="komoditas-card reveal stagger-3" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="komoditas-img-wrap">
                   <img src={imgSawit} alt="Sawit" />
                 </div>
@@ -894,13 +895,14 @@ export default function App() {
                   <h3 className="komoditas-title">Sawit</h3>
                   <p className="komoditas-desc">Komoditas perkebunan yang menjadi salah satu sumber pendapatan masyarakat Desa Padaleu.</p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </section>
 
+
         {/* 7. GALERI FOTO (Foto Placeholder Avatar) */}
-        <section className="section" id="galeri" style={{ background: 'var(--gray-50)' }}>
+        <section className="section section-bordered" id="galeri" style={{ background: '#f8f7f4' }}>
           <div className="container-wide">
             <div className="section-header reveal">
               <div className="overline">Galeri Visual</div>
@@ -940,7 +942,7 @@ export default function App() {
         </section>
 
         {/* 8. PETA DIGITAL GIS DESA */}
-        <section className="section" id="peta-sec" style={{ background: 'var(--white)' }}>
+        <section className="section section-bordered" id="peta-sec" style={{ background: '#ffffff' }}>
           <div className="container">
             <div className="section-header reveal">
               <div className="overline">Peta Geografis Interaktif</div>
@@ -962,8 +964,30 @@ export default function App() {
           </div>
         </section>
 
+        {/* 8.5. VIDEO DOKUMENTER */}
+        <section className="section section-bordered" id="dokumenter" style={{ background: '#e7e5e4' }}>
+          <div className="container-wide">
+            <div className="section-header reveal">
+              <div className="overline">Video Dokumenter</div>
+              <h2>Lensa Padaleu</h2>
+              <p>Dokumenter potensi &amp; kehidupan Desa Padaleu, Kecamatan Lembo, Kabupaten Konawe Utara.</p>
+              <div className="divider"></div>
+            </div>
+            <div className="video-player-wrap reveal">
+              <div className="video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/w9liIAud8og?rel=0&modestbranding=1"
+                  title="Dokumenter Desa Padaleu — Lensa Padaleu"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 9. KONTAK DESA */}
-        <section className="cta-section" id="kontak-sec" style={{ background: 'var(--cream)', padding: '5rem 2rem' }}>
+        <section className="cta-section section-bordered" id="kontak-sec" style={{ background: '#f5f2ed', padding: '5rem 2rem' }}>
           <div className="container">
             <div className="section-header reveal">
               <div className="overline">Layanan Kontak Resmi</div>
@@ -982,7 +1006,7 @@ export default function App() {
                   <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
                     Alamat Fisik
                   </div>
-                  <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1rem' }}>
+                  <h3 style={{ fontFamily: "inherit", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1rem' }}>
                     Kantor Desa Padaleu
                   </h3>
                   <p style={{ fontSize: '0.92rem', color: 'var(--gray-600)', lineHeight: '1.6', margin: '0 0 1.8rem' }}>
@@ -1005,7 +1029,7 @@ export default function App() {
                   <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#128C7E', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>
                     Telepon / WhatsApp
                   </div>
-                  <h3 style={{ fontFamily: "'Recoleta', 'Playfair Display', serif", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1rem' }}>
+                  <h3 style={{ fontFamily: "inherit", fontSize: '1.4rem', color: 'var(--gray-800)', marginBottom: '1rem' }}>
                     +62 812-4777-1312
                   </h3>
                   <p style={{ fontSize: '0.92rem', color: 'var(--gray-600)', lineHeight: '1.6', margin: '0 0 1.8rem' }}>
