@@ -83,7 +83,7 @@ body {
 .stagger-5 { transition-delay: 0.5s !important; }
 
 /* ══════════════════════════════════════════════════════
-   TOP BAR (Desa Padaleu - Konawe Utara)
+   TOP BAR (Mürren Schilthorn Style)
    ══════════════════════════════════════════════════════ */
 .topbar {
     background: #004851;
@@ -95,114 +95,98 @@ body {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    transition: background 0.4s ease, box-shadow 0.4s ease;
-    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
 }
-
-/* ══════════════════════════════════════════════════════
-   MOTIF TENUN ETNIK KONAWE KHAS (DEKORATIF TOPBAR)
-   ══════════════════════════════════════════════════════ */
-.topbar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.075' fill-rule='evenodd'%3E%3Cpath d='M24 0L48 24L24 48L0 24L24 0zm0 8L8 24l16 16l16-16L24 8zm0 6l10 10l-10 10l-10-10l10-10z'/%3E%3Ccircle cx='24' cy='24' r='2.5' fill='%23FFD700' fill-opacity='0.25'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 36px 36px;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Garis Aksen Emas & Merah Khas Sultra */
-.topbar::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #004851 0%, #FFD700 25%, #e04336 50%, #FFD700 75%, #004851 100%);
-    z-index: 5;
-}
-
 .topbar.scrolled {
     box-shadow: 0 4px 20px rgba(0,0,0,0.18);
 }
+
 .topbar-left {
     display: flex;
     align-items: center;
     height: 100%;
-    position: relative;
-    z-index: 2;
 }
-.topbar-right-info {
-    display: flex;
-    align-items: center;
-    padding-right: 2rem;
-    color: rgba(255,255,255,0.88);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 2;
-}
+
 .topbar-logo-box {
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 1.8rem;
     height: 100%;
     text-decoration: none;
     color: #ffffff;
+    transition: background 0.2s ease;
 }
+.topbar-logo-box:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
 .topbar-logo-img {
-    height: 40px;
+    height: 38px;
     width: auto;
     object-fit: contain;
     margin-right: 0.85rem;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
+
 .topbar-logo-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
+
 .topbar-logo-text {
     font-family: 'Recoleta', 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 0.14em;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     line-height: 1;
     position: relative;
     padding-bottom: 2px;
     border-bottom: 1.5px solid rgba(255,255,255,0.85);
 }
+
 .topbar-logo-sub {
-    font-size: 0.52rem;
-    letter-spacing: 0.22em;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     opacity: 0.85;
     display: block;
     margin-top: 3px;
 }
-.topbar-logo-star {
-    color: #e04336;
-    font-size: 1rem;
-    vertical-align: super;
-    line-height: 0;
-    margin-left: 2px;
-}
 
-.topbar-right-info {
+/* Group Bagian Kanan (Red CTA Button ala Mürren) */
+.topbar-right-group {
     display: flex;
     align-items: center;
-    padding-right: 2rem;
-    color: rgba(255,255,255,0.85);
+    height: 100%;
+}
+
+/* Red CTA Button (Gaya "Booking" Warna Merah Koral pada Gambar Mürren) */
+.topbar-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.8rem;
+    height: 100%;
+    background: #e04336;
+    color: #ffffff;
     font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-weight: 700;
+    text-decoration: none;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+    transition: background 0.2s ease;
+}
+.topbar-cta-btn:hover {
+    background: #c9362a;
+}
+
+@media (max-width: 768px) {
+    .topbar-cta-btn {
+        display: none !important;
+    }
 }
 
 /* ══════════════════════════════════════════════════════

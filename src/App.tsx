@@ -177,7 +177,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-gray-800">
 
-      {/* ═══════════ TOP BAR (Mürren / Konawe Utara Style) ═══════════ */}
+      {/* ═══════════ TOP BAR (Mürren Schilthorn Style) ═══════════ */}
       <div className="topbar" id="topbar">
         <div className="topbar-left">
           <a href="#hero" className="topbar-logo-box" onClick={() => setIsMobileMenuOpen(false)}>
@@ -188,20 +188,30 @@ export default function App() {
             </div>
           </a>
         </div>
-        <div className="topbar-right-info">
-          Pemerintah Kabupaten Konawe Utara
-        </div>
 
-        {/* Mobile Hamburger Menu Button */}
-        <button
-          className={`mobile-menu-toggle ${isMobileMenuOpen ? 'open' : ''}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle Navigation Menu"
-        >
-          <span className="hamburger-bar"></span>
-          <span className="hamburger-bar"></span>
-          <span className="hamburger-bar"></span>
-        </button>
+        <div className="topbar-right-group">
+          {/* Red CTA Button (Gaya "Booking" Warna Merah Koral pada Gambar Mürren) */}
+          <a
+            href="https://konaweutarakab.go.id/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="topbar-cta-btn"
+            title="Buka Website Resmi Pemerintah Kabupaten Konawe Utara"
+          >
+            Pemerintah Kabupaten Konawe Utara
+          </a>
+
+          {/* Mobile Hamburger Menu Button */}
+          <button
+            className={`mobile-menu-toggle ${isMobileMenuOpen ? 'open' : ''}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Navigation Menu"
+          >
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+          </button>
+        </div>
       </div>
 
       {/* ═══════════ SECONDARY NAV (Desktop Subnav) ═══════════ */}
