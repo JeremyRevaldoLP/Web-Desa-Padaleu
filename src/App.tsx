@@ -534,16 +534,16 @@ export default function App() {
                 <div className="aparatur-avatar">
                   <img src={imgFotoKades} alt="Masiudin, S.Si" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                 </div>
+                <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)', marginBottom: '0.2rem' }}>Masiudin, S.Si</h3>
                 <div className="aparatur-role" style={{ color: '#004851', fontWeight: 800, letterSpacing: '0.15em' }}>Kepala Desa</div>
-                <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)' }}>Masiudin, S.Si</h3>
               </div>
 
               <div className="aparatur-card reveal stagger-2" style={{ borderTop: '4px solid var(--teal)', background: 'var(--white)', maxWidth: '320px', width: '100%' }}>
                 <div className="aparatur-avatar">
                   <img src={imgSekdes} alt="Asrul" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                 </div>
+                <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)', marginBottom: '0.2rem' }}>Asrul</h3>
                 <div className="aparatur-role" style={{ color: 'var(--teal)', fontWeight: 700, letterSpacing: '0.15em' }}>Sekretaris Desa</div>
-                <h3 className="aparatur-name" style={{ fontSize: '1.35rem', color: 'var(--gray-900)' }}>Asrul</h3>
               </div>
             </div>
 
@@ -567,12 +567,12 @@ export default function App() {
                   { name: 'ANSAR', role: 'Ketua BPD', pend: 'SMA' },
                   { name: 'AYU NUR', role: 'Wakil Ketua BPD', pend: 'SMA' },
                   { name: 'SURIANTO, S.Pd', role: 'Sekretaris BPD', pend: 'S-1' },
-                  { name: 'JUHARNI', role: 'Anggota BPD', pend: '-' },
-                  { name: "SU'AIB, ST, M.Si", role: 'Anggota BPD', pend: 'S-2' }
+                  { name: "SU'AIB, ST, M.Si", role: 'Anggota BPD', pend: 'S-2' },
+                  { name: 'JUHARNI', role: 'Anggota BPD', pend: '-' }
                 ].map((bpd, idx) => (
                   <div key={idx} style={{ background: 'var(--gray-50)', padding: '1.2rem', borderRadius: '4px', borderTop: idx === 0 ? '3px solid #004851' : '3px solid var(--teal)', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{bpd.role}</div>
-                    <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.05rem', color: 'var(--gray-800)', marginTop: '0.3rem', marginBottom: '0.2rem' }}>{bpd.name}</h4>
+                    <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.05rem', color: 'var(--gray-800)', marginTop: '0.2rem', marginBottom: '0.2rem' }}>{bpd.name}</h4>
+                    <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.3rem' }}>{bpd.role}</div>
                     <span style={{ fontSize: '0.72rem', color: 'var(--gray-500)', fontWeight: 500 }}>Pendidikan: {bpd.pend}</span>
                   </div>
                 ))}
@@ -598,8 +598,8 @@ export default function App() {
                       { no: 1, name: 'ANSAR', role: 'KETUA', ttl: 'PADALEU, 12 AGUSTUS 1976', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
                       { no: 2, name: 'AYU NUR', role: 'WAKIL KETUA', ttl: 'PADALEU, 17 OKTOBER 1970', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
                       { no: 3, name: 'SURIANTO, S.Pd', role: 'SEKRETARIS', ttl: 'PADALEU, 10 NOVEMBER 1983', agama: 'ISLAM', pend: 'S-1', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
-                      { no: 4, name: 'JUHARNI', role: 'ANGGOTA', ttl: '-', agama: 'ISLAM', pend: '-', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' },
-                      { no: 5, name: "SU'AIB, ST, M.Si", role: 'ANGGOTA', ttl: 'PADALEU KENDARI, 09 MEI 1964', agama: 'ISLAM', pend: 'S-2', sk: '-', status: 'AKTIF' }
+                      { no: 4, name: "SU'AIB, ST, M.Si", role: 'ANGGOTA', ttl: 'PADALEU KENDARI, 09 MEI 1964', agama: 'ISLAM', pend: 'S-2', sk: '-', status: 'AKTIF' },
+                      { no: 5, name: 'JUHARNI', role: 'ANGGOTA', ttl: '-', agama: 'ISLAM', pend: '-', sk: '346 TAHUN 2019 TANGGAL 27 SEPTEMBER 2019', status: 'AKTIF' }
                     ].map((row, idx) => (
                       <tr key={idx} style={{ background: idx % 2 === 0 ? 'white' : 'var(--gray-50)', borderBottom: '1px solid var(--gray-200)' }}>
                         <td style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--gray-600)' }}>{row.no}</td>
@@ -626,8 +626,8 @@ export default function App() {
                   { no: 1, name: 'ANSAR', role: 'KETUA BPD', ttl: 'PADALEU, 12 AGUSTUS 1976', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
                   { no: 2, name: 'AYU NUR', role: 'WAKIL KETUA BPD', ttl: 'PADALEU, 17 OKTOBER 1970', agama: 'ISLAM', pend: 'SMA', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
                   { no: 3, name: 'SURIANTO, S.Pd', role: 'SEKRETARIS BPD', ttl: 'PADALEU, 10 NOVEMBER 1983', agama: 'ISLAM', pend: 'S-1', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
-                  { no: 4, name: 'JUHARNI', role: 'ANGGOTA BPD', ttl: '-', agama: 'ISLAM', pend: '-', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' },
-                  { no: 5, name: "SU'AIB, ST, M.Si", role: 'ANGGOTA BPD', ttl: 'PADALEU KENDARI, 09 MEI 1964', agama: 'ISLAM', pend: 'S-2', sk: '-', status: 'AKTIF' }
+                  { no: 4, name: "SU'AIB, ST, M.Si", role: 'ANGGOTA BPD', ttl: 'PADALEU KENDARI, 09 MEI 1964', agama: 'ISLAM', pend: 'S-2', sk: '-', status: 'AKTIF' },
+                  { no: 5, name: 'JUHARNI', role: 'ANGGOTA BPD', ttl: '-', agama: 'ISLAM', pend: '-', sk: '346 TAHUN 2019 (27 SEPT 2019)', status: 'AKTIF' }
                 ].map((bpd, idx) => (
                   <div key={idx} className="bpd-mobile-card">
                     <div className="bpd-mobile-card-header">
@@ -675,24 +675,24 @@ export default function App() {
                   <div className="aparatur-avatar">
                     <img src={imgKaurPerencanaan} alt="Aris" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
-                  <div className="aparatur-role">Kaur Perencanaan</div>
                   <h3 className="aparatur-name">Aris</h3>
+                  <div className="aparatur-role">Kaur Perencanaan</div>
                 </div>
 
                 <div className="aparatur-card reveal stagger-2" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
                     <img src={imgKaurUmum} alt="Jois" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
-                  <div className="aparatur-role">Kaur Administrasi & Umum</div>
                   <h3 className="aparatur-name">Jois</h3>
+                  <div className="aparatur-role">Kaur Administrasi & Umum</div>
                 </div>
 
                 <div className="aparatur-card reveal stagger-3" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
                     <img src={imgKaurKeuangan} alt="Arlis" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
-                  <div className="aparatur-role">Kaur Keuangan</div>
                   <h3 className="aparatur-name">Arlis</h3>
+                  <div className="aparatur-role">Kaur Keuangan</div>
                 </div>
               </div>
             </div>
@@ -711,24 +711,24 @@ export default function App() {
                   <div className="aparatur-avatar">
                     <img src={imgKasiPemerintahan} alt="Ismail" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
-                  <div className="aparatur-role">Kasi Pemerintahan</div>
                   <h3 className="aparatur-name">Ismail</h3>
+                  <div className="aparatur-role">Kasi Pemerintahan</div>
                 </div>
 
                 <div className="aparatur-card reveal stagger-2" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
                     <img src={imgKasiPelayanan} alt="Derman, S.P" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
-                  <div className="aparatur-role">Kasi Pelayanan</div>
                   <h3 className="aparatur-name">Derman, S.P</h3>
+                  <div className="aparatur-role">Kasi Pelayanan</div>
                 </div>
 
                 <div className="aparatur-card reveal stagger-3" style={{ maxWidth: '280px', width: '100%' }}>
                   <div className="aparatur-avatar">
                     <img src={imgKasiKesejahteraan} alt="Endang Fitriani" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                   </div>
-                  <div className="aparatur-role">Kasi Kesejahteraan</div>
                   <h3 className="aparatur-name">Endang Fitriani</h3>
+                  <div className="aparatur-role">Kasi Kesejahteraan</div>
                 </div>
               </div>
             </div>
@@ -753,8 +753,8 @@ export default function App() {
                       <img src={imgKadus1} alt="Budugami" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
+                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Budugami</h4>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun I</div>
-                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '2px 0 0' }}>Budugami</h4>
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -779,8 +779,8 @@ export default function App() {
                       <img src={imgKadus2} alt="Arit Noval" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
+                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Arit Noval</h4>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun II</div>
-                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '2px 0 0' }}>Arit Noval</h4>
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -805,8 +805,8 @@ export default function App() {
                       <img src={imgKadus3} alt="Harman" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                     </div>
                     <div>
+                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '0 0 2px' }}>Harman</h4>
                       <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Kepala Dusun III</div>
-                      <h4 style={{ fontFamily: "'Recoleta', serif", fontSize: '1.15rem', color: 'var(--gray-800)', margin: '2px 0 0' }}>Harman</h4>
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>

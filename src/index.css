@@ -429,13 +429,14 @@ body {
 .aparatur-card:hover .aparatur-avatar img {
     transform: scale(1.05);
 }
-.aparatur-role {
-    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.12em; color: var(--teal); margin-bottom: 0.3rem;
-}
 .aparatur-name {
     font-family: 'Recoleta', 'Playfair Display', serif;
     font-size: 1.1rem; font-weight: 600; color: var(--gray-800);
+    margin-bottom: 0.25rem;
+}
+.aparatur-role {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--teal);
 }
 
 /* ══════════════════════════════════════════════════════
@@ -1068,13 +1069,9 @@ body {
 }
 
 @media (max-width: 768px) {
-    .bpd-table-desktop {
-        display: none !important;
-    }
+    .bpd-table-desktop,
     .bpd-cards-mobile {
-        display: flex !important;
-        flex-direction: column;
-        gap: 1.2rem;
+        display: none !important;
     }
 }
 
