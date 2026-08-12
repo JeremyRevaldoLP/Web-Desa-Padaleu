@@ -50,8 +50,19 @@ export default function App() {
 
   // ── 3. Leaflet Map, Gallery & Leader State ──
   const mapRef = useRef<HTMLDivElement>(null)
+  const heroVideoRef = useRef<HTMLVideoElement>(null)
   const [currentLeaderIdx, setCurrentLeaderIdx] = useState(0)
   const [selectedImage, setSelectedImage] = useState<{ title: string; category: string; image: string } | null>(null)
+
+  // ── Force Video Autoplay on Mobile Devices ──
+  useEffect(() => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.muted = true
+      heroVideoRef.current.play().catch(() => {
+        // Fallback for strict power-saver policies
+      })
+    }
+  }, [])
 
   // ── ESC Key Handler to Close Modals ──
   useEffect(() => {
@@ -199,7 +210,8 @@ export default function App() {
             className="topbar-cta-btn"
             title="Buka Website Resmi Pemerintah Kabupaten Konawe Utara"
           >
-            Pemerintah Kabupaten Konawe Utara
+            <span className="topbar-cta-full">Pemerintah Kabupaten Konawe Utara</span>
+            <span className="topbar-cta-short">Pemkab Konawe Utara</span>
           </a>
 
           {/* Mobile Hamburger Menu Button */}
@@ -273,15 +285,15 @@ export default function App() {
         {/* 1. BERANDA (Hero Section) */}
         <section className="hero" id="hero">
           <video
+            ref={heroVideoRef}
             autoPlay
             loop
             muted
             playsInline
-            poster={imgGambarHome}
+            preload="auto"
             className="hero-video"
           >
             <source src="/imports/videolatar.mp4" type="video/mp4" />
-            <img src={imgGambarHome} alt="Panorama Desa Padaleu" className="hero-img" />
           </video>
           <div className="hero-overlay"></div>
           <div className="hero-content">
@@ -446,10 +458,11 @@ export default function App() {
                               ? (item.active ? '0 12px 36px rgba(0,72,81,0.18)' : '0 8px 28px rgba(0,0,0,0.08)')
                               : '0 3px 12px rgba(0,0,0,0.03)',
                             textAlign: 'center',
-                            filter: isFocused ? 'blur(0px) opacity(1)' : 'blur(4px) opacity(0.48)',
-                            transform: isFocused ? 'scale(1.04)' : 'scale(0.92)',
+                            filter: isFocused ? 'blur(0px) opacity(1)' : 'blur(2px) opacity(0.68)',
+                            transform: isFocused ? 'scale(1.03)' : 'scale(0.95)',
                             cursor: isFocused ? 'default' : 'pointer',
-                            transition: 'all 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+                            transition: 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s cubic-bezier(0.16, 1, 0.3, 1), flex 0.55s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1)',
+                            willChange: 'transform, opacity, filter',
                             zIndex: isFocused ? 10 : 3
                           }}>
                           
@@ -859,7 +872,7 @@ export default function App() {
 
             <div className="welcome-grid reveal" style={{ background: 'var(--white)', border: '1px solid var(--gray-200)', padding: '2rem', borderRadius: '6px', marginBottom: '2.5rem' }}>
               <div className="welcome-img-wrap" style={{ height: '380px' }}>
-                <img src={imgCengkeh} alt="Komoditas unggulan Desa Padaleu" style={{ height: '100%' }} />
+                <img src="/imports/komoditas.png" alt="Komoditas unggulan Desa Padaleu" style={{ height: '100%' }} />
                 <div className="caption-bar">
                   <h4>Potensi Alam Padaleu</h4>
                   <span>Komoditas Unggulan Masyarakat</span>
@@ -876,7 +889,7 @@ export default function App() {
             <div className="komoditas-grid">
               <a href="https://id.wikipedia.org/wiki/Cengkih" target="_blank" rel="noopener noreferrer" className="komoditas-card reveal stagger-1" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="komoditas-img-wrap">
-                  <img src={imgCengkeh} alt="Cengkeh" />
+                  <img src="/imports/cengkeh.png" alt="Cengkeh" />
                 </div>
                 <div className="komoditas-body">
                   <div className="komoditas-tag">Komoditas Utama</div>
