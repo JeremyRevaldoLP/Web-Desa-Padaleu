@@ -272,7 +272,17 @@ export default function App() {
       <main>
         {/* 1. BERANDA (Hero Section) */}
         <section className="hero" id="hero">
-          <img src={imgGambarHome} alt="Panorama Desa Padaleu" className="hero-img" />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={imgGambarHome}
+            className="hero-video"
+          >
+            <source src="/imports/videolatar.mp4" type="video/mp4" />
+            <img src={imgGambarHome} alt="Panorama Desa Padaleu" className="hero-img" />
+          </video>
           <div className="hero-overlay"></div>
           <div className="hero-content">
             <div className="hero-overline">
