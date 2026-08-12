@@ -275,8 +275,16 @@ export default function App() {
         </nav>
 
         <div className="mobile-menu-footer">
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#004851', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pemerintah Desa Padaleu</div>
-          <div style={{ fontSize: '0.68rem', color: 'var(--gray-600)', marginTop: '3px' }}>Kecamatan Lembo, Kabupaten Konawe Utara</div>
+          <a
+            href="https://konaweutarakab.go.id/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-drawer-cta-btn"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <span>Pemerintah Kabupaten Konawe Utara ↗</span>
+          </a>
+          <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--gray-500)', marginTop: '0.8rem' }}>Pemerintah Desa Padaleu &bull; Lembo</div>
         </div>
       </div>
 
