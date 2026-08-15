@@ -341,15 +341,18 @@ export default function App() {
         <section className="section section-bordered" id="sejarah" style={{ background: '#ffffff' }}>
           <div className="container">
             <div className="section-header reveal">
-              <div className="overline">Jejak Langkah & Sejarah</div>
-              <h2>Sejarah & Perjalanan Kepemimpinan Desa Padaleu</h2>
-              <p><strong>Desa Padaleu</strong> merupakan pemekaran dari desa lembo pada tahun 1967. Sekarang telah berubah status menjadi kelurahan dan menjadi ibu kota kecamatan.</p>
+              <div className="overline">Jejak Langkah &amp; Sejarah</div>
+              <h2>Sejarah &amp; Perjalanan Kepemimpinan Desa Padaleu</h2>
+              <p><strong>Desa Padaleu</strong> merupakan pemekaran dari Desa Lembo (sekarang Kel. Lembo, Kec. Lembo) yang berdiri sejak tahun 1967 di ketinggian &plusmn;500 mdpl dengan luas wilayah 4.170 km&sup2;.</p>
               <div className="divider"></div>
             </div>
 
-            <div style={{ maxWidth: '800px', margin: '0 auto 3.5rem', textAlign: 'center' }} className="reveal">
+            <div style={{ maxWidth: '840px', margin: '0 auto 3.5rem', textAlign: 'center' }} className="reveal">
+              <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem', lineHeight: '1.8', marginBottom: '1rem' }}>
+                Berdiri pada tahun 1967 dengan 162 jiwa awal, <strong>Desa Padaleu</strong> berkembang pesat hingga mampu memekarkan tiga desa baru, yaitu <strong>Desa Puulemo</strong> (1979), <strong>Desa Pasir Putih</strong> (1999), dan <strong>Desa Laramo</strong> (2010).
+              </p>
               <p style={{ color: 'var(--gray-600)', fontSize: '0.95rem', lineHeight: '1.8' }}>
-                Dalam perkembangannya <strong>Desa Padaleu</strong> telah memekarkan <strong>Desa Puulemo</strong> pada tahun 1979. <strong>Desa Pasir Putih</strong> pada tahun 1999 dan <strong>Desa Laramo</strong> pada tahun 2010. Secara lengkap berikut adalah sejarah singkat perjalanan kepemimpinan desa dari tahun ke tahun.
+                Didukung aksesibilitas jalan yang lancar untuk kendaraan roda dua maupun roda empat, para petani dan pekebun tidak kesulitan dalam memasarkan hasil panennya. Sebagai desa yang terbuka dan heterogen, warga Desa Padaleu hidup rukun dengan beragam suku serta mata pencaharian.
               </p>
             </div>
 
