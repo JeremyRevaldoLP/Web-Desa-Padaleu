@@ -210,8 +210,7 @@ export default function App() {
             className="topbar-cta-btn"
             title="Buka Website Resmi Pemerintah Kabupaten Konawe Utara"
           >
-            <span className="topbar-cta-full">Pemerintah Kabupaten Konawe Utara</span>
-            <span className="topbar-cta-short">Pemkab Konawe Utara</span>
+            Pemerintah Kabupaten Konawe Utara
           </a>
 
           {/* Mobile Hamburger Menu Button */}
