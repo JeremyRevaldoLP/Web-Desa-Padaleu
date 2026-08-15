@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import imgLogoKonaweUtara from './imports/Kabupaten Konawe Utara.png'
 import imgGambarHome from './imports/gambarhome.png'
+import imgLoadingScreen from '../public/imports/loadingscreen.png'
 import videoLatar from '../public/imports/videolatar.mp4'
 import imgAvatar from './imports/avatar_default.jpg'
 import imgFotoKades from './imports/fotokades.jpeg'
@@ -46,6 +47,7 @@ export default function App() {
     { id: 'galeri', label: 'Galeri' },
     { id: 'peta-sec', label: 'Peta Digital' },
     { id: 'dokumenter', label: 'Dokumenter' },
+    { id: 'promosi', label: 'Video Promosi' },
     { id: 'kontak-sec', label: 'Kontak' },
   ]
 
@@ -156,7 +158,7 @@ export default function App() {
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 350)
 
-      const sections = ['hero', 'sejarah', 'struktur', 'komoditas', 'galeri', 'peta-sec', 'kontak-sec']
+      const sections = ['hero', 'sejarah', 'struktur', 'komoditas', 'galeri', 'peta-sec', 'dokumenter', 'promosi', 'kontak-sec']
       const scrollY = window.scrollY + 220
       let current = 'hero'
       sections.forEach(id => {
@@ -310,6 +312,7 @@ export default function App() {
       <main>
         {/* 1. BERANDA (Hero Section) */}
         <section className="hero" id="hero">
+          <img src={imgLoadingScreen} alt="Loading Desa Padaleu" className="hero-img" />
           <video
             ref={heroVideoRef}
             autoPlay
@@ -317,6 +320,7 @@ export default function App() {
             muted
             playsInline
             preload="auto"
+            poster={imgLoadingScreen}
             className="hero-video"
           >
             <source src={videoLatar} type="video/mp4" />
@@ -1039,6 +1043,28 @@ export default function App() {
           </div>
         </section>
 
+        {/* 8.6. VIDEO PROMOSI */}
+        <section className="section section-bordered" id="promosi" style={{ background: '#ffffff' }}>
+          <div className="container-wide">
+            <div className="section-header reveal">
+              <div className="overline">Video Promosi Desa</div>
+              <h2>Profil &amp; Promosi Desa Padaleu</h2>
+              <p>Saksikan tayangan profil promosi potensi alam, hasil bumi, dan pembangunan Desa Padaleu.</p>
+              <div className="divider"></div>
+            </div>
+            <div className="video-player-wrap reveal">
+              <div className="video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/B1LEL26tS8I?rel=0&modestbranding=1"
+                  title="Video Promosi Desa Padaleu"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 9. KONTAK DESA */}
         <section className="cta-section section-bordered" id="kontak-sec" style={{ background: '#f5f2ed', padding: '5rem 2rem' }}>
           <div className="container">
@@ -1108,24 +1134,24 @@ export default function App() {
             <p>Portal informasi pariwisata dan pemerintahan Desa Padaleu. Menyajikan transparansi, sejarah kepemimpinan, profil aparatur, peta digital, serta layanan kependudukan terpadu.</p>
           </div>
           <div>
-            <h4>Navigasi</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <a href="#sejarah">Sejarah Desa</a>
-              <a href="#struktur">Struktur Desa</a>
-              <a href="#komoditas">Komoditas Unggulan</a>
-              <a href="#peta-sec">Peta Digital</a>
+            <h4>Navigasi Utama</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+              {navItems.slice(0, 5).map((item) => (
+                <a key={item.id} href={`#${item.id}`}>{item.label}</a>
+              ))}
             </div>
           </div>
           <div>
-            <h4>Informasi</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <a href="#galeri">Galeri Foto</a>
-              <a href="#kontak-sec">Hubungi Kami</a>
+            <h4>Media &amp; Informasi</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+              {navItems.slice(5).map((item) => (
+                <a key={item.id} href={`#${item.id}`}>{item.label}</a>
+              ))}
             </div>
           </div>
           <div>
             <h4>Kontak</h4>
-            <p>Kantor Desa Padaleu<br />Jl. Trans Sulawesi, Lembo<br />Konawe Utara, Sultra<br /></p>
+            <p>Kantor Desa Padaleu<br />Jl. Trans Sulawesi, Lembo<br />Konawe Utara, Sultra<br /><strong>WA: +62 812-4777-1312</strong></p>
           </div>
         </div>
         <div className="footer-bottom">
@@ -1135,7 +1161,7 @@ export default function App() {
 
       {/* ═══════════ FLOATING BUTTONS ═══════════ */}
       <div className="floating-btn-group">
-        <a href="https://wa.me/6281244556677?text=Halo%20Admin%20Desa%20Padaleu,%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer" className="btn-float btn-whatsapp-float" title="Chat WhatsApp Desa">
+        <a href="https://wa.me/6281247771312?text=Halo%20Admin%20Desa%20Padaleu,%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer" className="btn-float btn-whatsapp-float" title="Chat WhatsApp Desa">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         </a>
         <button className={`btn-float btn-back-to-top ${showBackToTop ? 'visible' : ''}`} title="Kembali ke Atas" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
