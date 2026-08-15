@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import imgLogoKonaweUtara from './imports/Kabupaten Konawe Utara.png'
 import imgGambarHome from './imports/gambarhome.png'
+import videoLatar from '../public/imports/videolatar.mp4'
 import imgAvatar from './imports/avatar_default.jpg'
 import imgFotoKades from './imports/fotokades.jpeg'
 import imgSekdes from './imports/sekdes.png'
@@ -291,6 +292,7 @@ export default function App() {
       <main>
         {/* 1. BERANDA (Hero Section) */}
         <section className="hero" id="hero">
+          <img src={imgGambarHome} alt="Panorama Desa Padaleu" className="hero-img" />
           <video
             ref={heroVideoRef}
             autoPlay
@@ -298,8 +300,10 @@ export default function App() {
             muted
             playsInline
             preload="auto"
+            poster={imgGambarHome}
             className="hero-video"
           >
+            <source src={videoLatar} type="video/mp4" />
             <source src="/imports/videolatar.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay"></div>
