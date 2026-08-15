@@ -55,14 +55,32 @@ export default function App() {
   const [currentLeaderIdx, setCurrentLeaderIdx] = useState(0)
   const [selectedImage, setSelectedImage] = useState<{ title: string; category: string; image: string } | null>(null)
 
-  // ── Force Video Autoplay on Mobile Devices ──
+  // ── Force Video Autoplay & Seamless Loop Fade ──
   useEffect(() => {
-    if (heroVideoRef.current) {
-      heroVideoRef.current.muted = true
-      heroVideoRef.current.play().catch(() => {
-        // Fallback for strict power-saver policies
-      })
+    const video = heroVideoRef.current
+    if (!video) return
+
+    video.muted = true
+    video.play().catch(() => {
+      // Fallback for strict power-saver policies
+    })
+
+    const handleTimeUpdate = () => {
+      if (!video.duration) return
+      const fadeDuration = 0.8 // Fade out/in during last and first 0.8s for smooth loop transition
+      const timeLeft = video.duration - video.currentTime
+
+      if (timeLeft <= fadeDuration) {
+        video.style.opacity = Math.max(0, timeLeft / fadeDuration).toString()
+      } else if (video.currentTime <= fadeDuration) {
+        video.style.opacity = Math.min(1, video.currentTime / fadeDuration).toString()
+      } else {
+        video.style.opacity = '1'
+      }
     }
+
+    video.addEventListener('timeupdate', handleTimeUpdate)
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate)
   }, [])
 
   // ── ESC Key Handler to Close Modals ──
@@ -292,7 +310,6 @@ export default function App() {
       <main>
         {/* 1. BERANDA (Hero Section) */}
         <section className="hero" id="hero">
-          <img src={imgGambarHome} alt="Panorama Desa Padaleu" className="hero-img" />
           <video
             ref={heroVideoRef}
             autoPlay
@@ -300,7 +317,6 @@ export default function App() {
             muted
             playsInline
             preload="auto"
-            poster={imgGambarHome}
             className="hero-video"
           >
             <source src={videoLatar} type="video/mp4" />
